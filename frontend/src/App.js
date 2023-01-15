@@ -9,6 +9,7 @@ import Lowbar from "./components/navigation/Lowbar";
 import Home from "./components/core/Home";
 import Curso from "./components/core/Curso";
 import Video from "./components/core/Video";
+import Reviews from "./components/core/Reviews";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/" component={Home} exact />
               <Route path='/curso/' component={Curso} />
               <Route path='/video/' component={Video} />
+              <Route path='/reviews/' component={Reviews} />
 
             </div>
           </main>

@@ -36,7 +36,7 @@ const Video = () => {
                             <input
                                 type="text"
                                 className="bg-grey-2 mt-4 w-full py-2 pl-10 pr-4 rounded-lg text-grey  outline-none"
-                                placeholder="Añade un comentario"
+                                placeholder="Añade un comentario ..."
                             />
                         </form>
 
@@ -45,69 +45,24 @@ const Video = () => {
                                 <ul>
                                     <li className='mt-1'>
                                         <a href=''>
-                                            <div className='flex space-x-2 items-center px-5 text-grey-3 font-bold font-mono p-2 mb-2'>
-                                                <img className='w-8 h-8' src={logo} />
-
-                                                <span className='text-white '>
-
-                                                    Agustin Fricke:
-
-                                                </span>
-
-
+                                            <div className="flex items-center mb-4 space-x-4">
+                                                <img className="w-10 h-10 rounded-full" src={logo} alt="" />
+                                                <div className="space-y-1 font-medium text-white">
+                                                    <p>Agustin Fricke<time datetime="2014-08-16 19:00" className="block text-sm text-gray-500 text-grey">24 August 2014</time></p>
+                                                </div>
                                             </div>
-                                            <div className='ml-[60px] text-start'>
-                                                <span className='text-grey '>
-                                                    Muy buien video, seguire viendo la parte 2
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore animi praesentium odit tempore expedita, quia atque maiores impedit, doloribus ipsum commodi itaque possimus voluptate dignissimos at quibusdam, iusto rem illum?
-                                                </span>
+
+
+                                            <div className="flex items-center mb-1 ml-7">
+
+                                                <p className="ml-10 mt-1 text-sm text-grey">
+                                                    Reviewed in the United Kingdom on
+                                                </p>
                                             </div>
                                         </a>
                                     </li>
 
-                                    <li className='mt-1'>
-                                        <a href=''>
-                                            <div className='flex space-x-2 items-center px-5 text-grey-3 font-bold font-mono p-2 mb-2'>
-                                                <img className='w-8 h-8' src={logo} />
 
-                                                <span className='text-white '>
-
-                                                    Agustin Fricke:
-
-                                                </span>
-
-
-                                            </div>
-                                            <div className='ml-[60px] text-start'>
-                                                <span className='text-grey '>
-                                                    Muy buien video, seguire viendo la parte 2
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore animi praesentium odit tempore expedita, quia atque maiores impedit, doloribus ipsum commodi itaque possimus voluptate dignissimos at quibusdam, iusto rem illum?
-                                                </span>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li className='mt-1'>
-                                        <a href=''>
-                                            <div className='flex space-x-2 items-center px-5 text-grey-3 font-bold font-mono p-2 mb-2'>
-                                                <img className='w-8 h-8' src={logo} />
-
-                                                <span className='text-white '>
-
-                                                    Agustin Fricke:
-
-                                                </span>
-
-
-                                            </div>
-                                            <div className='ml-[60px] text-start'>
-                                                <span className='text-grey '>
-                                                    Muy buien video, seguire viendo la parte 2
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore animi praesentium odit tempore expedita, quia atque maiores impedit, doloribus ipsum commodi itaque possimus voluptate dignissimos at quibusdam, iusto rem illum?
-                                                </span>
-                                            </div>
-                                        </a>
-                                    </li>
 
 
                                 </ul>
@@ -122,10 +77,10 @@ const Video = () => {
                             <ul>
                                 <li className='mt-1'>
                                     <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
+                                        <div className='flex space-x-2 items-center px-5 text-white hover:text-grey-3 bg-grey-2 hover:bg-grey font-bold font-mono  p-2 '>
                                             <img className='w-12 h-12' src={logo} />
 
-                                            <span>
+                                            <span className=' '>
                                                 1- Instalacion
                                             </span>
 
@@ -133,150 +88,7 @@ const Video = () => {
                                     </a>
                                 </li>
 
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                2- Programar Projecto
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                3- Modelos
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                3- Modelos
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                3- Modelos
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                3- Modelos
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                1- Instalacion
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                2- Programar Projecto
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                3- Modelos
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                1- Instalacion
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                2- Programar Projecto
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li className='mt-1'>
-                                    <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
-
-                                            <span>
-                                                3- Modelos
-                                            </span>
-
-                                        </div>
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>

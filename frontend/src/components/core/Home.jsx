@@ -8,7 +8,6 @@ const Home = () => {
         <>
             <div className="flex items-center justify-between mb-16">
                 <h2 className="text-3xl text-grey-1 font-mono">Todos los Cursos</h2>
-
             </div>
 
             <div className="p-8 mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
@@ -25,7 +24,7 @@ const Home = () => {
 
                     <span className="text-grey font-mono">lo Descripcion muy larga y muy entretenida de Django Rest Fraamework</span>
 
-                    <p className="text-gray-600">Rating</p>
+                    <a href={`/reviews/`} className="text-gray-600">Rating</a>
 
                     <a href={`/curso/`}>
                         <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-10'>
