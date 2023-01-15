@@ -51,7 +51,7 @@ const Login = () => {
             <div className='items-center'>
               <button
                 type="submit"
-                className=" space-x-2 block w-full   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-3 px-10"
+                className=" space-x-2 block w-full transition-colors  text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-3 px-10"
               >
 
                 Iniciar Session
@@ -62,7 +62,7 @@ const Login = () => {
             <div className="text-sm">
               <a style={{ textDecoration: 'none' }} href="/register" className="text-mono font-mono text-grey ">
                 No tienes una cuenta?
-                <span className='hover:text-orange ml-2'>
+                <span className='hover:text-orange ml-2 transition-colors'>
                   Crea una aqui!
                 </span>
 
@@ -73,7 +73,7 @@ const Login = () => {
             <div className="text-sm">
               <a style={{ textDecoration: 'none' }} href="/reset-password" className="text-mono font-mono text-grey ">
                 Olvidaste tu contraseña?
-                <span className='hover:text-orange ml-2'>
+                <span className='hover:text-orange ml-2 transition-colors'>
                   Recuperala aqui!
                 </span>
 

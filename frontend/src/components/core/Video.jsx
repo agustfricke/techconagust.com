@@ -13,7 +13,7 @@ const Video = () => {
         <>
 
 
-            <div className="bg-blue w-full min-h-screen">
+            <div className="bg-blue h-[2000px]">
                 <div className=" p-8  grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-16">
 
                     <div className=" col-span-1 md:col-span-2 lg:col-span-2">
@@ -72,12 +72,12 @@ const Video = () => {
 
 
 
-                    <div className='mt-[500px]  md:mt-0 lg:mt-0'>
+                    <div className='mt-[500px]  md:mt-[500px] lg:mt-0'>
                         <div className="flex-none overflow-y-scroll h-[575px]">
                             <ul>
                                 <li className='mt-1'>
                                     <a href=''>
-                                        <div className='flex space-x-2 items-center px-5 text-white hover:text-grey-3 bg-grey-2 hover:bg-grey font-bold font-mono  p-2 '>
+                                        <div className='flex space-x-2 items-center px-5 transition-colors  text-white hover:text-grey-3 bg-grey-2 hover:bg-grey font-bold font-mono  p-2 '>
                                             <img className='w-12 h-12' src={logo} />
 
                                             <span className=' '>

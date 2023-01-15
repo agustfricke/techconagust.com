@@ -39,7 +39,7 @@ const Register = () => {
                                 <input
                                     id="email"
                                     name="email"
-                                    type="password"
+                                    type="text"
                                     autoComplete="email"
                                     required
                                     class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
@@ -52,7 +52,7 @@ const Register = () => {
                                 <input
                                     id="email"
                                     name="email"
-                                    type="password"
+                                    type="text"
                                     autoComplete="email"
                                     required
                                     class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
@@ -91,7 +91,7 @@ const Register = () => {
                         <div className='items-center'>
                             <button
                                 type="submit"
-                                className=" space-x-2 block w-full   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-3 px-10"
+                                className=" space-x-2 block w-full transition-colors  text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-3 px-10"
                             >
 
                                 Crear Cuenta
@@ -102,7 +102,7 @@ const Register = () => {
                         <div className="text-sm">
                             <a style={{ textDecoration: 'none' }} href="/register" className="text-mono font-mono text-grey ">
                                 Tienes una cuenta?
-                                <span className='hover:text-orange ml-2'>
+                                <span className='hover:text-orange ml-2 transition-colors'>
                                     Inicia Session aqui!
                                 </span>
 
