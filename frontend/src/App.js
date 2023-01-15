@@ -15,6 +15,9 @@ import Reviews from "./components/core/Reviews";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 
+// Admin Components
+import AdminCursos from "./components/admin/AdminCursos";
+
 function App() {
   return (
     <div className="bg-blue w-full min-h-screen">
@@ -33,9 +36,7 @@ function App() {
               <Route path='/reviews/' component={Reviews} />
               <Route path='/login/' component={Login} />
               <Route path='/register/' component={Register} />
-
-              
-
+              <Route path='/admin/cursos/' component={AdminCursos} />
 
             </div>
           </main>

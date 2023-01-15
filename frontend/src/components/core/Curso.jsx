@@ -3,6 +3,8 @@ import logo from '../../media/logo.png';
 import {  HiShoppingBag,  } from "react-icons/hi";
 import { RiUserStarFill } from "react-icons/ri";
 import { HiArrowUpOnSquareStack } from "react-icons/hi2";
+
+
 const Curso = () => {
 
   return (
