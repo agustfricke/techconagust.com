@@ -8,6 +8,7 @@ import Lowbar from "./components/navigation/Lowbar";
 // Core Components
 import Home from "./components/core/Home";
 import Curso from "./components/core/Curso";
+import Video from "./components/core/Video";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 
               <Route path="/" component={Home} exact />
               <Route path='/curso/' component={Curso} />
+              <Route path='/video/' component={Video} />
 
             </div>
           </main>

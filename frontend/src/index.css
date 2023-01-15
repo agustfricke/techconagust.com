@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scroll {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.player-wrapper {
+    position: relative;
+    /* 720 / 1280 = 0.5625 */
+}
+
+.scrolling {
+    height: 500px;
+    overflow-y: scroll;
+  }

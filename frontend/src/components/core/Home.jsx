@@ -27,7 +27,7 @@ const Home = () => {
 
                     <p className="text-gray-600">Rating</p>
 
-                    <a href=''>
+                    <a href={`/curso/`}>
                         <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-10'>
                             <span>
                                 Enter

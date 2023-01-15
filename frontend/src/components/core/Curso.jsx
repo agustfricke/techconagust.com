@@ -60,7 +60,7 @@ const Curso = () => {
                     </div>
 
 
-                    <a href=''>
+                    <a href={`/video/`}>
                         <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-5'>
                             <span>
                                 Enter
