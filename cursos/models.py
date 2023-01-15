@@ -4,7 +4,7 @@ from users.models import User
 
 class Curso(models.Model):
     user            = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    comprador       = models.ForeignKey(User, related_name='comprador', on_delete=models.SET_NULL, null=True)
+    comprador       = models.ManyToManyField(User, related_name='comprador')
     title           = models.CharField(max_length=250, null=True, blank=True)
     image           = models.ImageField(null=True, blank=True, default='/curso.jpg', upload_to='cursos')
     category        = models.CharField(max_length=250, null=True, blank=True)
@@ -14,7 +14,7 @@ class Curso(models.Model):
     price           = models.DecimalField(max_digits=10, decimal_places=10, null=True, blank=True)
     created         = models.DateTimeField(auto_now_add=True)
     trailer         = models.CharField(max_length=250, null=True, blank=True)
-    file            = models.FileField(null=True, blank=True)
+    file            = models.FileField(null=True, blank=True, upload_to='files')
 
 
 class Review(models.Model):
@@ -32,7 +32,7 @@ class Episodio(models.Model):
     title           = models.CharField(max_length=250, null=True, blank=True)
     url             = models.CharField(max_length=250, null=True, blank=True)
     description     = models.TextField(null=True, blank=True)
-    file            = models.FileField(null=True, blank=True)
+    file            = models.FileField(null=True, blank=True, upload_to='files')
 
 
 

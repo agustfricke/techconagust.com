@@ -26,21 +26,21 @@ class CustomUserManager(UserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(blank=False, unique=True)
-    username = models.CharField(unique=True, max_length=50)
-    name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    bio = models.TextField(blank=True)
-    avatar = models.ImageField(default='avatar.jpg', upload_to='users')
-    premium = models.BooleanField(default=False)
+    email           = models.EmailField(blank=False, unique=True)
+    username        = models.CharField(unique=True, max_length=50)
+    name            = models.CharField(max_length=50)
+    last_name       = models.CharField(max_length=50)
+    bio             = models.TextField(blank=True)
+    avatar          = models.ImageField(default='avatar.jpg', upload_to='users')
+    premium         = models.BooleanField(default=False)
 
-    is_active = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
+    is_active       = models.BooleanField(default=False)
+    is_superuser    = models.BooleanField(default=False)
+    is_staff        = models.BooleanField(default=False)
 
-    date_joind = models.DateTimeField(default=timezone.now)
+    date_joind      = models.DateTimeField(default=timezone.now)
 
-    objects = CustomUserManager()
+    objects         = CustomUserManager()
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
