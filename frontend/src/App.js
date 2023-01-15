@@ -14,6 +14,7 @@ import Reviews from "./components/core/Reviews";
 // Auth Components
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Activation from "./components/auth/Activation";
 
 // Admin Components
 import AdminCursos from "./components/admin/AdminCursos";
@@ -37,6 +38,8 @@ function App() {
               <Route path='/login/' component={Login} />
               <Route path='/register/' component={Register} />
               <Route path='/admin/cursos/' component={AdminCursos} />
+              <Route path='/activate/:uid/:token' component={Activation} />
+
 
             </div>
           </main>

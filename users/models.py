@@ -27,14 +27,14 @@ class CustomUserManager(UserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email           = models.EmailField(blank=False, unique=True)
-    username        = models.CharField(unique=True, max_length=50)
-    name            = models.CharField(max_length=50)
-    last_name       = models.CharField(max_length=50)
+    username        = models.CharField( max_length=50)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255, null=True, blank=True)
     bio             = models.TextField(blank=True)
     avatar          = models.ImageField(default='avatar.jpg', upload_to='users')
     premium         = models.BooleanField(default=False)
 
-    is_active       = models.BooleanField(default=False)
+    is_active       = models.BooleanField(default=True)
     is_superuser    = models.BooleanField(default=False)
     is_staff        = models.BooleanField(default=False)
 
@@ -43,8 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects         = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    EMAIL_FIELD = 'email'
-    REQUIRED_FIELD = []
+    REQUIRED_FIELD = ['user_name', 'first_name']
 
 
 
