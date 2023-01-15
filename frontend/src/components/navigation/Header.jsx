@@ -15,7 +15,7 @@ const Header = () => {
           <HiSearch className="absolute text-white left-3 top-1/2 -translate-y-1/2 " />
           <input
             type="text"
-            className="bg-grey-2 w-full py-2 pl-10 pr-4 rounded-lg text-grey  outline-none"
+            className="bg-grey-2 w-full py-2 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none"
             placeholder="Buscar ..."
           />
         </div>

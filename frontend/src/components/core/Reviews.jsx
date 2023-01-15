@@ -17,8 +17,8 @@ const Reviews = () => {
 
             <div className="flex items-center mb-4 space-x-4">
                 <img className="w-10 h-10 rounded-full" src={logo} alt="" />
-                <div className="space-y-1 font-medium text-white">
-                    <p>Agustin Fricke<time datetime="2014-08-16 19:00" className="block text-sm text-gray-500 text-grey">23 August 2014</time></p>
+                <div className="space-y-1 font-medium text-white text-mono">
+                    <p>Agustin Fricke<time datetime="2014-08-16 19:00" className="block text-mono text-sm text-gray-500 text-grey">23 August 2014</time></p>
                 </div>
             </div>
 
@@ -31,8 +31,8 @@ const Reviews = () => {
                 </div>
                 <div className="flex items-center mb-1 ml-7">
 
-            <p className="ml-10 mt-1 text-sm text-grey">
-                Reviewed in the United Kingdom on 
+            <p className="ml-10 mt-1  text-grey text-mono">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio iusto error, aspernatur distinctio, iure natus aperiam sequi officiis quas eveniet maiores asperiores harum, vitae ea ratione eaque dolore. Officia, magnam.
             </p>
             </div>
 

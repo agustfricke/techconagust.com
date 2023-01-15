@@ -11,6 +11,10 @@ import Curso from "./components/core/Curso";
 import Video from "./components/core/Video";
 import Reviews from "./components/core/Reviews";
 
+// Auth Components
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+
 function App() {
   return (
     <div className="bg-blue w-full min-h-screen">
@@ -27,6 +31,11 @@ function App() {
               <Route path='/curso/' component={Curso} />
               <Route path='/video/' component={Video} />
               <Route path='/reviews/' component={Reviews} />
+              <Route path='/login/' component={Login} />
+              <Route path='/register/' component={Register} />
+
+              
+
 
             </div>
           </main>
