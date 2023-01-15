@@ -10,9 +10,9 @@ const Register = ({ location, history }) => {
         document.title = 'Tech con Agust | Registro'
       }, []);
     
-      const [first_name, setFirstName] = useState('');
       const [email, setEmail] = useState('');
-      const [user_name, setUserName] = useState('');
+      const [username, setUsername] = useState('');
+      const [name, setName] = useState('');
       const [password, setPassword] = useState('');
       const [re_password, setRePassword] = useState('');
       const [message, setMessage] = useState('');
@@ -35,7 +35,7 @@ const Register = ({ location, history }) => {
         if (password !== re_password) {
           setMessage('Passwords must match ');
         } else {
-          dispatch(register(first_name, email, user_name, password, re_password));
+          dispatch(register(email, username, name, password, re_password));
           setExito(`Verifica tu Correo en ${email}`)
         }
       }
@@ -81,8 +81,8 @@ const Register = ({ location, history }) => {
                             <div className='mt-7'>
 
                                 <input
-                               value={user_name}
-                               onChange={(e) => setUserName(e.target.value)}
+                               value={username}
+                               onChange={(e) => setUsername(e.target.value)}
                                     type="text"
                                     autoComplete="email"
                                     required
@@ -94,8 +94,8 @@ const Register = ({ location, history }) => {
                             <div className='mt-7'>
 
                                 <input
-                                value={first_name}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
 
                                     type="text"
                                     required

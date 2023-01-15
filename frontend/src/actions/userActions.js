@@ -238,7 +238,7 @@ export const logout = () => (dispatch) => {
 }
 
 
-export const register = (first_name, email, user_name,  password, re_password) => async (dispatch) => {
+export const register = ( email, username , name, password, re_password) => async (dispatch) => {
     try {
         dispatch({ type: USER_REGISTER_REQUEST })
 
@@ -250,7 +250,7 @@ export const register = (first_name, email, user_name,  password, re_password) =
 
         const { data } = await axios.post(
             `${URL}auth/users/`,
-            { 'first_name': first_name, 'email': email, 'user_name':user_name, 'password': password , 're_password':re_password}, config
+            {  'email': email, 'username':username,'name': name, 'password': password , 're_password':re_password}, config
         )
 
         dispatch({

@@ -7,7 +7,7 @@ from .models import User
 class UserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ('id', 'email', 'first_name', 'last_name', 'password')
+        fields = ('id', 'email', 'username', 'name', 'password')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'is_admin', 'bio', 'first_name', 'avatar', 'premium']
+        fields = ['id', 'username', 'email', 'is_admin', 'bio', 'name', 'avatar', 'premium']
 
     def get_is_admin(self, obj):
         return obj.is_staff
@@ -26,7 +26,7 @@ class UserSerializerWithToken(UserSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name',
+        fields = ['id', 'username', 'name',
                   'email', 'is_admin', 'token', 'bio', 'avatar', 'premium']
 
     def get_token(self, obj):
