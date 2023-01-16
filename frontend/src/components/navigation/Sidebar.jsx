@@ -1,10 +1,20 @@
 import React from 'react'
-
+import { useDispatch, useSelector } from 'react-redux';
 import { HiHome, HiUser, HiOutlineLogout } from "react-icons/hi";
 import logo from '../../media/logo.png';
-
+import { logout } from '../../actions/userActions'
 
 const Sidebar = (props) => {
+
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+  
+  
+    const logoutHandler = (e) => {
+      dispatch(logout())
+  }
 
     const { showMenu } = props;
 
@@ -24,7 +34,7 @@ const Sidebar = (props) => {
 
                     <li className="bg-grey-2 p-4 rounded-tl-xl rounded-bl-xl ">
                         <a
-                            href="#"
+                            href="/"
                             className="bg-orange p-4 flex justify-center rounded-xl text-grey-2 group transition-colors"
                         >
                             <HiHome className="text-2xl" />
@@ -33,7 +43,7 @@ const Sidebar = (props) => {
 
                     <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-bl-xl group transition-colors">
                         <a
-                            href="#"
+                            href={`/MiPerfil/`}
                             className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
                         >
                             <HiUser className="text-2xl" />
@@ -42,12 +52,15 @@ const Sidebar = (props) => {
 
                     <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
                         <a
+                        onClick={logoutHandler}
                             href="#"
                             className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
                         >
                             <HiOutlineLogout className="text-2xl" />
                         </a>
                     </li>
+
+                    
 
                 </ul>
             </div>

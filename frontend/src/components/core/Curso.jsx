@@ -11,7 +11,7 @@ const Curso = () => {
 
     <>
     <div className="flex items-center justify-between ">
-        <h2 className="text-3xl text-grey-1 font-mono">Django Rest Framework</h2>
+        <h2 className="text-3xl text-grey-1 font-mono mt-7">Django Rest Framework</h2>
 
     </div>
 

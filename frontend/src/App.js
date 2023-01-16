@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
 // Navigation Component
 import Sidebar from "./components/navigation/Sidebar";
@@ -24,16 +25,53 @@ import MiPerfil from "./components/auth/MiPerfil";
 import AdminCursos from "./components/admin/AdminCursos";
 
 function App() {
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+
   return (
     <div className="bg-blue w-full min-h-screen">
-      <Sidebar />
-      <Lowbar/>
+      {/* Remove Side and low if user is not log in */}
+      {userInfo ? (
+        <>
+          <Sidebar />
+          <Lowbar />
+        </>
+      ) : (
+        <>
+        </>
+      )}
       <Router>
         {/* <Header /> */}
         <Switch>
-          <main className="lg:pl-32 lg:pr-38 pb-20">
+          {/* Remove this div if user is not log in */}
+          {userInfo ? (
+            <>
+              <main className="lg:pl-32 lg:pr-38 pb-20">
+
+                <div className="md:p-8 p-4">
+                  <Header />
+
+                  <Route path="/" component={Home} exact />
+                  <Route path='/curso/' component={Curso} />
+                  <Route path='/video/' component={Video} />
+                  <Route path='/reviews/' component={Reviews} />
+                  <Route path='/login/' component={Login} />
+                  <Route path='/register/' component={Register} />
+                  <Route path='/admin/cursos/' component={AdminCursos} />
+                  <Route path='/activate/:uid/:token' component={Activation} />
+                  <Route path='/reset-password' component={ResetPassword} />
+                  <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
+                  <Route path='/MiPerfil/' component={MiPerfil} />
+
+                </div>
+              </main>
+            </>
+
+          ) : (
             <div className="md:p-8 p-4">
-              <Header/> 
+              <Header />
 
               <Route path="/" component={Home} exact />
               <Route path='/curso/' component={Curso} />
@@ -48,7 +86,8 @@ function App() {
               <Route path='/MiPerfil/' component={MiPerfil} />
 
             </div>
-          </main>
+
+          )}
 
         </Switch>
         {/* <Footer/> */}

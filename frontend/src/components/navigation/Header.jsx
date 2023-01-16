@@ -1,14 +1,29 @@
 import React from 'react'
 import { HiSearch, HiBadgeCheck } from "react-icons/hi";
-
+import { useDispatch, useSelector } from 'react-redux';
 
 const Header = () => {
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+
   return (
     <header>
     <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
       <div className='flex items-center'>
-      <HiBadgeCheck className='text-orange w-8 h-8 mr-4'/> 
-        <h1 className="text-2xl text-grey font-mono "> Agustin Fricke</h1>
+      {userInfo ? (
+        <>
+       <HiBadgeCheck className='text-orange w-8 h-8 mr-4'/> 
+        <h1 className="text-2xl text-grey font-mono ">{userInfo.username}</h1>
+        </>
+        ) : (
+          <>
+        <a href='login' className=' ml-10 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 '>
+          Iniciar Session</a>
+        <a href='register' className=' ml-10  items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 '>Crear cuenta</a>
+        </>
+        )}
       </div>
       <form>
         <div className="w-full relative">

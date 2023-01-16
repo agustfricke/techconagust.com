@@ -6,8 +6,8 @@ import { HiArrowUpOnSquareStack } from "react-icons/hi2";
 const Home = () => {
     return (
         <>
-            <div className="flex items-center justify-between mb-16">
-                <h2 className="text-3xl text-grey-1 font-mono">Todos los Cursos</h2>
+            <div className="flex items-center justify-between">
+                <h2 className="text-3xl text-grey-1 font-mono mt-7">Todos los Cursos</h2>
             </div>
 
             <div className="p-8 mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">

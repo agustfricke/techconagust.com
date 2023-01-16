@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../../actions/userActions';
 import logo from '../../media/logo.png';
+import { useHistory } from "react-router-dom";
+import { register } from '../../actions/userActions';
 
 
-const Register = ({ location, history }) => {
+const Register = () => {
+
+    let history = useHistory();
+
 
     useEffect(() => {
         document.title = 'Tech con Agust | Registro'
@@ -21,7 +25,6 @@ const Register = ({ location, history }) => {
     
       const dispatch = useDispatch()
     
-      const redirect = location.search ? location.search.split('=')[1] : '/';
     
       const userRegister = useSelector(state => state.userRegister);
       const { error, loading, success } = userRegister;
@@ -35,15 +38,12 @@ const Register = ({ location, history }) => {
         if (password !== re_password) {
           setMessage('Passwords must match ');
         } else {
-          setExito(`Verifica tu Correo en ${email}`)
+          dispatch(register(email, username, name, password, re_password));
+          setExito(`Verifica tu Correo Spam en ${email}`)
         }
       }
     
-      useEffect(() => {
-        if (success) {
-          setExito(`Verifica tu Correo en ${email}`)
-        }
-      }, [history, success]);
+
 
       
 

@@ -2,8 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../actions/userActions';
 import logo from '../../media/logo.png';
+import { useHistory } from "react-router-dom";
 
-const Login = ({ location, history }) => {
+
+
+const Login = () => {
+
+
+  let history = useHistory();
+
+
+  
 
   useEffect(() => {
     document.title = 'Tech con Agust | Login'
@@ -14,22 +23,18 @@ const Login = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const redirect = location.search ? location.search.split('=')[1] : '/';
 
   const userLogin = useSelector(state => state.userLogin);
   const { error, loading, userInfo } = userLogin;
 
 
-  useEffect(() => {
-    if (userInfo) {
-      history.push(redirect);
 
-    }
-  }, [history, userInfo, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
+    history.push("/");
+
   }
 
 
@@ -48,6 +53,7 @@ const Login = ({ location, history }) => {
             />
             <h2 className="mt-6 text-center text-3xl font-mono  text-grey">
               Iniciar Session
+             
             </h2>
           </div>
           <form onSubmit={submitHandler} className="mt-8 space-y-6" action="#" method="POST">
