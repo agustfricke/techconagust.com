@@ -64,6 +64,7 @@ def createCurso(request):
     curso = Curso.objects.create(
         user=user,
         title='Titulo',
+        price='00.00',
         category='Categoria',
         description='Descripcion',
         trailer='Trailer URL',

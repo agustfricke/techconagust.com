@@ -15,7 +15,7 @@ class Curso(models.Model):
     created         = models.DateTimeField(auto_now_add=True)
     trailer         = models.CharField(max_length=250, null=True, blank=True)
     file            = models.FileField(null=True, blank=True, upload_to='files')
-
+    price           = models.CharField(max_length=250, null=True, blank=True)
 
 class Review(models.Model):
     curso           = models.ForeignKey(Curso, on_delete=models.SET_NULL, null=True)

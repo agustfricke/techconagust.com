@@ -23,6 +23,7 @@ import MiPerfil from "./components/auth/MiPerfil";
 
 // Admin Components
 import AdminCursos from "./components/admin/AdminCursos";
+import AdminFormCursos from "./components/admin/AdminFormCursos";
 
 function App() {
 
@@ -60,6 +61,7 @@ function App() {
                   <Route path='/login/' component={Login} />
                   <Route path='/register/' component={Register} />
                   <Route path='/admin/cursos/' component={AdminCursos} />
+                  <Route path='/cursos/:id/form' component={AdminFormCursos} />
                   <Route path='/activate/:uid/:token' component={Activation} />
                   <Route path='/reset-password' component={ResetPassword} />
                   <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
