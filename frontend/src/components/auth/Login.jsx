@@ -58,10 +58,7 @@ const Login = ({ location, history }) => {
                 <input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  id="email"
-                  name="email"
                   type="email"
-                  autoComplete="email"
                   required
                   class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                   placeholder="Correo Electronico"
@@ -73,10 +70,7 @@ const Login = ({ location, history }) => {
                 <input
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  id="email"
-                  name="email"
                   type="password"
-                  autoComplete="email"
                   required
                   class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                   placeholder="Contraseña"

@@ -17,6 +17,8 @@ import Register from "./components/auth/Register";
 import Activation from "./components/auth/Activation";
 import ResetPassword from "./components/auth/ResetPassword";
 import ResetPasswordConfirm from "./components/auth/ResetPasswordConfirm";
+import MiPerfil from "./components/auth/MiPerfil";
+
 
 // Admin Components
 import AdminCursos from "./components/admin/AdminCursos";
@@ -43,7 +45,7 @@ function App() {
               <Route path='/activate/:uid/:token' component={Activation} />
               <Route path='/reset-password' component={ResetPassword} />
               <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
-
+              <Route path='/MiPerfil/' component={MiPerfil} />
 
             </div>
           </main>
