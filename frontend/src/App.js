@@ -15,6 +15,8 @@ import Reviews from "./components/core/Reviews";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Activation from "./components/auth/Activation";
+import ResetPassword from "./components/auth/ResetPassword";
+import ResetPasswordConfirm from "./components/auth/ResetPasswordConfirm";
 
 // Admin Components
 import AdminCursos from "./components/admin/AdminCursos";
@@ -39,6 +41,8 @@ function App() {
               <Route path='/register/' component={Register} />
               <Route path='/admin/cursos/' component={AdminCursos} />
               <Route path='/activate/:uid/:token' component={Activation} />
+              <Route path='/reset-password' component={ResetPassword} />
+              <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
 
 
             </div>

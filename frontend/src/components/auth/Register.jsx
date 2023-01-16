@@ -35,7 +35,6 @@ const Register = ({ location, history }) => {
         if (password !== re_password) {
           setMessage('Passwords must match ');
         } else {
-          dispatch(register(email, username, name, password, re_password));
           setExito(`Verifica tu Correo en ${email}`)
         }
       }
