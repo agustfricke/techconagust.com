@@ -106,6 +106,11 @@ const AdminCursos = () => {
                         <th scope="col" class="px-6 py-3 text-white font-mono">
                             Editar
                         </th>
+
+                        <th scope="col" class="px-6 py-3 text-white font-mono">
+                            Episodios
+                        </th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -142,6 +147,17 @@ const AdminCursos = () => {
                             
                         <a href={`/cursos/${curso.id}/form`} >
                         <FaEdit className='w-7 h-7' />
+
+                            </a>
+
+
+                        </td>
+
+                        <td class="px-6 py-4 text-grey font-mono hover:text-orange">
+
+                            
+                        <a href={`/epi/${curso.id}`}>
+                        <HiFolderPlus className='w-7 h-7' />
 
                             </a>
 

@@ -34,11 +34,9 @@ def putUser(request):
     user = request.user
     serializer = UserSerializerWithToken(user, many=False)
     data = request.data
-    user.user_name = data['user_name']
+    user.username = data['username']
     user.bio = data['bio']
     user.email = data['email']
-    if data['password'] != '':
-        user.password = make_password(data['password'])
     user.save()
     return Response(serializer.data)
 

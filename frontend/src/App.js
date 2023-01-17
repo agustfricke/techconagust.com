@@ -24,6 +24,8 @@ import MiPerfil from "./components/auth/MiPerfil";
 // Admin Components
 import AdminCursos from "./components/admin/AdminCursos";
 import AdminFormCursos from "./components/admin/AdminFormCursos";
+import Episodios from "./components/admin/Episodios";
+import EditEpisodio from "./components/admin/EditEpisodio";
 
 function App() {
 
@@ -66,6 +68,10 @@ function App() {
                   <Route path='/reset-password' component={ResetPassword} />
                   <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
                   <Route path='/MiPerfil/' component={MiPerfil} />
+                  <Route path='/reset-password' component={ResetPassword} />
+                  <Route path='/epi/:id' component={Episodios} />
+                  <Route path='/episodio/:id/form' component={EditEpisodio} />
+
 
                 </div>
               </main>

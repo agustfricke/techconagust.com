@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { HiHome, HiUser, HiOutlineLogout } from "react-icons/hi";
+import { HiHome, HiUser, HiOutlineLogout, HiUsers, HiFolder } from "react-icons/hi";
 import logo from '../../media/logo.png';
 import { logout } from '../../actions/userActions'
 
@@ -10,11 +10,11 @@ const Sidebar = (props) => {
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-  
-  
+
+
     const logoutHandler = (e) => {
-      dispatch(logout())
-  }
+        dispatch(logout())
+    }
 
     const { showMenu } = props;
 
@@ -28,7 +28,7 @@ const Sidebar = (props) => {
 
                     <li>
                         <h1 className="ml-3 my-5">
-                            <img src={logo} style={{ maxHeight: "70px" }}/>
+                            <img src={logo} style={{ maxHeight: "70px" }} />
                         </h1>
                     </li>
 
@@ -52,7 +52,7 @@ const Sidebar = (props) => {
 
                     <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
                         <a
-                        onClick={logoutHandler}
+                            onClick={logoutHandler}
                             href="#"
                             className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
                         >
@@ -60,7 +60,43 @@ const Sidebar = (props) => {
                         </a>
                     </li>
 
-                    
+
+
+                    {userInfo.is_admin ? (
+
+                        <>
+
+                            <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
+                                <a
+                                    href="#"
+                                    className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
+                                >
+                                    <HiUsers className="text-2xl" />
+                                </a>
+                            </li>
+
+                            <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
+                                <a
+                                    href={`admin/cursos/`}
+                                    className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
+                                >
+                                    <HiFolder className="text-2xl" />
+                                </a>
+                            </li>
+                        </>
+
+                    ) : (
+
+                        <>
+
+
+                        </>
+
+                    )}
+
+
+
+
 
                 </ul>
             </div>
