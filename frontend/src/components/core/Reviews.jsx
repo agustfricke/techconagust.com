@@ -14,7 +14,50 @@ const Reviews = () => {
 
                 </h2>
             </div>
+            <div className="flex min-h-full items-center justify-center ">
+      <div className=' m-4 p-4 bg-grey-3 rounded-lg'>
+        <div className="w-[400px] max-w-md space-y-8 ">
+          <div >
+           
+            <h2 className="mt-6 text-center text-xl font-mono  text-grey">
+              Crea una Review
+             
+            </h2>
+          </div>
+          <form  className="mt-8 space-y-6" action="#" method="POST">
 
+            <div className="">
+              <div className='mb-2'>
+
+                <input
+                  type="email"
+                  required
+                  class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
+                  placeholder="Escribe aqui ..."
+                />
+              </div>
+
+              
+            </div>
+
+            <div className='items-center'>
+              <button
+                type="submit"
+                className=" space-x-2 block w-full transition-colors  text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-3 px-10"
+              >
+
+                Publicar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+<div className='border border-t-white mb-7 mt-7'>
+
+</div>
             <div className="flex items-center mb-4 space-x-4">
                 <img className="w-10 h-10 rounded-full" src={logo} alt="" />
                 <div className="space-y-1 font-medium text-white text-mono">

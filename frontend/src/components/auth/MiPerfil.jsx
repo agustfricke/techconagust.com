@@ -8,6 +8,9 @@ import { HiArrowUpOnSquareStack } from "react-icons/hi2";
 
 export default function MiPerfil() {
 
+  const URL = 'http://127.0.0.1:8000'
+  // const URL = 'https://techconagust.com/'
+
   useEffect(() => {
     document.title = `Tech con Agust | Mi Perfil`
   }, []);
@@ -37,11 +40,10 @@ export default function MiPerfil() {
 
                     <div className="flex min-h-full items-center justify-center">
                       <div>
-                        <img className="h-40 w-55 rounded-full my-4 ml-9" src={logo} alt="" />
+                        <img className="h-40 w-55 rounded-full my-4 ml-9" src={`${URL}${userInfo.avatar}`} alt="" />
                         <h3 className="text-lg font-mono leading-6 text-white">{userInfo.username} &nbsp;&nbsp;&nbsp;&nbsp;
                           <a
-                            style={{ textDecoration: 'none' }}
-                            href={"/editprofile"}
+                            href={"/edit/profile"}
                             className=" text-sm font-mono text-orange font-semibold hover:text-grey-1  "
                           >
                             EDITAR
@@ -94,7 +96,7 @@ export default function MiPerfil() {
 
                 <span className="text-grey font-mono">lo Descripcion muy larga y muy entretenida de Django Rest Fraamework</span>
 
-                <a href={`/reviews/`} className="text-gray-600">Rating</a>
+                <a href={`/reviews/`} className="text-white font-mono"> Review</a>
 
                 <a href={`/curso/`}>
                   <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-10'>

@@ -1,9 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Rating from '../utils/Rating';
+import Error from '../utils/Error';
+import Loader from '../utils/Loader';
+import { listCursos } from "../../actions/cursoActions";
+import ContentLoader from "../utils/ContentLoader";
 import logo from '../../media/logo.png';
 import { HiArrowUpOnSquareStack } from "react-icons/hi2";
+import { useHistory } from "react-router-dom";
 
 
 const Home = () => {
+
+
+  let history = useHistory();
+
+    const URL = 'http://127.0.0.1:8000'
+    // const URL = 'https://techconagust.com/'
+
+    useEffect(() => {
+        document.title = 'Tech con Agust | Home'
+      }, []);
+    
+      const dispatch = useDispatch();
+    
+      const cursoList = useSelector((state) => state.cursoList);
+      const { error, loading, cursos } = cursoList;
+    
+      let keysearch = history.location.search;
+      console.log(keysearch);
+      useEffect(() => {
+        dispatch(listCursos(keysearch));
+      }, [dispatch, keysearch]);
+
+
     return (
         <>
             <div className="flex items-center justify-between">
@@ -12,21 +42,23 @@ const Home = () => {
 
             <div className="p-8 mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
 
-
+{cursos && cursos.map((c) => (
                 <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-2 text-center text-gray-300">
 
                     <img
-                        src={logo}
+                        src={`${URL}${c.image}`}
                         className="w-40 h-40 object-cover -mt-20 shadow-2xl rounded-full"
                     />
 
-                    <p className="text-xl text-white font-mono font-bold">Django Rest Framework</p>
+                    <p className="text-xl text-white font-mono font-bold">{c.title}</p>
+                    <p className="text-xl text-white font-mono font-bold">$ {c.price}</p>
 
-                    <span className="text-grey font-mono">lo Descripcion muy larga y muy entretenida de Django Rest Fraamework</span>
+                    <span className="text-grey font-mono">{c.description}</span>
 
-                    <a href={`/reviews/`} className="text-gray-600">Rating</a>
+                    <p className="mt-1 text-sm text-white"> <Rating value={c.rating} />
+                                  <p>{`${c.num_reviews} reviews`}</p></p>
 
-                    <a href={`/curso/`}>
+                    <a href={`/curso/${c.id}`}>
                         <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-10'>
                             <span>
                                 Enter
@@ -40,6 +72,7 @@ const Home = () => {
 
 
                 </div>
+                  ))}
             </div>
         </>
     )

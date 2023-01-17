@@ -11,6 +11,9 @@ import { useHistory } from "react-router-dom";
 
 const EditEpisodio = ({match}) => {
 
+  const URL = 'http://127.0.0.1:8000/'
+  // const URL = 'https://techconagust.com/'
+
     let history = useHistory();
 
     const episodioId = match.params.id
@@ -84,7 +87,7 @@ const EditEpisodio = ({match}) => {
                 }
             }
 
-            const { data } = await axios.post('http://127.0.0.1:8000/cursos/uploadFileEpisodio/', formData, config)
+            const { data } = await axios.post(`${URL}cursos/uploadFileEpisodio/`, formData, config)
             
             setFile(data)
             setUploadingFile(false)

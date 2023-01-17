@@ -79,7 +79,7 @@ export const updateEmailProfile = (user) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.patch(
-            `${URL}users/me/`,
+            `${URL}auth/users/me/`,
             user,
             config
         )

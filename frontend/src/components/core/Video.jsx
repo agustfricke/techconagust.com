@@ -1,10 +1,83 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import Message from '../utils/Message';
+import Loader from '../utils/Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import {Route, Redirect} from 'react-router-dom';
+
+import Rating from '../utils/Rating'
+import { listEpisodioDetails, createCommentEpisodio, listEpisodios, listCursoDetails } from '../../actions/cursoActions'
+import { EPISODIO_CREATE_COMMENT_RESET } from '../../constants/cursoConstants'
+import { BsSearch } from "react-icons/bs";
+import { FaLocationArrow } from "react-icons/fa";
+import Error from "../utils/Error";
+import ContentLoader from "../utils/ContentLoader";
+import { listUsers } from '../../actions/userActions';
 import logo from '../../media/logo.png';
 
 
 
 
-const Video = () => {
+const Video = ({match}) => {
+
+    const [description, setDescription] = useState('')
+
+    const createComment = useSelector(state => state.createComment)
+    const { loading: loadingEpisodioComment, error: errorEpisodioComment, success: successEpisodioComment } = createComment
+
+
+    const dispatch = useDispatch()
+
+    const episodioDetails = useSelector(state => state.episodioDetails)
+    const { loading, error, episodio } = episodioDetails
+
+    const episodioAll = useSelector(state => state.episodioAll)
+    const { episodios } = episodioAll
+
+    const detailsCurso = useSelector(state => state.detailsCurso)
+    const { curso } = detailsCurso
+
+    const userList = useSelector(state => state.userList);
+    const {users} = userList;
+
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    const URL = 'http://127.0.0.1:8000'
+    // const URL = 'https://techconagust.com/'
+
+
+
+
+
+    useEffect(() => {
+        
+        if (successEpisodioComment) {
+            setDescription('')
+            dispatch({ type: EPISODIO_CREATE_COMMENT_RESET })
+        }
+
+        dispatch(listEpisodioDetails(match.params.epi))
+        dispatch(listCursoDetails(match.params.curso))
+        dispatch(listUsers());
+
+
+
+    }, [dispatch, match, successEpisodioComment])
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        dispatch(createCommentEpisodio(
+            match.params.epi, {
+            description
+        }
+        ))
+    }
+
+    useEffect(() => {
+        document.title = `Tech con Agust | ${episodio.title}`
+      }, []);
+
 
 
     return (
@@ -17,7 +90,7 @@ const Video = () => {
                 <div className=" p-8  grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-16">
 
                     <div className=" col-span-1 md:col-span-2 lg:col-span-2">
-                        <iframe src="https://www.youtube.com/watch?v=JcyE2dbm1HQ"
+                        <iframe src={episodio.URL}
                             width="100%"
                             height="100%"
                             loading="lazy"
@@ -26,14 +99,20 @@ const Video = () => {
                         </iframe>
 
 
-                        <p className='font-mono text-white text-xl mt-3'>Django Rest Framework</p>
+                        <p className='font-mono text-white text-xl mt-3'>{episodio.title}</p>
 
-                        <p className='font-mono text-grey mt-1'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit porro nemo doloribus aut sequi perspiciatis eum optio </p>
+                        <p className='font-mono text-grey mt-1'>{episodio.description}</p>
+
+                        <a className="font-mono text-grey hover:text-orange mt-1" href={`${URL}${curso.file}`}>
+                           Descargar Recurso
+                        </a>
 
 
 
-                        <form className='mb-5'>
+                        <form className='mb-5' onSubmit={submitHandler}>
                             <input
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                                 type="text"
                                 className="bg-grey-2 mt-4 w-full py-2 pl-10 pr-4 rounded-lg text-grey  outline-none"
                                 placeholder="Añade un comentario ..."
@@ -43,12 +122,18 @@ const Video = () => {
                         <div className='mt-[50px] md:mt-10 lg:mt-10'>
                             <div className="overflow-y-auto h-60">
                                 <ul>
+                                {episodio.comments && episodio.comments.map((comment) => (
+                        <>
+                                {users && users.map(user => (
+                                    <>
+                                    {user.username === comment.user &&
                                     <li className='mt-1'>
                                         <a href=''>
                                             <div className="flex items-center mb-4 space-x-4">
-                                                <img className="w-10 h-10 rounded-full" src={logo} alt="" />
+                                                <img className="w-10 h-10 rounded-full" src={`${URL}${user.avatar}`} alt="" />
                                                 <div className="space-y-1 font-medium text-white">
-                                                    <p>Agustin Fricke<time datetime="2014-08-16 19:00" className="block text-sm text-gray-500 text-grey">24 August 2014</time></p>
+                                                    <p>{comment.user}<time className="block text-sm text-gray-500 text-grey">
+                                                    {comment.date}</time></p>
                                                 </div>
                                             </div>
 
@@ -56,11 +141,17 @@ const Video = () => {
                                             <div className="flex items-center mb-1 ml-7">
 
                                                 <p className="ml-10 mt-1 text-sm text-grey">
-                                                    Reviewed in the United Kingdom on
+                                                    {comment.description}
                                                 </p>
                                             </div>
                                         </a>
                                     </li>
+                                }
+                                             </>
+                                                                                 ))}
+                                                                                 </>
+                                             
+                                                                     ))}
 
 
 
@@ -75,18 +166,20 @@ const Video = () => {
                     <div className='mt-[500px]  md:mt-[500px] lg:mt-0'>
                         <div className="flex-none overflow-y-scroll h-[575px]">
                             <ul>
+                            {curso.episodios && curso.episodios.map((epi) => (
                                 <li className='mt-1'>
-                                    <a href=''>
+                                    <a href={`/video/${epi.id}/${curso.id}`}>
                                         <div className='flex space-x-2 items-center px-5 transition-colors  text-white hover:text-grey-3 bg-grey-2 hover:bg-grey font-bold font-mono  p-2 '>
-                                            <img className='w-12 h-12' src={logo} />
+                                            <img className='w-12 h-12' src={`${URL}${epi.file}`} />
 
                                             <span className=' '>
-                                                1- Instalacion
+                                                {epi.title}
                                             </span>
 
                                         </div>
                                     </a>
                                 </li>
+                                ))}
 
                                 
                             </ul>

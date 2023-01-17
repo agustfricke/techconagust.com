@@ -20,6 +20,7 @@ import ResetPassword from "./components/auth/ResetPassword";
 import ResetPasswordConfirm from "./components/auth/ResetPasswordConfirm";
 import MiPerfil from "./components/auth/MiPerfil";
 import UpdateEmail from "./components/auth/UpdateEmail";
+import EditProfile from "./components/auth/EditProfile";
 
 
 // Admin Components
@@ -59,8 +60,8 @@ function App() {
                   <Header />
 
                   <Route path="/" component={Home} exact />
-                  <Route path='/curso/' component={Curso} />
-                  <Route path='/video/' component={Video} />
+                  <Route path='/curso/:id' component={Curso} />
+                  <Route path='/video/:epi/:curso' component={Video} />
                   <Route path='/reviews/' component={Reviews} />
                   <Route path='/login/' component={Login} />
                   <Route path='/register/' component={Register} />
@@ -75,6 +76,8 @@ function App() {
                   <Route path='/episodio/:id/form' component={EditEpisodio} />
                   <Route path='/update/email/' component={UpdateEmail} />
                   <Route path='/users/admin/' component={Users} />
+                  <Route path='/edit/profile' component={EditProfile} />
+
 
 
 
