@@ -4,7 +4,6 @@ from users.models import User
 
 class Curso(models.Model):
     user            = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    comprador       = models.ManyToManyField(User, related_name='comprador')
     title           = models.CharField(max_length=250, null=True, blank=True)
     image           = models.ImageField(null=True, blank=True, default='/curso.jpg', upload_to='cursos')
     category        = models.CharField(max_length=250, null=True, blank=True)
@@ -16,6 +15,10 @@ class Curso(models.Model):
     trailer         = models.CharField(max_length=250, null=True, blank=True)
     file            = models.FileField(null=True, blank=True, upload_to='files')
     price           = models.CharField(max_length=250, null=True, blank=True)
+
+class Comprador(models.Model):
+    usuario         = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    curso           = models.ForeignKey(Curso, on_delete=models.SET_NULL, null=True)
 
 class Review(models.Model):
     curso           = models.ForeignKey(Curso, on_delete=models.SET_NULL, null=True)

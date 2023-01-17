@@ -29,6 +29,7 @@ import { cursoListReducer,
         createCommentReducer,
         episodioAllReducer,
         episodioDeleteReducer,
+        cursoPagadoReducer,
 
 
 } from './reducers/cursoReducers';
@@ -64,6 +65,7 @@ const reducer = combineReducers({
     createComment: createCommentReducer,
     episodioAll: episodioAllReducer,
     episodioDelete:episodioDeleteReducer,
+    cursoPagado:cursoPagadoReducer,
 
 })
 

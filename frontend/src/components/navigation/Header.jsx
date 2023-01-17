@@ -15,7 +15,7 @@ const Header = () => {
           {userInfo ? (
             <>
               <HiBadgeCheck className='text-orange w-8 h-8 mr-4' />
-              <h1 className="text-2xl text-grey font-mono ">{userInfo.username}</h1>
+              <h1 className="text-2xl text-grey font-mono ">{userInfo.username} {userInfo.premium}</h1>
             </>
           ) : (
             <>

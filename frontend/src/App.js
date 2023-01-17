@@ -30,6 +30,12 @@ import Episodios from "./components/admin/Episodios";
 import EditEpisodio from "./components/admin/EditEpisodio";
 import Users from "./components/admin/Users";
 
+// Shopping Stuff
+import PremiumUser from "./components/shopping/PremiumUser";
+import SuccessPremium from "./components/shopping/SuccessPremium";
+import SoloCurso from "./components/shopping/SoloCurso";
+
+
 function App() {
 
   const userLogin = useSelector(state => state.userLogin)
@@ -77,6 +83,12 @@ function App() {
                   <Route path='/update/email/' component={UpdateEmail} />
                   <Route path='/users/admin/' component={Users} />
                   <Route path='/edit/profile' component={EditProfile} />
+                  <Route path='/premium/user/payment' component={PremiumUser} />
+                  <Route path='/success/premium/' component={SuccessPremium} />
+                  <Route path='/solo/curso/payment/:id' component={SoloCurso} />
+
+
+
 
 
 

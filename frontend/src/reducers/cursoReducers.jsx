@@ -57,7 +57,27 @@ import {
     EPISODIO_DELETE_SUCCESS,
     EPISODIO_DELETE_FAIL,
 
+    CURSO_PAGADO_REQUEST,
+    CURSO_PAGADO_SUCCESS,
+    CURSO_PAGADO_FAIL,
+
 } from '../constants/cursoConstants';
+
+export const cursoPagadoReducer = (state = {}, action) => {
+    switch (action.type) {
+        case CURSO_PAGADO_REQUEST:
+            return { loading: true }
+
+        case CURSO_PAGADO_SUCCESS:
+            return { loading: false, success: true }
+
+        case CURSO_PAGADO_FAIL:
+            return { loading: false, error: action.payload }
+
+        default:
+            return state
+    }
+}
 
 
 export const episodioDeleteReducer = (state = {}, action) => {

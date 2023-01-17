@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from django.utils import timezone
 from rest_framework import status
 
-from .models import Curso, Review, Episodio, Comment
-from .serializers import EpisodioSerializer, CursoSerializer
+from .models import Curso, Review, Episodio, Comment, Comprador
+from .serializers import EpisodioSerializer, CursoSerializer,CompradorSerializer
 
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
@@ -24,14 +24,17 @@ def updateCurso(request, pk):
     else:
         return Response({'Error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
 
-@api_view(['PUT'])
+@api_view(['POST'])
 def comprador(request, pk):
     data = request.data
     user = request.user
     curso = Curso.objects.get(id=pk)
-    curso.comprador = user
-    curso.save()
-    serializer = CursoSerializer(curso, many=False)
+    comprador = Comprador.objects.create(
+        usuario = user,
+        curso = curso
+    )
+    comprador.save()
+    serializer = CompradorSerializer(comprador, many=False)
     return Response(serializer.data)
 
 @api_view(['GET'])

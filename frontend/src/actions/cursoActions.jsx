@@ -52,10 +52,51 @@ import {
     EPISODIO_DELETE_SUCCESS,
     EPISODIO_DELETE_FAIL,
 
+    CURSO_PAGADO_REQUEST,
+    CURSO_PAGADO_SUCCESS,
+    CURSO_PAGADO_FAIL,
+
 } from '../constants/cursoConstants';
 
 // const URL = 'https://techconagust.com/'
 const URL = 'http://127.0.0.1:8000/'
+
+export const cursoPagadoAction = (cursoId, user) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: CURSO_PAGADO_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.post(
+            `${URL}cursos/comprador/${cursoId}/`,
+            user,
+            config
+        )
+
+        dispatch({
+            type: CURSO_PAGADO_SUCCESS,
+            payload: data,
+        })
+
+    } catch (error) {
+        dispatch({
+            type: CURSO_PAGADO_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
 
 
 export const deleteEpisodio = (id) => async (dispatch, getState) => {
