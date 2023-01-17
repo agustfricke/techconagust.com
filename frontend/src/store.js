@@ -13,6 +13,7 @@ import { userLoginReducer,
         passwordConfirmReducer,
         userActivationReducer,
         userPremumReducer,
+        userEmailReducer,
 } from './reducers/userReducers'
 
 import { cursoListReducer,
@@ -47,6 +48,7 @@ const reducer = combineReducers({
     passwordConfirm:passwordConfirmReducer,
     userActivation:userActivationReducer,
     userPremum: userPremumReducer,
+    userEmail:userEmailReducer,
 
     // Curso 
     cursoList: cursoListReducer,

@@ -19,6 +19,7 @@ import Activation from "./components/auth/Activation";
 import ResetPassword from "./components/auth/ResetPassword";
 import ResetPasswordConfirm from "./components/auth/ResetPasswordConfirm";
 import MiPerfil from "./components/auth/MiPerfil";
+import UpdateEmail from "./components/auth/UpdateEmail";
 
 
 // Admin Components
@@ -26,6 +27,7 @@ import AdminCursos from "./components/admin/AdminCursos";
 import AdminFormCursos from "./components/admin/AdminFormCursos";
 import Episodios from "./components/admin/Episodios";
 import EditEpisodio from "./components/admin/EditEpisodio";
+import Users from "./components/admin/Users";
 
 function App() {
 
@@ -71,6 +73,10 @@ function App() {
                   <Route path='/reset-password' component={ResetPassword} />
                   <Route path='/epi/:id' component={Episodios} />
                   <Route path='/episodio/:id/form' component={EditEpisodio} />
+                  <Route path='/update/email/' component={UpdateEmail} />
+                  <Route path='/users/admin/' component={Users} />
+
+
 
 
                 </div>

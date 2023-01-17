@@ -37,7 +37,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -49,6 +49,15 @@ CORS_ALLOWED_ORIGINS = [
     "https://techconagust.com",
     "http://127.0.0.1:3000"
 ]
+
+# CSRF_ALLOWED = [
+#     "http://127.0.0.1:3000"
+# ]
+
+# CSRF_ORIGINS = [
+#     "http://127.0.0.1:3000"
+# ]
+
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -158,6 +167,7 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
     'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
 }
+
 
 DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE': True,
