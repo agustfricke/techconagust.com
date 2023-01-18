@@ -68,7 +68,7 @@ function App() {
                   <Route path="/" component={Home} exact />
                   <Route path='/curso/:id' component={Curso} />
                   <Route path='/video/:epi/:curso' component={Video} />
-                  <Route path='/reviews/' component={Reviews} />
+                  <Route path='/reviews/:id' component={Reviews} />
                   <Route path='/login/' component={Login} />
                   <Route path='/register/' component={Register} />
                   <Route path='/admin/cursos/' component={AdminCursos} />

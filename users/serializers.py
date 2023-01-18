@@ -11,13 +11,13 @@ class UserCreateSerializer(UserCreateSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    is_admin = serializers.SerializerMethodField(read_only=True)
+    is_superuser = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'is_superuser', 'bio', 'name', 'avatar', 'premium']
 
-    def get_is_admin(self, obj):
+    def get_is_superuser(self, obj):
         return obj.is_staff
 
 
