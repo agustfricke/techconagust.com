@@ -58,9 +58,12 @@ const PremiumUser = () => {
                 {
                     amount: {
                         value: "39.99"
-                    }
-                }
-            ]
+                    },
+                },
+            ],
+            application_context: {
+                shipping_preference: "NO_SHIPPING"
+            }
         });
     };
 

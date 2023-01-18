@@ -51,7 +51,6 @@ const Home = () => {
                     />
 
                     <p className="text-xl text-white font-mono font-bold">{c.title}</p>
-                    <p className="text-xl text-white font-mono font-bold">$ {c.price}</p>
 
                     <span className="text-grey font-mono">{c.description}</span>
 

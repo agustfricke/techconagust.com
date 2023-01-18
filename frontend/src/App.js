@@ -103,7 +103,7 @@ function App() {
               <Header />
 
               <Route path="/" component={Home} exact />
-              <Route path='/curso/' component={Curso} />
+              <Route path='/curso/:id' component={Curso} />
               <Route path='/video/' component={Video} />
               <Route path='/reviews/' component={Reviews} />
               <Route path='/login/' component={Login} />

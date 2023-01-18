@@ -48,9 +48,12 @@ const SoloCurso = ({match}) => {
                 {
                     amount: {
                         value:precio
-                    }
-                }
-            ]
+                    },
+                },
+            ],
+            application_context: {
+              shipping_preference: "NO_SHIPPING"
+          }
         });
     };
 
