@@ -47,9 +47,9 @@ import {
     USER_PREMIUM_SUCCESS,
     USER_PREMIUM_FAIL,
 
-    UPDATE_EMAIL_REQUEST,
-    UPDATE_EMAIL_SUCCESS,
-    UPDATE_EMAIL_FAIL
+    CHANGE_EMAIL_REQUEST,
+    CHANGE_EMAIL_SUCCESS,
+    CHANGE_EMAIL_FAIL
 
 } from '../constants/userConstants'
 
@@ -61,10 +61,9 @@ const URL = 'http://127.0.0.1:8000/'
 
 
 
-
-export const updateEmailProfile = (user) => async (dispatch, getState) => {
+export const updateEmailProfile = (new_email, re_new_email, current_password) => async (dispatch, getState) => {
     try {
-        dispatch({ type: UPDATE_EMAIL_REQUEST })
+        dispatch({ type: CHANGE_EMAIL_REQUEST })
         dispatch({ type: USER_DETAILS_RESET })
 
         const {
@@ -78,33 +77,27 @@ export const updateEmailProfile = (user) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.patch(
-            `${URL}auth/users/me/`,
-            user,
-            config
+        const { data } = await axios.post(
+            `${URL}auth/users/set_email/`,
+            { 'new_email': new_email, 're_new_email':re_new_email, 'current_password':current_password }, config
         )
 
         dispatch({
-            type: UPDATE_EMAIL_SUCCESS,
+            type: CHANGE_EMAIL_SUCCESS,
             payload: data
         })
 
-        dispatch({
-            type: USER_LOGIN_SUCCESS,
-            payload: data
-        })
-
-        localStorage.setItem('userInfo', JSON.stringify(data))
 
     } catch (error) {
         dispatch({
-            type: UPDATE_EMAIL_FAIL,
+            type: CHANGE_EMAIL_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
         })
     }
 }
+
 
 
 

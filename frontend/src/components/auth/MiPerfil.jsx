@@ -57,6 +57,12 @@ export default function MiPerfil() {
                           >
                             EDITAR
                           </a>
+                          <a
+                            href={"/update/email/"}
+                            className=" text-sm font-mono m-4 text-orange font-semibold hover:text-grey-1  "
+                          >
+                            CAMBIAR EMAIL
+                          </a>
                         </h3>
                       </div>
                     </div>

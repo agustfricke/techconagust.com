@@ -49,32 +49,33 @@ import {
     USER_PREMIUM_FAIL,
     USER_PREMIUM_RESET,
 
-    UPDATE_EMAIL_REQUEST,
-    UPDATE_EMAIL_SUCCESS,
-    UPDATE_EMAIL_FAIL
+
+    CHANGE_EMAIL_REQUEST,
+    CHANGE_EMAIL_SUCCESS,
+    CHANGE_EMAIL_FAIL
 
 
 } from '../constants/userConstants'
 
 
-export const userEmailReducer = (state = {}, action) => {
+export const changeEmailReducer = (state = {}, action) => {
     switch (action.type) {
-        case UPDATE_EMAIL_REQUEST:
+        case CHANGE_EMAIL_REQUEST:
             return { loading: true }
 
-        case UPDATE_EMAIL_SUCCESS:
-            return { loading: false, success: true, userInfo: action.payload }
+        case CHANGE_EMAIL_SUCCESS:
+            return { loading: false, success: true }
 
-        case UPDATE_EMAIL_FAIL:
+        case CHANGE_EMAIL_FAIL:
             return { loading: false, error: action.payload }
-
-        case USER_UPDATE_PROFILE_RESET:
-            return {}
 
         default:
             return state
     }
 }
+
+
+
 
 export const userPremumReducer = (state = {}, action) => {
     switch (action.type) {

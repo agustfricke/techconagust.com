@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateEmailProfile, getUserDetails } from '../../actions/userActions';
+import { updateEmailProfile, getUserDetails, logout } from '../../actions/userActions';
 import logo from '../../media/logo.png';
 import { useHistory } from "react-router-dom";
 import { USER_UPDATE_PROFILE_RESET } from '../../constants/userConstants'
@@ -13,41 +13,30 @@ const UpdateEmail = () => {
     document.title = 'Tech con Agust | Edit Profile'
   }, []);
 
-  const [email, setEmail] = useState('')
+  const [new_email, setNewEmail] = useState('')
+  const [re_new_email, setReNewNewEmail] = useState('')
+  const [cuerrent_password, setCurrentPassword] = useState('')
+
 
   const dispatch = useDispatch()
 
-  const userDetails = useSelector(state => state.userDetails)
-  const { error, loading, user } = userDetails
-
-  const userLogin = useSelector(state => state.userLogin)
-  const { userInfo } = userLogin
-
-
-  const userEmail = useSelector(state => state.userEmail)
-  const { success } = userEmail
 
 
 
-  useEffect(() => {
-    
-      if (!user || !user.email || success || userInfo.id !== user.id) {
-        dispatch({ type: USER_UPDATE_PROFILE_RESET })
-        dispatch(getUserDetails('profile'))
-      } else {
-        setEmail(user.email)
-    }
-  }, [dispatch, history, userInfo, user, success])
+
+
+  const changeEmail = useSelector(state => state.changeEmail)
+  const { success } = changeEmail
+
+
+
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    history.push('/MiPerfil')
+    e.preventDefault();
+    dispatch(updateEmailProfile(new_email, re_new_email, cuerrent_password));
+    dispatch(logout())
+    history.push("/login");
 
-   
-      dispatch(updateEmailProfile({
-        'id': user.id,
-        'email': email,
-      }))
   }
 
 
@@ -74,12 +63,34 @@ const UpdateEmail = () => {
             <div className='mb-2'>
 
               <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={new_email}
+                onChange={(e) => setNewEmail(e.target.value)}
                 type="email"
                 required
                 class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
-                placeholder="Correo Electronico"
+                placeholder="Nuevo Email"
+              />
+            </div>
+            <div className='mb-2'>
+
+              <input
+                value={re_new_email}
+                onChange={(e) => setReNewNewEmail(e.target.value)}
+                type="email"
+                required
+                class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
+                placeholder="Confirmacion de Email"
+              />
+            </div>
+            <div className='mb-2'>
+
+              <input
+                value={cuerrent_password}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                type="password"
+                required
+                class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
+                placeholder="Contraseña"
               />
             </div>
             </div>
