@@ -115,7 +115,7 @@ export default function MiPerfil() {
                     <span className="text-grey font-mono">{c.description}</span>
 
                     <p className="mt-1 text-sm text-white"> <Rating value={c.rating} />
-                                  <p>{`${c.num_reviews} reviews`}</p></p>
+                                  <a href={`/reviews/${c.id}`}>{`${c.num_reviews} reviews`}</a></p>
 
                     <a href={`/curso/${c.id}`}>
                         <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-10'>

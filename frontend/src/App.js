@@ -11,6 +11,7 @@ import Home from "./components/core/Home";
 import Curso from "./components/core/Curso";
 import Video from "./components/core/Video";
 import Reviews from "./components/core/Reviews";
+import ReviewAll from "./components/core/ReviewAll";
 
 // Auth Components
 import Login from "./components/auth/Login";
@@ -69,6 +70,7 @@ function App() {
                   <Route path='/curso/:id' component={Curso} />
                   <Route path='/video/:epi/:curso' component={Video} />
                   <Route path='/reviews/:id' component={Reviews} />
+                  <Route path='/revisiones/all/:id' component={ReviewAll} />
                   <Route path='/login/' component={Login} />
                   <Route path='/register/' component={Register} />
                   <Route path='/admin/cursos/' component={AdminCursos} />
@@ -105,7 +107,8 @@ function App() {
               <Route path="/" component={Home} exact />
               <Route path='/curso/:id' component={Curso} />
               <Route path='/video/' component={Video} />
-              <Route path='/reviews/' component={Reviews} />
+              <Route path='/reviews/:id' component={Reviews} />
+
               <Route path='/login/' component={Login} />
               <Route path='/register/' component={Register} />
               <Route path='/admin/cursos/' component={AdminCursos} />

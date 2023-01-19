@@ -127,7 +127,7 @@ const Curso = ({ match }) => {
                                         <span className="text-grey font-mono">{curso.description}</span>
 
                                         <p className="mt-1  text-white font-mono"> <Rating value={curso.rating} />
-                                            <a href="">{`${curso.num_reviews} reviews`}</a></p>
+                                            <a href={`/reviews/${curso.id}/`}>{`${curso.num_reviews} reviews`}</a></p>
 
 
 
@@ -232,7 +232,7 @@ const Curso = ({ match }) => {
                                                     <span className="text-grey font-mono">{curso.description}</span>
 
                                                     <p className="mt-1  text-white font-mono"> <Rating value={curso.rating} />
-                                                        <a href="">{`${curso.num_reviews} reviews`}</a></p>
+                                                        <a href={`/reviews/${curso.id}/`}>{`${curso.num_reviews} reviews`}</a></p>
 
                                                     <div className='flex items-center   gap-1'>
 
@@ -370,7 +370,7 @@ const Curso = ({ match }) => {
                                                     <span className="text-grey font-mono">{curso.description}</span>
 
                                                     <p className="mt-1  text-white font-mono"> <Rating value={curso.rating} />
-                                                        <a href="">{`${curso.num_reviews} reviews`}</a></p>
+                                                        <a href={`/reviews/all/${curso.id}/`}>{`${curso.num_reviews} reviews`}</a></p>
 
                                                     <div className='flex items-center   gap-1'>
 
@@ -515,7 +515,7 @@ const Curso = ({ match }) => {
                                 <span className="text-grey font-mono">{curso.description}</span>
 
                                 <p className="mt-1  text-white font-mono"> <Rating value={curso.rating} />
-                                    <a href="">{`${curso.num_reviews} reviews`}</a></p>
+                                    <a href={`/reviews/all/${curso.id}/`}>{`${curso.num_reviews} reviews`}</a></p>
 
                                 <div className='flex items-center   gap-1'>
 
