@@ -7,8 +7,6 @@ import { userLoginReducer,
         userDetailsReducer, 
         userUpdateProfileReducer,
         userListReducer, 
-        userDeleteReducer, 
-        userUpdateReducer,
         passwordRestReducer,
         passwordConfirmReducer,
         userActivationReducer,
@@ -30,8 +28,6 @@ import { cursoListReducer,
         episodioAllReducer,
         episodioDeleteReducer,
         cursoPagadoReducer,
-
-
 } from './reducers/cursoReducers';
 
 
@@ -43,12 +39,10 @@ const reducer = combineReducers({
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
     userList: userListReducer,
-    deleteUser: userDeleteReducer,
-    userUpdate: userUpdateReducer,
     passwordRest:passwordRestReducer,
     passwordConfirm:passwordConfirmReducer,
     userActivation:userActivationReducer,
-    userPremum: userPremumReducer,
+    userPremium: userPremumReducer,
     changeEmail:changeEmailReducer,
 
     // Curso 

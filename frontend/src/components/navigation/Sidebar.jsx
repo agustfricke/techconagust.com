@@ -1,23 +1,29 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { HiHome, HiUser, HiOutlineLogout, HiUsers, HiFolder } from "react-icons/hi";
-import logo from '../../media/logo.png';
+import { useHistory } from 'react-router-dom'
+
 import { logout } from '../../actions/userActions'
 
+import { HiHome, HiUser, HiOutlineLogout, HiUsers, HiFolder } from "react-icons/hi";
+import logo from '../../media/logo.png';
+
+
+
 const Sidebar = (props) => {
+
+    let history = useHistory();
 
     const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-
     const logoutHandler = (e) => {
         dispatch(logout())
+        history.push('/login/')
     }
 
     const { showMenu } = props;
-
 
     return (
         <div
@@ -25,13 +31,11 @@ const Sidebar = (props) => {
                 }`}>
             <div>
                 <ul className="pl-4">
-
                     <li>
                         <h1 className="ml-3 my-5">
                             <img src={logo} style={{ maxHeight: "70px" }} />
                         </h1>
                     </li>
-
                     <li className="bg-grey-2 p-4 rounded-tl-xl rounded-bl-xl ">
                         <a
                             href="/"
@@ -40,7 +44,6 @@ const Sidebar = (props) => {
                             <HiHome className="text-2xl" />
                         </a>
                     </li>
-
                     <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-bl-xl group transition-colors">
                         <a
                             href={`/MiPerfil/`}
@@ -49,7 +52,6 @@ const Sidebar = (props) => {
                             <HiUser className="text-2xl" />
                         </a>
                     </li>
-
                     <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
                         <a
                             onClick={logoutHandler}
@@ -59,13 +61,8 @@ const Sidebar = (props) => {
                             <HiOutlineLogout className="text-2xl" />
                         </a>
                     </li>
-
-
-
                     {userInfo.is_admin ? (
-
                         <>
-
                             <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
                                 <a
                                     href="#"
@@ -74,7 +71,6 @@ const Sidebar = (props) => {
                                     <HiUsers className="text-2xl" />
                                 </a>
                             </li>
-
                             <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
                                 <a
                                     href={`admin/cursos/`}
@@ -84,20 +80,10 @@ const Sidebar = (props) => {
                                 </a>
                             </li>
                         </>
-
                     ) : (
-
                         <>
-
-
                         </>
-
                     )}
-
-
-
-
-
                 </ul>
             </div>
         </div>

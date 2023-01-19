@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-    PayPalScriptProvider,
-    PayPalButtons,
-    usePayPalScriptReducer
-} from "@paypal/react-paypal-js";
+import { useHistory } from "react-router-dom";
+
 import { premiumUser, getUserDetails } from '../../actions/userActions'
 import { USER_PREMIUM_RESET } from '../../constants/userConstants'
-import logo from '../../media/logo.png';
-import { useHistory } from "react-router-dom";
+
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
+import Error from '../utils/Error';
+import Success from '../utils/Success';
+import Loader from '../utils/Loader';
+
 
 
 const PremiumUser = () => {
@@ -18,7 +20,6 @@ const PremiumUser = () => {
     useEffect(() => {
         document.title = `Tech con Agust | Se Premium`
     }, []);
-
 
     const [premium, setPremium] = useState('')
 
@@ -30,12 +31,8 @@ const PremiumUser = () => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const userPremum = useSelector(state => state.userPremum)
-    const { success } = userPremum
-
-
-
-
+    const userPremium = useSelector(state => state.userPremium)
+    const { loading: loadingPremium, error: errorPremium, success } = userPremium
 
     useEffect(() => {
         if (userInfo.email === "") {
@@ -49,8 +46,6 @@ const PremiumUser = () => {
             }
         }
     }, [dispatch, history, userInfo, user, success])
-
-
 
     const createOrder = (data, actions) => {
         return actions.order.create({
@@ -73,8 +68,6 @@ const PremiumUser = () => {
 
     function handlePay() {
         history.push('/success/premium/')
-
-
         dispatch(premiumUser({
             'id': user.id,
             'premium': premium,
@@ -82,48 +75,45 @@ const PremiumUser = () => {
     }
 
     return (
-
-
-    <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div className=' m-5 p-10 bg-grey-3'>
-      <div className="w-[400px] max-w-md space-y-8 ">
-        <div >
-          <h2 className="mt-2 text-center text-xl font-mono  text-white">
-            
-            Convietete en Usuario Premium
-           
-          </h2>
-          <p className='text-grey text-center font-mono mt-4'>
-            Acceso de por vida a todos los cursos y proyectos con codigo fuente
-          </p>
-
-          <p className='text-grey text-center font-mono mt-4'>
-            $ 39.99 
-          </p>
-
-        </div>
-
-
-        <PayPalScriptProvider
-            options={{
-                "client-id": "AagP4ONe8aPmVkKC1TiFz8QxceRQEMlyxFILAR84-Ws9X0NwRtwFOrAfx-dcprZ2Cy3R1txtYErnHpI8",
-                components: "buttons",
-                currency: "USD"
-            }}>
-            <PayPalButtons
-                createOrder={(data, actions) => createOrder(data, actions)}
-                onApprove={(data, actions) => onApprove(data, actions)}
-            />
-        </PayPalScriptProvider>
-      
-       
-      </div>
-    </div>
-  </div>
-
-
-
-
+        <>
+            {error && <Error>{error}</Error>}
+            {errorPremium && <Error>{errorPremium}</Error>}
+            {success && <Success>{`Pago completado!`}</Success>}
+            {loading || loadingPremium ?
+                <Loader />
+                : (
+                    <>
+                        <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                            <div className=' m-5 p-10 bg-grey-3'>
+                                <div className="w-[400px] max-w-md space-y-8 ">
+                                    <div >
+                                        <h2 className="mt-2 text-center text-xl font-mono  text-white">
+                                            Convietete en Usuario Premium
+                                        </h2>
+                                        <p className='text-grey text-center font-mono mt-4'>
+                                            Acceso de por vida a todos los cursos y proyectos con codigo fuente
+                                        </p>
+                                        <p className='text-grey text-center font-mono mt-4'>
+                                            $ 39.99
+                                        </p>
+                                    </div>
+                                    <PayPalScriptProvider
+                                        options={{
+                                            "client-id": "AagP4ONe8aPmVkKC1TiFz8QxceRQEMlyxFILAR84-Ws9X0NwRtwFOrAfx-dcprZ2Cy3R1txtYErnHpI8",
+                                            components: "buttons",
+                                            currency: "USD"
+                                        }}>
+                                        <PayPalButtons
+                                            createOrder={(data, actions) => createOrder(data, actions)}
+                                            onApprove={(data, actions) => onApprove(data, actions)}
+                                        />
+                                    </PayPalScriptProvider>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+        </>
     )
 }
 

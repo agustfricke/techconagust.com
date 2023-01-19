@@ -1,60 +1,65 @@
 import React, { useEffect } from 'react';
-import logo from '../../media/logo.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
+
+import { listCursos, deleteCurso, createCurso } from '../../actions/cursoActions';
+import { CURSO_CREATE_RESET } from '../../constants/cursoConstants';
+
 import { HiFolderPlus, HiOutlineTrash } from "react-icons/hi2";
 import { FaEdit } from "react-icons/fa";
-import { listCursos, deleteCurso, createCurso } from '../../actions/cursoActions'
-import { useDispatch, useSelector } from 'react-redux'
-import { CURSO_CREATE_RESET } from '../../constants/cursoConstants'
-import Message from '../utils/Message';
-import Loader from '../utils/Loader'
-import { useHistory } from "react-router-dom";
+
+import Error from '../utils/Error';
+import Loader from '../utils/Loader';
+
+
 
 const AdminCursos = () => {
 
+    const URL = (process.env.REACT_APP_API_URL);
+
     let history = useHistory();
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const cursoList = useSelector(state => state.cursoList)
-    const { loading, error, cursos } = cursoList
+    const cursoList = useSelector(state => state.cursoList);
+    const { loading, error, cursos } = cursoList;
 
-    const cursoDelete = useSelector(state => state.cursoDelete)
-    const { loading: loadingDelete, error: errorDelete, success: successDelete } = cursoDelete
+    const cursoDelete = useSelector(state => state.cursoDelete);
+    const { loading: loadingDelete, error: errorDelete, success: successDelete } = cursoDelete;
 
-    const cursoCreate = useSelector(state => state.cursoCreate)
-    const { loading: loadingCreate, error: errorCreate, success: successCreate, curso: createdCurso } = cursoCreate
+    const cursoCreate = useSelector(state => state.cursoCreate);
+    const { loading: loadingCreate, error: errorCreate, success: successCreate, curso: createdCurso } = cursoCreate;
 
-    const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
 
     useEffect(() => {
-        dispatch({ type: CURSO_CREATE_RESET })
+        dispatch({ type: CURSO_CREATE_RESET });
 
         if (userInfo.is_superuser === false) {
-            history.push('/login')
+            history.push('/login');
         }
 
         if (successCreate) {
-            history.push(`/cursos/${createdCurso.id}/form`)
+            history.push(`/cursos/${createdCurso.id}/form`);
         } else {
-            dispatch(listCursos())
+            dispatch(listCursos());
         }
 
-    }, [dispatch, history, userInfo, successDelete, successCreate, createCurso])
+    }, [dispatch, history, userInfo, successDelete, successCreate, createCurso]);
 
     const deleteHandler = (id) => {
-        if (window.confirm('Are you shure you want to delete this Curso?')) {
-            dispatch(deleteCurso(id))
+        if (window.confirm('Seguro que quieres eliminar este curso?')) {
+            dispatch(deleteCurso(id));
         }
     }
 
     const createCursoHandler = (curso) => {
-        dispatch(createCurso())
+        dispatch(createCurso());
     }
 
 
     return (
-
         <div class="relative overflow-x-auto  sm:rounded-lg mt-7">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
                 <div className='flex items-center'>
@@ -70,114 +75,77 @@ const AdminCursos = () => {
                     </div>
                 </button>
             </div>
-
-            {loadingDelete && <Loader />}
-            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-
-            {loadingCreate && <Loader />}
-            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
-
-            {loading
+            {errorDelete && <Error>{errorDelete}</Error>}
+            {errorCreate && <Error>{errorCreate}</Error>}
+            {loading || loadingDelete || loadingCreate
                 ? (<Loader />)
                 : error
-                    ? (<Message variant='danger'>{error}</Message>)
+                    ? (<Error>{error}</Error>)
                     : (
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-xs text-gray-700 uppercase">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-white font-mono">
+                                        Imagen
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-white font-mono">
+                                        Nombre
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-white font-mono">
+                                        Categoria
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-white font-mono">
+                                        Precio
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-white font-mono">
+                                        Eliminar
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-white font-mono">
+                                        Editar
+                                    </th>
 
-
-            <table class="w-full text-sm text-left">
-                <thead class="text-xs text-gray-700 uppercase">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-white font-mono">
-                            Imagen
-                        </th>
-
-                        <th scope="col" class="px-6 py-3 text-white font-mono">
-                            Nombre
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-white font-mono">
-                            Categoria
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-white font-mono">
-                            Precio
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-white font-mono">
-                            Eliminar
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-white font-mono">
-                            Editar
-                        </th>
-
-                        <th scope="col" class="px-6 py-3 text-white font-mono">
-                            Episodios
-                        </th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                {cursos.map(curso => (
-                    <tr class=" border-b bg-grey-3 hover:bg-gray-50 dark:hover:bg-gray-600">
-
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src={logo} alt="Jese image" />
-
-                        </th>
-                        <td class="px-6 py-4 text-grey font-mono">
-                            {curso.title}
-                        </td>
-                        <td class="px-6 py-4 text-grey font-mono">
-                            {curso.category}
-                        </td>
-                        <td class="px-6 py-4 text-grey font-mono">
-                            $ {curso.price}
-                        </td>
-
-                        <td class="px-6 py-4 text-grey font-mono hover:text-orange">
-
-                            
-                            <button  onClick={() => deleteHandler(curso.id)}>
-                                <HiOutlineTrash className='w-7 h-7' />
-
-                            </button>
-
-
-                        </td>
-
-                        <td class="px-6 py-4 text-grey font-mono hover:text-orange">
-
-                            
-                        <a href={`/cursos/${curso.id}/form`} >
-                        <FaEdit className='w-7 h-7' />
-
-                            </a>
-
-
-                        </td>
-
-                        <td class="px-6 py-4 text-grey font-mono hover:text-orange">
-
-                            
-                        <a href={`/epi/${curso.id}`}>
-                        <HiFolderPlus className='w-7 h-7' />
-
-                            </a>
-
-
-                        </td>
-
-
-
-
-                    </tr>
-
-
-))}
-
-                </tbody>
-            </table>
-             )}
+                                    <th scope="col" class="px-6 py-3 text-white font-mono">
+                                        Episodios
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cursos.map(curso => (
+                                    <tr class=" border-b bg-grey-3 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                            <img class="w-10 h-10 rounded-full" src={`${URL}${curso.image}`} alt={curso.title} />
+                                        </th>
+                                        <td class="px-6 py-4 text-grey font-mono">
+                                            {curso.title}
+                                        </td>
+                                        <td class="px-6 py-4 text-grey font-mono">
+                                            {curso.category}
+                                        </td>
+                                        <td class="px-6 py-4 text-grey font-mono">
+                                            $ {curso.price}
+                                        </td>
+                                        <td class="px-6 py-4 text-grey font-mono hover:text-orange">
+                                            <button onClick={() => deleteHandler(curso.id)}>
+                                                <HiOutlineTrash className='w-7 h-7' />
+                                            </button>
+                                        </td>
+                                        <td class="px-6 py-4 text-grey font-mono hover:text-orange">
+                                            <a href={`/cursos/${curso.id}/form`} >
+                                                <FaEdit className='w-7 h-7' />
+                                            </a>
+                                        </td>
+                                        <td class="px-6 py-4 text-grey font-mono hover:text-orange">
+                                            <a href={`/epi/${curso.id}`}>
+                                                <HiFolderPlus className='w-7 h-7' />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
         </div>
 
     )
 }
-
 export default AdminCursos

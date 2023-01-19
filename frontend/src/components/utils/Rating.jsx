@@ -6,7 +6,7 @@ import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 
 function Rating({value, text}) {
     return (
-        <div className='rating'>
+        <div className='rating text-[#ffc107]'>
                    { value >= 1
                     ? <FontAwesomeIcon icon={faStar} />
                     : value >= 0.5
