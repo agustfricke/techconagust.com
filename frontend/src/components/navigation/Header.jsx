@@ -1,8 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { HiSearch, HiBadgeCheck } from "react-icons/hi";
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 
 const Header = () => {
+
+  const [keysearch, setKeysearch] = useState('')
+
+
+  let history = useHistory()
+
+  const submitHandler = (e) => {
+      e.preventDefault()
+      if (keysearch) {
+          history.push(`/?keysearch=${keysearch}`)
+      } else {
+          history.push(history.push(history.location.pathname))
+      }
+  }
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
@@ -25,10 +40,11 @@ const Header = () => {
             </>
           )}
         </div>
-        <form>
+        <form onSubmit={submitHandler}>
           <div className="w-full relative">
             <HiSearch className="absolute text-white left-3 top-1/2 -translate-y-1/2 " />
             <input
+            onChange={(e) => setKeysearch(e.target.value)}
               type="text"
               className="bg-grey-2 w-full py-2 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none"
               placeholder="Buscar ..."

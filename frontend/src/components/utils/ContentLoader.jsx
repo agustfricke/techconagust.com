@@ -7,18 +7,6 @@ export default function ContentLoader () {
 
     return (
         <>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
 
 <div className='flex justify-center'>
           <BulletList 
@@ -26,7 +14,7 @@ export default function ContentLoader () {
           height={240}
           speed={1}
           backgroundColor={'#2F4F4F'}
-          className='mx-8'
+          className='m-8'
           
           />
 
@@ -35,11 +23,36 @@ export default function ContentLoader () {
           height={240}
           speed={1}
           backgroundColor={'#2F4F4F'}
+          className="m-8"
+          
+          />
+           
+
+</div>
+
+<div className='flex justify-center'>
+          <BulletList 
+          
+          height={240}
+          speed={1}
+          backgroundColor={'#2F4F4F'}
+          className='m-8'
           
           />
 
+          <BulletList 
+          
+          height={240}
+          speed={1}
+          backgroundColor={'#2F4F4F'}
+          className="m-8"
+          
+          />
+           
 
 </div>
+
+
 
 
 </>

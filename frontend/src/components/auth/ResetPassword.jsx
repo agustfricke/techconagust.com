@@ -27,7 +27,7 @@ const ResetPassword = ({ reset_password }) => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(Reset(email))
-    setExito(`Verifica tu Correo en ${email}`)
+    setExito(`Verifica tu Correo de spam ${email}`)
   }
 
 

@@ -13,66 +13,79 @@ import { useHistory } from "react-router-dom";
 const Home = () => {
 
 
-  let history = useHistory();
+    let history = useHistory();
 
     const URL = 'http://127.0.0.1:8000'
     // const URL = 'https://techconagust.com/'
 
     useEffect(() => {
         document.title = 'Tech con Agust | Home'
-      }, []);
-    
-      const dispatch = useDispatch();
-    
-      const cursoList = useSelector((state) => state.cursoList);
-      const { error, loading, cursos } = cursoList;
-    
-      let keysearch = history.location.search;
-      console.log(keysearch);
-      useEffect(() => {
+    }, []);
+
+    const dispatch = useDispatch();
+
+    const cursoList = useSelector((state) => state.cursoList);
+    const { error, loading, cursos } = cursoList;
+
+    let keysearch = history.location.search;
+    console.log(keysearch);
+    useEffect(() => {
         dispatch(listCursos(keysearch));
-      }, [dispatch, keysearch]);
+    }, [dispatch, keysearch]);
 
 
     return (
+
+
+
         <>
-            <div className="flex items-center justify-between">
-                <h2 className="text-3xl text-grey-1 font-mono mt-7">Todos los Cursos</h2>
-            </div>
+            {error && <Error>{error}</Error>}
+            {loading ?
+                <ContentLoader />
+                : (
 
-            <div className="p-8 mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
 
-{cursos && cursos.map((c) => (
-                <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-2 text-center text-gray-300">
 
-                    <img
-                        src={`${URL}${c.image}`}
-                        className="w-40 h-40 object-cover -mt-20 shadow-2xl rounded-full"
-                    />
-
-                    <p className="text-xl text-white font-mono font-bold">{c.title}</p>
-
-                    <span className="text-grey font-mono">{c.description}</span>
-
-                    <p className="mt-1 text-sm text-white"> <Rating value={c.rating} />
-                                  <a href={`/revisiones/all/${c.id}/`}>{`${c.num_reviews} reviews`}</a></p>
-
-                    <a href={`/curso/${c.id}`}>
-                        <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-10'>
-                            <span>
-                                Enter
-                            </span>
-                            <HiArrowUpOnSquareStack className='w-7 h-7' />
-
+                    <>
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-3xl text-grey-1 font-mono mt-7">Todos los Cursos</h2>
                         </div>
-                    </a>
+
+                        <div className="p-8 mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+
+                            {cursos && cursos.map((c) => (
+                                <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-2 text-center text-gray-300">
+
+                                    <img
+                                        src={`${URL}${c.image}`}
+                                        className="w-40 h-40 object-cover -mt-20 shadow-2xl rounded-full"
+                                    />
+
+                                    <p className="text-xl text-white font-mono font-bold">{c.title}</p>
+
+                                    <span className="text-grey font-mono">{c.description}</span>
+
+                                    <p className="mt-1 text-sm text-white"> <Rating value={c.rating} />
+                                        <a href={`/revisiones/all/${c.id}/`}>{`${c.num_reviews} reviews`}</a></p>
+
+                                    <a href={`/curso/${c.id}`}>
+                                        <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-10'>
+                                            <span>
+                                                Enter
+                                            </span>
+                                            <HiArrowUpOnSquareStack className='w-7 h-7' />
+
+                                        </div>
+                                    </a>
 
 
 
 
-                </div>
-                  ))}
-            </div>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
         </>
     )
 }
