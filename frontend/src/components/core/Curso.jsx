@@ -17,9 +17,8 @@ import { TbWorld } from "react-icons/tb";
 
 const Curso = ({ match }) => {
 
-    const URL = 'http://127.0.0.1:8000'
-    // const URL = 'https://techconagust.com/'
 
+    const URL = (process.env.REACT_APP_API_URL)
     const [showMore, setShowMore] = useState();
 
 

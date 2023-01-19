@@ -13,6 +13,8 @@ import { listUsers } from '../../actions/userActions';
 const Reviews = ({match}) => {
 
 
+  const URL = (process.env.REACT_APP_API_URL)
+
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [comment, setComment] = useState('')
@@ -96,7 +98,7 @@ const Reviews = ({match}) => {
         {user.username === review.user &&
           <>
             <div className="flex items-center mb-4 space-x-4">
-              <img className="w-10 h-10 rounded-full" src={`http:127.0.1:8000/${user.avatar}`} alt="" />
+              <img className="w-10 h-10 rounded-full" src={`${URL}${user.avatar}`} alt="" />
               <div className="space-y-1 font-medium text-white text-mono">
                 <p>{review.user}  {curso.id} {curso.user}</p>
                 <p className="text-grey"> {review.created?.substring(0, 10)}</p>
@@ -217,7 +219,7 @@ const Reviews = ({match}) => {
         {user.username === review.user &&
           <>
             <div className="flex items-center mb-4 space-x-4">
-              <img className="w-10 h-10 rounded-full" src={`http:127.0.1:8000/${user.avatar}`} alt="" />
+              <img className="w-10 h-10 rounded-full" src={`${URL}${user.avatar}`} alt="" />
               <div className="space-y-1 font-medium text-white text-mono">
                 <p>{review.user}  {curso.id} {curso.user}</p>
                 <p className="text-grey"> {review.created?.substring(0, 10)}</p>

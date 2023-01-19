@@ -16,9 +16,8 @@ export default function MiPerfil() {
   const cursoList = useSelector((state) => state.cursoList);
   const { errorCursos, loadingCursos, cursos } = cursoList;
 
-  const URL = 'http://127.0.0.1:8000'
-  // const URL = 'https://techconagust.com/'
-
+  const URL = (process.env.REACT_APP_API_URL)
+  
   useEffect(() => {
     document.title = `Tech con Agust | Mi Perfil`
   }, []);

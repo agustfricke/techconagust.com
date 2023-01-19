@@ -10,9 +10,7 @@ import { useHistory } from "react-router-dom";
 
 
 const EditEpisodio = ({match}) => {
-
-  const URL = 'http://127.0.0.1:8000/'
-  // const URL = 'https://techconagust.com/'
+  const URL = (process.env.REACT_APP_API_URL)
 
     let history = useHistory();
 

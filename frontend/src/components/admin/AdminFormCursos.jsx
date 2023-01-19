@@ -25,8 +25,9 @@ const AdminFormCursos = ({ match }) => {
   const [file, setFile] = useState('')
   const [uploadingFile, setUploadingFile] = useState(false)
 
-  const URL = 'http://127.0.0.1:8000/'
-  // const URL = 'https://techconagust.com/'
+
+  
+  const URL = (process.env.REACT_APP_API_URL)
 
 
 

@@ -39,6 +39,8 @@ import SoloCurso from "./components/shopping/SoloCurso";
 
 function App() {
 
+  console.log(process.env.REACT_APP_API_URL)
+
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 

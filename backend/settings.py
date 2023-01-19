@@ -1,13 +1,17 @@
 from pathlib import Path
 import os
 from datetime import timedelta
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
-SECRET_KEY = 'django-insecure-h__zbj4n#6f#ka&v8vdceph-f_eet9n5af_i3qzt-2so-br@*p'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
@@ -133,12 +137,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'techconagust@gmail.com'
-EMAIL_HOST_PASSWORD = 'echtqmcmwgsxenkt'
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

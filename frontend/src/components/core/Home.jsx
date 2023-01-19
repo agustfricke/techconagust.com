@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+import { listCursos } from "../../actions/cursoActions";
+
 import Rating from '../utils/Rating';
 import Error from '../utils/Error';
-import Loader from '../utils/Loader';
-import { listCursos } from "../../actions/cursoActions";
 import ContentLoader from "../utils/ContentLoader";
-import logo from '../../media/logo.png';
+
 import { HiArrowUpOnSquareStack } from "react-icons/hi2";
-import { useHistory } from "react-router-dom";
 
 
 const Home = () => {
 
-
     let history = useHistory();
 
-    const URL = 'http://127.0.0.1:8000'
-    // const URL = 'https://techconagust.com/'
+
+    const URL = (process.env.REACT_APP_API_URL)
 
     useEffect(() => {
-        document.title = 'Tech con Agust | Home'
+        document.title = 'Home | Tech con Agust'
     }, []);
 
     const dispatch = useDispatch();
