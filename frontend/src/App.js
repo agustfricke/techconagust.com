@@ -12,6 +12,12 @@ import Curso from "./components/core/Curso";
 import Video from "./components/core/Video";
 import Reviews from "./components/core/Reviews";
 import ReviewAll from "./components/core/ReviewAll";
+// Categorys
+import Backend from "./components/core/Backend";
+import Fontend from "./components/core/Fontend";
+import FullStack from "./components/core/FullStack";
+import Blockchain from "./components/core/Blockchain";
+import Hacking from "./components/core/Hacking";
 
 // Auth Components
 import Login from "./components/auth/Login";
@@ -22,7 +28,6 @@ import ResetPasswordConfirm from "./components/auth/ResetPasswordConfirm";
 import MiPerfil from "./components/auth/MiPerfil";
 import UpdateEmail from "./components/auth/UpdateEmail";
 import EditProfile from "./components/auth/EditProfile";
-
 
 // Admin Components
 import AdminCursos from "./components/admin/AdminCursos";
@@ -69,6 +74,12 @@ function App() {
                   <Header />
 
                   <Route path="/" component={Home} exact />
+                  <Route path='/backend/' component={Backend} />
+                  <Route path='/fontend/' component={Fontend} />
+                  <Route path='/blockchain/' component={Blockchain} />
+                  <Route path='/fullstack/' component={FullStack} />
+                  <Route path='/hacking/' component={Hacking} />
+
                   <Route path='/curso/:id' component={Curso} />
                   <Route path='/video/:epi/:curso' component={Video} />
                   <Route path='/reviews/:id' component={Reviews} />

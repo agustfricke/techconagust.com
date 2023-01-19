@@ -55,27 +55,19 @@ const Header = () => {
       </div>
       {/* Tabs */}
       <div className='flex flex-row gap-4 overflow-y-auto '>
-        <a href="#" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
-          Django
+        <a href="/fontend/" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
+          Frontend
         </a>
-        <a href="#" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors  font-semibold">
-          Django Rest Framework
+        <a href="/backend/" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors  font-semibold">
+          Backend
         </a>
-        <a href="#" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
+        <a href="/fullstack/" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
+          Full Stack
+        </a>
+        <a href="/hacking/" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
           Hacking
         </a>
-        <a href="#" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
-          Django & React
-        </a>
-        <a href="#" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
-          Tailwind css
-        </a>
-
-        <a href="#" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
-          HTML & CSS
-        </a>
-
-        <a href="#" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
+        <a href="/blockchain/" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
           Blockchain
         </a>
       </div>
