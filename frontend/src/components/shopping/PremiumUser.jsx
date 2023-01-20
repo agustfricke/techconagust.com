@@ -99,7 +99,7 @@ const PremiumUser = () => {
                                     </div>
                                     <PayPalScriptProvider
                                         options={{
-                                            "client-id": "AagP4ONe8aPmVkKC1TiFz8QxceRQEMlyxFILAR84-Ws9X0NwRtwFOrAfx-dcprZ2Cy3R1txtYErnHpI8",
+                                            "client-id": "Ac70iUCZRhvgwlOVYAjzWlZiMjin0PqqgxLlhoXHiw8L0oQawa4dSWM2ROljITHCbmuJCl5PjkV20Z5Z",
                                             components: "buttons",
                                             currency: "USD"
                                         }}>
