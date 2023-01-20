@@ -61,6 +61,8 @@ const Reviews = ({ match }) => {
 
   const isFound = reviews.some(element => {
     if (element.user === userInfo.username) {
+      console.log('El usuario ya publico!!!!')
+
       return true;
     }
     return false;
@@ -77,7 +79,7 @@ const Reviews = ({ match }) => {
             <>
               <div className="flex items-center justify-between mt-10 mb-16">
                 <h2 className="text-3xl text-grey-1 font-mono">
-                  Reviews de
+                  Reviews de el usuario ya publico
                   <span className='text-orange ml-3.5'>
                     {curso.title}
                   </span>
@@ -132,7 +134,8 @@ const Reviews = ({ match }) => {
             <>
               <div className="flex items-center justify-between mt-10 mb-16">
                 <h2 className="text-3xl text-grey-1 font-mono">
-                  Reviews de
+                  Reviews de el usuario nmo publicoooooooo9ooikoik
+                  
                   <span className='text-orange ml-3.5'>
                     {curso.title}
                   </span>

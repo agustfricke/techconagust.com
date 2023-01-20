@@ -28,6 +28,9 @@ import ResetPasswordConfirm from "./components/auth/ResetPasswordConfirm";
 import MiPerfil from "./components/auth/MiPerfil";
 import UpdateEmail from "./components/auth/UpdateEmail";
 import EditProfile from "./components/auth/EditProfile";
+// Route Stuff
+import PrivateRoute from "./components/auth/PrivateRoute";
+import AdminPrivateRoute from "./components/auth/AdminPrivateRoute";
 
 // Admin Components
 import AdminCursos from "./components/admin/AdminCursos";
@@ -44,15 +47,11 @@ import SoloCurso from "./components/shopping/SoloCurso";
 
 function App() {
 
-  console.log(process.env.REACT_APP_API_URL)
-
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
-
   return (
     <div className="bg-blue w-full min-h-screen">
-      {/* Remove Side and low if user is not log in */}
       {userInfo ? (
         <>
           <Sidebar />
@@ -63,79 +62,61 @@ function App() {
         </>
       )}
       <Router>
-        {/* <Header /> */}
         <Switch>
-          {/* Remove this div if user is not log in */}
           {userInfo ? (
             <>
               <main className="lg:pl-32 lg:pr-38 pb-20">
-
                 <div className="md:p-8 p-4">
                   <Header />
-
                   <Route path="/" component={Home} exact />
                   <Route path='/backend/' component={Backend} />
                   <Route path='/fontend/' component={Fontend} />
                   <Route path='/blockchain/' component={Blockchain} />
                   <Route path='/fullstack/' component={FullStack} />
                   <Route path='/hacking/' component={Hacking} />
-
                   <Route path='/curso/:id' component={Curso} />
-                  <Route path='/video/:epi/:curso' component={Video} />
-                  <Route path='/reviews/:id' component={Reviews} />
+                  <PrivateRoute path='/video/:epi/:curso' component={Video} />
+                  <PrivateRoute path='/reviews/:id' component={Reviews} />
                   <Route path='/revisiones/all/:id' component={ReviewAll} />
                   <Route path='/login/' component={Login} />
                   <Route path='/register/' component={Register} />
-                  <Route path='/admin/cursos/' component={AdminCursos} />
-                  <Route path='/cursos/:id/form' component={AdminFormCursos} />
+                  <AdminPrivateRoute path='/admin/cursos/' component={AdminCursos} />
+                  <AdminPrivateRoute path='/cursos/:id/form' component={AdminFormCursos} />
                   <Route path='/activate/:uid/:token' component={Activation} />
                   <Route path='/reset-password' component={ResetPassword} />
                   <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
-                  <Route path='/MiPerfil/' component={MiPerfil} />
+                  <PrivateRoute path='/MiPerfil/' component={MiPerfil} />
                   <Route path='/reset-password' component={ResetPassword} />
-                  <Route path='/epi/:id' component={Episodios} />
-                  <Route path='/episodio/:id/form' component={EditEpisodio} />
-                  <Route path='/update/email/' component={UpdateEmail} />
-                  <Route path='/users/admin/' component={Users} />
-                  <Route path='/edit/profile' component={EditProfile} />
-                  <Route path='/premium/user/payment' component={PremiumUser} />
-                  <Route path='/success/premium/' component={SuccessPremium} />
-                  <Route path='/solo/curso/payment/:id' component={SoloCurso} />
-
-
-
-
-
-
-
-
+                  <AdminPrivateRoute path='/epi/:id' component={Episodios} />
+                  <AdminPrivateRoute path='/episodio/:id/form' component={EditEpisodio} />
+                  <PrivateRoute path='/update/email/' component={UpdateEmail} />
+                  <AdminPrivateRoute path='/users/admin/' component={Users} />
+                  <PrivateRoute path='/edit/profile' component={EditProfile} />
+                  <PrivateRoute path='/premium/user/payment' component={PremiumUser} />
+                  <PrivateRoute path='/success/premium/' component={SuccessPremium} />
+                  <PrivateRoute path='/solo/curso/payment/:id' component={SoloCurso} />
                 </div>
               </main>
             </>
-
           ) : (
             <div className="md:p-8 p-4">
               <Header />
-
               <Route path="/" component={Home} exact />
+              <Route path='/backend/' component={Backend} />
+              <Route path='/fontend/' component={Fontend} />
+              <Route path='/blockchain/' component={Blockchain} />
+              <Route path='/fullstack/' component={FullStack} />
+              <Route path='/hacking/' component={Hacking} />
               <Route path='/curso/:id' component={Curso} />
-              <Route path='/video/' component={Video} />
-              <Route path='/reviews/:id' component={Reviews} />
-
+              <Route path='/revisiones/all/:id' component={ReviewAll} />
               <Route path='/login/' component={Login} />
               <Route path='/register/' component={Register} />
-              <Route path='/admin/cursos/' component={AdminCursos} />
               <Route path='/activate/:uid/:token' component={Activation} />
               <Route path='/reset-password' component={ResetPassword} />
-              <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
-              <Route path='/MiPerfil/' component={MiPerfil} />
-
+              <Route path='/reset-password' component={ResetPassword} />
             </div>
-
           )}
-
         </Switch>
-        {/* <Footer/> */}
       </Router>
     </div>
   );
