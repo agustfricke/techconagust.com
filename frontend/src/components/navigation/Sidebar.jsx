@@ -32,7 +32,7 @@ const Sidebar = (props) => {
             <div>
                 <ul className="pl-4">
                     <li>
-                        <h1 className="ml-3 my-5">
+                        <h1 className="ml-3 mb-10 my-5">
                             <img src={logo} style={{ maxHeight: "70px" }} />
                         </h1>
                     </li>
@@ -61,11 +61,11 @@ const Sidebar = (props) => {
                             <HiOutlineLogout className="text-2xl" />
                         </a>
                     </li>
-                    {userInfo.is_admin ? (
+                    {userInfo.is_superuser ? (
                         <>
                             <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
                                 <a
-                                    href="#"
+                                    href="/users/admin/"
                                     className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
                                 >
                                     <HiUsers className="text-2xl" />
@@ -73,7 +73,7 @@ const Sidebar = (props) => {
                             </li>
                             <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
                                 <a
-                                    href={`admin/cursos/`}
+                                    href={`/cursos/admin/`}
                                     className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
                                 >
                                     <HiFolder className="text-2xl" />

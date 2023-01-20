@@ -7,11 +7,16 @@ import { listUsers } from '../../actions/userActions'
 import Loader from "../utils/Loader";
 import Error from "../utils/Error";
 
-import { GrCheckbox, GrCheckboxSelected } from "react-icons/gr";
+import { RiCheckboxMultipleBlankLine, RiCheckboxMultipleFill } from "react-icons/ri";
 
 
 
 const Users = () => {
+
+    useEffect(() => {
+        document.title = 'Tech con Agust | Admin'
+      }, []);
+
 
     const URL = (process.env.REACT_APP_API_URL);
 
@@ -22,11 +27,13 @@ const Users = () => {
     const userList = useSelector(state => state.userList)
     const { loading, error, users } = userList
 
+
+
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
     useEffect(() => {
-        if (userInfo && userInfo.is_admin) {
+        if (userInfo && userInfo.is_superuser) {
             dispatch(listUsers())
         } else {
             history.push('/')
@@ -42,7 +49,7 @@ const Users = () => {
                     ? (<Error>{error}</Error>)
                     : (
                         <table class="w-full text-sm text-left">
-                            <thead class="text-xs text-gray-700 uppercase">
+                            <thead class="text-xs  uppercase">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-white font-mono">
                                         ID
@@ -70,7 +77,7 @@ const Users = () => {
                             </thead>
                             <tbody>
                                 {users.map(u => (
-                                    <tr class=" border-b bg-grey-3 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr class="border-b bg-grey-3">
                                         <td class="px-6 py-4 text-grey font-mono">
                                             {u.id}
                                         </td>
@@ -87,18 +94,26 @@ const Users = () => {
                                             {u.email}
                                         </td>
                                         <td class="px-6 py-4 text-grey ">
-                                            {u.is_admin ? (
-                                                <GrCheckboxSelected />
+                                            {u.is_superuser ? (
+                                                <RiCheckboxMultipleFill className='w-7 h-7' />
                                             ) : (
-                                                <GrCheckbox />
+                                                <RiCheckboxMultipleBlankLine className='w-7 h-7'/>
                                             )}
                                         </td>
                                         <td class="px-6 py-4 text-grey font-mono">
-                                            {u.premium === 'premium' ? (
-                                                <GrCheckboxSelected />
+                                            {u.premium === true ? (
+                                                <p className='text-grey'>
+                                                <RiCheckboxMultipleFill className='w-7 h-7' />
+
+                                                </p>
                                             ) : (
-                                                <GrCheckbox />
+                                                <RiCheckboxMultipleBlankLine className='w-7 h-7'/>
                                             )}
+                                        </td>
+                                        <td class="px-6 py-4 text-grey font-mono hover:text-orange">
+                                            <a href={`/epi/}`}>
+                                                
+                                            </a>
                                         </td>
                                     </tr>
                                 ))}

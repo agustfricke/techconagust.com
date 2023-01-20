@@ -13,6 +13,11 @@ import { HiArrowUpOnSquareStack } from "react-icons/hi2";
 
 const Backend = () => {
 
+    useEffect(() => {
+        document.title = 'Tech con Agust | Backend'
+      }, []);
+
+
     let history = useHistory();
 
     const URL = (process.env.REACT_APP_API_URL)

@@ -50,7 +50,7 @@ def uploadImage(request):
     data = request.data
     user_id = data['user_id']
     user = User.objects.get(id=user_id)
-    user.image = request.FILES.get('image')
+    user.avatar = request.FILES.get('image')
     user.save()
     return Response('Imagen subida!')
 
@@ -64,7 +64,6 @@ def getUserProfile(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def getUsers(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)

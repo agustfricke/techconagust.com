@@ -1,8 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 
 
 const SuccessPremium = () => {
+
+  useEffect(() => {
+    document.title = 'Tech con Agust | Home '
+}, []);
+
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className=' m-5 p-10 bg-grey-3'>

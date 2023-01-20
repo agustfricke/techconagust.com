@@ -30,7 +30,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username        = models.CharField(max_length=50, unique=True)
     name            = models.CharField(max_length=255)
     bio             = models.TextField(blank=True)
-    avatar          = models.ImageField(default='users/avatar.jpg', upload_to='users')
+    avatar          = models.ImageField(default='users/avatar.jpg')
     premium         = models.BooleanField(default=False)
 
     is_active       = models.BooleanField(default=True)

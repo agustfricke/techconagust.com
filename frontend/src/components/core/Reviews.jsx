@@ -15,6 +15,10 @@ import Rating from '../utils/Rating'
 
 const Reviews = ({ match }) => {
 
+  useEffect(() => {
+    document.title = 'Tech con Agust | Reviews '
+}, []);
+
   const URL = (process.env.REACT_APP_API_URL)
 
   const [rating, setRating] = useState(0);
@@ -56,12 +60,11 @@ const Reviews = ({ match }) => {
     }
     ))
   }
-
+  console.log(curso)
   const { reviews } = curso
 
   const isFound = reviews.some(element => {
     if (element.user === userInfo.username) {
-      console.log('El usuario ya publico!!!!')
 
       return true;
     }
@@ -79,7 +82,7 @@ const Reviews = ({ match }) => {
             <>
               <div className="flex items-center justify-between mt-10 mb-16">
                 <h2 className="text-3xl text-grey-1 font-mono">
-                  Reviews de el usuario ya publico
+                  Reviews de
                   <span className='text-orange ml-3.5'>
                     {curso.title}
                   </span>
@@ -93,12 +96,12 @@ const Reviews = ({ match }) => {
                   <>
                     {users && users.map(user => (
                       <>
-                        {user.username === review.user &&
-                          <>
-                            <div className="flex items-center mb-4 space-x-4">
+                        { user.username === review.user &&
+                          <div className="mb-7">
+                            <div className="flex items-center mb-2 space-x-4">
                               <img className="w-10 h-10 rounded-full" src={`${URL}${user.avatar}`} alt="" />
                               <div className="space-y-1 font-medium text-white text-mono">
-                                <p>{review.user}  {curso.id} {curso.user}</p>
+                                <p>{review.user}</p>
                                 <p className="text-grey"> {review.created?.substring(0, 10)}</p>
                               </div>
                             </div>
@@ -112,7 +115,7 @@ const Reviews = ({ match }) => {
                                 {review.comment}
                               </p>
                             </div>
-                          </>
+                          </div>
                         }
                       </>
                     ))}
@@ -134,8 +137,6 @@ const Reviews = ({ match }) => {
             <>
               <div className="flex items-center justify-between mt-10 mb-16">
                 <h2 className="text-3xl text-grey-1 font-mono">
-                  Reviews de el usuario nmo publicoooooooo9ooikoik
-                  
                   <span className='text-orange ml-3.5'>
                     {curso.title}
                   </span>
@@ -205,7 +206,7 @@ const Reviews = ({ match }) => {
                             <div className="flex items-center mb-4 space-x-4">
                               <img className="w-10 h-10 rounded-full" src={`${URL}${user.avatar}`} alt="" />
                               <div className="space-y-1 font-medium text-white text-mono">
-                                <p>{review.user}  {curso.id} {curso.user}</p>
+                                <p>{review.user} </p>
                                 <p className="text-grey"> {review.created?.substring(0, 10)}</p>
                               </div>
                             </div>

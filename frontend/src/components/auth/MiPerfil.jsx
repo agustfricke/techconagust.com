@@ -49,11 +49,11 @@ const MiPerfil = () => {
                     </h2>
                     <div className="flex min-h-full items-center justify-center">
                       <div>
-                        <img className="h-40 w-55 rounded-full my-4 ml-9" src={`${URL}${userInfo.avatar}`} alt="" />
-                        <h3 className="text-lg font-mono leading-6 text-white">{userInfo.username} &nbsp;&nbsp;&nbsp;&nbsp;
+                        <img className="h-40 w-55 rounded-full my-4 ml-[100px]" src={`${URL}${userInfo.avatar}`} alt="" />
+                        <h3 className="text-lg font-mono leading-6 text-white">{userInfo.username}
                           <a
                             href={"/edit/profile"}
-                            className=" text-sm font-mono text-orange font-semibold hover:text-grey-1  "
+                            className=" text-sm font-mono ml-3 text-orange font-semibold hover:text-grey-1  "
                           >
                             EDITAR
                           </a>
@@ -92,42 +92,7 @@ const MiPerfil = () => {
                 </div>
               </div>
             </div>
-            <h1 className="text-center text-4xl mt-8 mb-5 text-white font-mono">
-              Tus Cursos
-            </h1>
-            <div className="p-8 mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-              {cursos && cursos.map((c) => (
-                <>
-                  {c.comprador && c.comprador.map((comprador) => (
-                    <>
-                      {comprador.usuario === userInfo.id &&
-                        <h1>
-                          <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-2 text-center text-gray-300">
-                            <img
-                              src={`${URL}${c.image}`}
-                              className="w-40 h-40 object-cover -mt-20 shadow-2xl rounded-full"
-                            />
-                             <p className="text-xl text-white font-mono font-bold">{c.title}</p>
-                            <span className="text-grey font-mono">{c.description}</span>
-                            <p className="mt-1 text-sm text-white"> <Rating value={c.rating} />
-                              <a href={`/reviews/${c.id}`}>{`${c.num_reviews} reviews`}</a></p>
-                            <a href={`/curso/${c.id}`}>
-                              <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-10'>
-                                <span>
-                                  Enter
-                                </span>
-                                <HiArrowUpOnSquareStack className='w-7 h-7' />
-
-                              </div>
-                            </a>
-                          </div>
-                        </h1>
-                      }
-                    </>
-                  ))}
-                </>
-              ))}
-            </div>
+           
           </>
         )}
     </>

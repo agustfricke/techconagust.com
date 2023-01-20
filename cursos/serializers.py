@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Curso, Review, Episodio, Comment, Comprador
+from .models import Curso, Review, Episodio, Comment
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -32,14 +32,10 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CompradorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comprador
-        fields = '__all__'
+
     
 class CursoSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source='user.username', read_only=True)
-    comprador = serializers.SerializerMethodField(read_only=True)
     reviews = serializers.SerializerMethodField(read_only=True)
     episodios = serializers.SerializerMethodField(read_only=True)
     
@@ -57,7 +53,3 @@ class CursoSerializer(serializers.ModelSerializer):
         serializer = EpisodioSerializer(episodio, many=True)
         return serializer.data
 
-    def get_comprador(self, obj):
-        comprador = obj.comprador_set.all()
-        serializer = CompradorSerializer(comprador, many=True)
-        return serializer.data

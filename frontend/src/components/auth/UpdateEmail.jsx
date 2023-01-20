@@ -14,7 +14,7 @@ import Loader from '../utils/Loader';
 const UpdateEmail = () => {
 
   useEffect(() => {
-    document.title = 'Tech con Agust | Edit Profile'
+    document.title = 'Tech con Agust | Ediatr Email'
   }, []);
 
   let history = useHistory();

@@ -13,6 +13,10 @@ import { HiArrowUpOnSquareStack } from "react-icons/hi2";
 
 const Hacking = () => {
 
+    useEffect(() => {
+        document.title = 'Tech con Agust | Hacking'
+      }, []);
+
     let history = useHistory();
 
     const URL = (process.env.REACT_APP_API_URL)

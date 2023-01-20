@@ -12,6 +12,10 @@ import Rating from '../utils/Rating'
 
 const ReviewAll = ({ match }) => {
 
+  useEffect(() => {
+    document.title = 'Tech con Agust | Reviews '
+}, []);
+
   const URL = (process.env.REACT_APP_API_URL)
 
   const detailsCurso = useSelector(state => state.detailsCurso)
@@ -44,14 +48,15 @@ const ReviewAll = ({ match }) => {
               </div>
               <div className='border border-t-white mb-7 mt-7'>
               </div>
+              
               <>
-                {curso.reviews && curso.reviews.map((review) => (
+                {curso.reviews.map((review) => (
                   <>
                     {users && users.map(user => (
                       <>
                         {user.username === review.user &&
-                          <>
-                            <div className="flex items-center mb-4 space-x-4">
+                          <div className="mb-7">
+                            <div key={user.id} className="flex items-center mb-4 space-x-4">
                               <img className="w-10 h-10 rounded-full" src={`${URL}${user.avatar}`} alt="" />
                               <div className="space-y-1 font-medium text-white text-mono">
                                 <p>{review.user}</p>
@@ -67,7 +72,7 @@ const ReviewAll = ({ match }) => {
                                 {review.comment}
                               </p>
                             </div>
-                          </>
+                          </div>
                         }
                       </>
                     ))}

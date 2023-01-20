@@ -15,6 +15,10 @@ import Loader from '../utils/Loader';
 
 const AdminCursos = () => {
 
+    useEffect(() => {
+        document.title = 'Tech con Agust | Admin'
+      }, []);
+
     const URL = (process.env.REACT_APP_API_URL);
 
     let history = useHistory();
@@ -23,6 +27,8 @@ const AdminCursos = () => {
 
     const cursoList = useSelector(state => state.cursoList);
     const { loading, error, cursos } = cursoList;
+
+
 
     const cursoDelete = useSelector(state => state.cursoDelete);
     const { loading: loadingDelete, error: errorDelete, success: successDelete } = cursoDelete;
@@ -37,7 +43,7 @@ const AdminCursos = () => {
         dispatch({ type: CURSO_CREATE_RESET });
 
         if (userInfo.is_superuser === false) {
-            history.push('/login');
+            history.push('/');
         }
 
         if (successCreate) {
@@ -94,9 +100,7 @@ const AdminCursos = () => {
                                     <th scope="col" class="px-6 py-3 text-white font-mono">
                                         Categoria
                                     </th>
-                                    <th scope="col" class="px-6 py-3 text-white font-mono">
-                                        Precio
-                                    </th>
+                                    
                                     <th scope="col" class="px-6 py-3 text-white font-mono">
                                         Eliminar
                                     </th>
@@ -111,8 +115,8 @@ const AdminCursos = () => {
                             </thead>
                             <tbody>
                                 {cursos.map(curso => (
-                                    <tr class=" border-b bg-grey-3 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                    <tr class=" border-b bg-grey-3 ">
+                                        <th scope="row" class="flex items-center px-6 py-4  whitespace-nowrap text-white">
                                             <img class="w-10 h-10 rounded-full" src={`${URL}${curso.image}`} alt={curso.title} />
                                         </th>
                                         <td class="px-6 py-4 text-grey font-mono">
@@ -121,9 +125,7 @@ const AdminCursos = () => {
                                         <td class="px-6 py-4 text-grey font-mono">
                                             {curso.category}
                                         </td>
-                                        <td class="px-6 py-4 text-grey font-mono">
-                                            $ {curso.price}
-                                        </td>
+                                        
                                         <td class="px-6 py-4 text-grey font-mono hover:text-orange">
                                             <button onClick={() => deleteHandler(curso.id)}>
                                                 <HiOutlineTrash className='w-7 h-7' />

@@ -60,43 +60,6 @@ import {
 
 const URL = (process.env.REACT_APP_API_URL)
 
-export const cursoPagadoAction = (cursoId, user) => async (dispatch, getState) => {
-    try {
-        dispatch({
-            type: CURSO_PAGADO_REQUEST
-        })
-
-        const {
-            userLogin: { userInfo },
-        } = getState()
-
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
-
-        const { data } = await axios.post(
-            `${URL}cursos/comprador/${cursoId}/`,
-            user,
-            config
-        )
-
-        dispatch({
-            type: CURSO_PAGADO_SUCCESS,
-            payload: data,
-        })
-
-    } catch (error) {
-        dispatch({
-            type: CURSO_PAGADO_FAIL,
-            payload: error.response && error.response.data.detail
-                ? error.response.data.detail
-                : error.message,
-        })
-    }
-}
-
 
 export const deleteEpisodio = (id) => async (dispatch, getState) => {
     try {

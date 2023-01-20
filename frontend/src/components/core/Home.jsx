@@ -18,10 +18,13 @@ const Home = () => {
     const URL = (process.env.REACT_APP_API_URL)
 
     useEffect(() => {
-        document.title = 'Home | Tech con Agust'
+        document.title = 'Tech con Agust | Home '
     }, []);
 
     const dispatch = useDispatch();
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
 
     const cursoList = useSelector((state) => state.cursoList);
     const { error, loading, cursos } = cursoList;
@@ -51,8 +54,14 @@ const Home = () => {
                                     />
                                     <p className="text-xl text-white font-mono font-bold">{c.title}</p>
                                     <span className="text-grey font-mono">{c.description}</span>
-                                    <p className="mt-1 text-sm text-white"> <Rating value={c.rating} />
-                                        <a href={`/revisiones/all/${c.id}/`}>{`${c.num_reviews} reviews`}</a></p>
+                                    <p className="mt-1 text-sm text-white"> <Rating value={c.rating} /></p>
+
+                                        {userInfo && userInfo.premium === true ? (
+                                                <a className="text-white hover:text-orange font-mono" href={`/reviews/${c.id}/`}>{`${c.num_reviews} reviews`}</a>
+                                            ): (
+                                                <a className="text-white hover:text-orange font-mono" href={`/reviews/all/${c.id}/`}>{`${c.num_reviews} reviews`}</a>
+                                            )}
+                                        
                                     <a href={`/curso/${c.id}`}>
                                         <div className='flex space-x-2 items-center   text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 px-10'>
                                             <span>

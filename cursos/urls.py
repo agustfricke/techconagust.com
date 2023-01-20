@@ -23,6 +23,5 @@ urlpatterns = [
     # Reviews
     path('<int:pk>/reviews/', views.createCursoReview),
     # Comprar
-    path('comprador/<int:pk>/', views.comprador),
 
 ]

@@ -13,6 +13,11 @@ import Loader from '../utils/Loader'
 
 const AdminFormCursos = ({ match }) => {
 
+  useEffect(() => {
+    document.title = 'Tech con Agust | Admin'
+  }, []);
+
+
   const URL = (process.env.REACT_APP_API_URL)
 
   let history = useHistory();
@@ -20,7 +25,6 @@ const AdminFormCursos = ({ match }) => {
   const cursoId = match.params.id
 
   const [title, setTitle] = useState('')
-  const [price, setPrice] = useState('')
   const [trailer, setTrailer] = useState('')
   const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
@@ -35,19 +39,24 @@ const AdminFormCursos = ({ match }) => {
   const detailsCurso = useSelector(state => state.detailsCurso)
   const { error, loading, curso } = detailsCurso
 
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
   const cursoUpdate = useSelector(state => state.cursoUpdate)
   const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = cursoUpdate
 
   useEffect(() => {
+    if (userInfo.is_superuser === false) {
+      history.push('/');
+  }
     if (successUpdate) {
       dispatch({ type: CURSO_UPDATE_RESET })
-      history.push('/admin/cursos')
+      history.push('/cursos/admin/')
     } else {
       if (!curso.title || curso.id !== Number(cursoId)) {
         dispatch(listCursoDetails(cursoId))
       } else {
         setTitle(curso.title)
-        setPrice(curso.price)
         setTrailer(curso.trailer)
         setDescription(curso.description)
         setImage(curso.image)
@@ -62,7 +71,6 @@ const AdminFormCursos = ({ match }) => {
     dispatch(updateCurso({
       id: cursoId,
       title,
-      price,
       description,
       trailer,
       image,
@@ -149,16 +157,7 @@ const AdminFormCursos = ({ match }) => {
                         placeholder="Titulo"
                       />
                     </div>
-                    <div className='mb-2'>
-                      <input
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        type="text"
-                        required
-                        class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
-                        placeholder="Titulo"
-                      />
-                    </div>
+                    
                     <div className='mb-2'>
                       <input
                         value={category}
@@ -190,7 +189,7 @@ const AdminFormCursos = ({ match }) => {
                       />
                     </div>
                     <div className='mb-2'>
-                      <p>Imege</p>
+                      <p className='sm text-white font-mono'>Imege</p>
                       <input
                         type='file'
                         onChange={uploadImageHandler}
@@ -199,7 +198,7 @@ const AdminFormCursos = ({ match }) => {
                       />
                     </div>
                     <div className='mb-2'>
-                      <p>File</p>
+                      <p className='sm text-white font-mono'>File</p>
                       <input
                         type='file'
                         onChange={uploadFileHandler}

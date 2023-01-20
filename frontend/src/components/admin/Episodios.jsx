@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from "react-router-dom";
 
 import { listCursoDetails, episodioCreate, deleteEpisodio } from '../../actions/cursoActions'
 import { CURSO_CREATE_EPISODIO_RESET } from "../../constants/cursoConstants";
@@ -14,9 +15,15 @@ import { FaEdit } from "react-icons/fa";
 
 const Episodios = ({ match }) => {
 
+    useEffect(() => {
+        document.title = 'Tech con Agust | Admin'
+      }, []);
+
+
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [url, setUrl] = useState('')
+    let history = useHistory();
 
     const dispatch = useDispatch()
 
@@ -26,10 +33,16 @@ const Episodios = ({ match }) => {
     const createEpisodio = useSelector(state => state.createEpisodio)
     const { loading: loadingEpisodio, error: errorEpisodio, success: successEpisodio } = createEpisodio
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
     const episodioDelete = useSelector(state => state.episodioDelete)
     const { loading: loadingDelete, error: errorDelete, success: successDelete } = episodioDelete
 
     useEffect(() => {
+        if (userInfo.is_superuser === false) {
+            history.push('/');
+        }
         if (successEpisodio) {
             setUrl('')
             setTitle('')

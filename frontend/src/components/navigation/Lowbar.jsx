@@ -30,7 +30,7 @@ const Lowbar = () => {
       </h1>
       <div className="bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl ">
         <a
-          href="#"
+          href="/"
           className="bg-orange p-4 flex justify-center rounded-xl text-grey-2"
         >
           <HiHome className="text-2xl" />
@@ -38,7 +38,7 @@ const Lowbar = () => {
       </div>
       <div className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
         <a
-          href="#"
+          href="/MiPerfil"
           className="
       group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
         >

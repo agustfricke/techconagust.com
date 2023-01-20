@@ -384,20 +384,9 @@ export const listUsers = () => async (dispatch, getState) => {
     try {
         dispatch({ type: USER_LIST_REQUEST })
 
-        const {
-            userLogin: { userInfo }
-        } = getState()
-
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
-
+        
         const { data } = await axios.get(
             `${URL}users/all/`,
-            config
         )
 
         dispatch({

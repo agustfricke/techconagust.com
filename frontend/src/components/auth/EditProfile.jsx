@@ -14,7 +14,7 @@ import Error from "../utils/Error";
 const EditProfile = () => {
 
   useEffect(() => {
-    document.title = 'Tech con Agust | Edit Profile'
+    document.title = 'Tech con Agust | Editar Perfil'
   }, []);
 
   const URL = (process.env.REACT_APP_API_URL)
@@ -29,7 +29,7 @@ const EditProfile = () => {
   const [message, setMessage] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [setUploading] = useState(false)
+  const [uploding, setUploading] = useState(false)
 
   const dispatch = useDispatch(history)
 
@@ -62,7 +62,7 @@ const EditProfile = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    history.push('/profile')
+    history.push('/MiPerfil')
 
     if (password !== confirmPassword) {
       setMessage('Las contraseñas deben conincidir! ')

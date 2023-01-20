@@ -13,6 +13,11 @@ import Loader from '../utils/Loader'
 
 const EditEpisodio = ({ match }) => {
 
+  useEffect(() => {
+    document.title = 'Tech con Agust | Admin'
+  }, []);
+
+
   const URL = (process.env.REACT_APP_API_URL)
 
   let history = useHistory();
@@ -23,17 +28,23 @@ const EditEpisodio = ({ match }) => {
   const [description, setDescription] = useState('')
   const [url, setUrl] = useState('')
   const [file, setFile] = useState('')
-  const [setUploadingFile] = useState(false)
+  const [uplodingFile, setUploadingFile] = useState(false)
 
   const dispatch = useDispatch()
 
   const episodioDetails = useSelector(state => state.episodioDetails)
   const { error, loading, episodio } = episodioDetails
 
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
   const episodioUpdate = useSelector(state => state.episodioUpdate)
   const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = episodioUpdate
 
   useEffect(() => {
+    if (userInfo.is_superuser === false) {
+      history.push('/');
+  }
     if (successUpdate) {
       dispatch({ type: EPISODIO_UPDATE_RESET })
       history.push(`/epi/${episodio.curso}`)
@@ -135,6 +146,7 @@ const EditEpisodio = ({ match }) => {
                       />
                     </div>
                     <div className='mb-2'>
+                    <p className='sm text-white font-mono'>Imagen</p>
                       <input
                         type='file'
                         onChange={uploadFileHandler}

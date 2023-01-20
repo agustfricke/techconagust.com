@@ -13,6 +13,10 @@ import { HiArrowUpOnSquareStack } from "react-icons/hi2";
 
 const FullStack = () => {
 
+    useEffect(() => {
+        document.title = 'Tech con Agust | Full Stack'
+      }, []);
+
     let history = useHistory();
 
     const URL = (process.env.REACT_APP_API_URL)
