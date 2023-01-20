@@ -52,7 +52,7 @@ const PremiumUser = () => {
             purchase_units: [
                 {
                     amount: {
-                        value: "39.99"
+                        value: "14.99"
                     },
                 },
             ],
@@ -94,7 +94,7 @@ const PremiumUser = () => {
                                             Acceso de por vida a todos los cursos y proyectos con codigo fuente
                                         </p>
                                         <p className='text-grey text-center font-mono mt-4'>
-                                            $ 39.99
+                                            $ 14.99
                                         </p>
                                     </div>
                                     <PayPalScriptProvider

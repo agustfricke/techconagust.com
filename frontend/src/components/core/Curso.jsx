@@ -137,7 +137,7 @@ const Curso = ({ match }) => {
                                                     <a href='/premium/user/payment' >
                                                         <div className='flex space-x-2 items-center px-5  text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 '>
                                                             <span>
-                                                                Premium $39.99
+                                                                Premium $14.99
                                                             </span>
                                                             <RiUserStarFill className='w-7 h-7' />
                                                         </div>
