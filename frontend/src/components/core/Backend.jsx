@@ -46,14 +46,14 @@ const Backend = () => {
                         <div className="p-8 mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                             {cursos && cursos.map((c) => (
                                 <>
-                                {c.category === 'Backend' ? (
+                                {c.category == 'Backend' ? (
 
                             <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-2 text-center text-gray-300">
                                     <img
                                         src={`${URL}${c.image}`}
                                         className="w-40 h-40 object-cover -mt-20 shadow-2xl rounded-full"
                                     />
-                                    <p className="text-xl text-white font-mono font-bold">{c.title}</p>
+                                    <p className="text-xl text-white font-mono font-bold">{c.title} {c.category}</p>
                                     <span className="text-grey font-mono">{c.description}</span>
                                     <p className="mt-1 text-sm text-white"> <Rating value={c.rating} />
                                         <a href={`/revisiones/all/${c.id}/`}>{`${c.num_reviews} reviews`}</a></p>
@@ -70,7 +70,7 @@ const Backend = () => {
                                 ) : (
                                     
                                     <>
-                                     <Error>{'Aun no hay cursos de Backend'}</Error>
+                                     
                                     </>
 
                                 )}

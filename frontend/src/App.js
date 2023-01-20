@@ -69,7 +69,7 @@ function App() {
                   <Header />
                   <Route path="/" component={Home} exact />
                   <Route path='/backend/' component={Backend} />
-                  <Route path='/fontend/' component={Fontend} />
+                  <Route path='/frontend/' component={Fontend} />
                   <Route path='/blockchain/' component={Blockchain} />
                   <Route path='/fullstack/' component={FullStack} />
                   <Route path='/hacking/' component={Hacking} />
@@ -100,13 +100,13 @@ function App() {
                   <Header />
                   <Route path="/" component={Home} exact />
                   <Route path='/backend/' component={Backend} />
-                  <Route path='/fontend/' component={Fontend} />
+                  <Route path='/frontend/' component={Fontend} />
                   <Route path='/blockchain/' component={Blockchain} />
                   <Route path='/fullstack/' component={FullStack} />
                   <Route path='/hacking/' component={Hacking} />
                   <Route path='/curso/:id' component={Curso} />
                   <PrivateRoute path='/video/:epi/:curso' component={Video} />
-                  <Route path='/reviews/all/:id' component={ReviewAll} />
+                  <Route path='/reviews/:id' component={ReviewAll} />
                   <Route path='/login/' component={Login} />
                   <Route path='/register/' component={Register} />
                   <PrivateRoute path='/cursos/admin/' component={AdminCursos} />

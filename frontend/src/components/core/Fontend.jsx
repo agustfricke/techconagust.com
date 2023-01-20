@@ -40,12 +40,12 @@ const Fontend = () => {
                 : (
                     <>
                         <div className="flex items-center justify-between">
-                            <h2 className="text-3xl text-grey-1 font-mono mt-7">Desarrollo Backend</h2>
+                            <h2 className="text-3xl text-grey-1 font-mono mt-7">Desarrollo Fontend</h2>
                         </div>
                         <div className="p-8 mt-[50px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                             {cursos && cursos.map((c) => (
                                 <>
-                                {c.category === 'Fontend' ? (
+                                {c.category === 'Frontend' ? (
 
                             <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-2 text-center text-gray-300">
                                     <img
@@ -69,7 +69,7 @@ const Fontend = () => {
                                 ) : (
                                     
                                     <>
-                                     <Error>{'Aun no hay cursos de Fontend'}</Error>
+                                     
                                     </>
 
                                 )}

@@ -25,8 +25,8 @@ const Activate = ({ match }) => {
 
   const verify_account = (e) => {
     dispatch(activation(match.params.uid, match.params.token))
-    history.push('/login/')
     setExito(`Cuenta Activada... Inicia Session`)
+    history.push('/login/')
   }
 
   return (

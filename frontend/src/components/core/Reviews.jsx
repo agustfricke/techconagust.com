@@ -63,7 +63,7 @@ const Reviews = ({ match }) => {
   console.log(curso)
   const { reviews } = curso
 
-  const isFound = reviews.some(element => {
+  const isFound = reviews && reviews.some(element => {
     if (element.user === userInfo.username) {
 
       return true;
@@ -82,7 +82,7 @@ const Reviews = ({ match }) => {
             <>
               <div className="flex items-center justify-between mt-10 mb-16">
                 <h2 className="text-3xl text-grey-1 font-mono">
-                  Reviews de
+                  Reviews de 
                   <span className='text-orange ml-3.5'>
                     {curso.title}
                   </span>
@@ -92,7 +92,7 @@ const Reviews = ({ match }) => {
               </div>
               <>
                 {curso.reviews.length && curso.reviews.length === 0 && <h1>No Reviews</h1>}
-                {curso.reviews.map((review) => (
+                {curso.reviews && curso.reviews.map((review) => (
                   <>
                     {users && users.map(user => (
                       <>
@@ -137,12 +137,17 @@ const Reviews = ({ match }) => {
             <>
               <div className="flex items-center justify-between mt-10 mb-16">
                 <h2 className="text-3xl text-grey-1 font-mono">
+                  Reviews de
                   <span className='text-orange ml-3.5'>
                     {curso.title}
                   </span>
                 </h2>
               </div>
-              <div className="flex min-h-full items-center justify-center ">
+              {userInfo.premium === false ? (
+                  <></>
+              ) : (
+
+                <div className="flex min-h-full items-center justify-center ">
                 <div className=' m-4 p-4 bg-grey-3 rounded-lg'>
                   <div className="w-[400px] max-w-md space-y-8 ">
                     <div>
@@ -194,10 +199,13 @@ const Reviews = ({ match }) => {
                   </div>
                 </div>
               </div>
+
+              )}
+             
               <div className='border border-t-white mb-7 mt-7'>
               </div>
               <>
-                {curso.reviews.map((review) => (
+                {curso.reviews && curso.reviews.map((review) => (
                   <>
                     {users && users.map(user => (
                       <>

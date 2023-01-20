@@ -32,7 +32,7 @@ const AdminFormCursos = ({ match }) => {
   const [image, setImage] = useState('')
   const [setUploading] = useState(false)
   const [file, setFile] = useState('')
-  const [setUploadingFile] = useState(false)
+  const [uploadingFile, setUploadingFile] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -152,7 +152,6 @@ const AdminFormCursos = ({ match }) => {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         type="text"
-                        required
                         class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                         placeholder="Titulo"
                       />
@@ -163,7 +162,6 @@ const AdminFormCursos = ({ match }) => {
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         type="text"
-                        required
                         class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                         placeholder="Categoria"
                       />
@@ -173,7 +171,6 @@ const AdminFormCursos = ({ match }) => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         type="text"
-                        required
                         class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                         placeholder="Descripcion"
                       />
@@ -183,7 +180,6 @@ const AdminFormCursos = ({ match }) => {
                         value={trailer}
                         onChange={(e) => setTrailer(e.target.value)}
                         type="text"
-                        required
                         class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                         placeholder="Trailer URL"
                       />
@@ -193,7 +189,6 @@ const AdminFormCursos = ({ match }) => {
                       <input
                         type='file'
                         onChange={uploadImageHandler}
-                        required
                         class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                       />
                     </div>
@@ -202,7 +197,6 @@ const AdminFormCursos = ({ match }) => {
                       <input
                         type='file'
                         onChange={uploadFileHandler}
-                        required
                         class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                         placeholder="Correo Electronico"
                       />

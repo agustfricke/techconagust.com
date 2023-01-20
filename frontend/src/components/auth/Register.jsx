@@ -40,7 +40,6 @@ const Register = () => {
             setMessage('Passwords must match ');
         } else {
             dispatch(register(email, username, name, password, re_password));
-            history.push('/')
         }
     }
 

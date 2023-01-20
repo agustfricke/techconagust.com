@@ -164,8 +164,7 @@ const Video = ({ match }) => {
                                     </>
                                 ) : (
                                     <>
-                                        <Redirect to={`/curso/${curso.id}`} />
-                                        <Error>{'Accesso restingido'}</Error>
+                                        <Redirect to={`/curso/${match.params.curso}`} />
                                     </>
                                 )}
                             </>

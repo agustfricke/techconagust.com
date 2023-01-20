@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 
 import { listCursoDetails } from '../../actions/cursoActions'
@@ -17,7 +17,9 @@ const Curso = ({ match }) => {
 
     useEffect(() => {
         document.title = 'Tech con Agust | Curso'
-      }, []);
+    }, []);
+
+    const [noPremium, setNoPremium] = useState('')
 
 
     const URL = (process.env.REACT_APP_API_URL)
@@ -36,13 +38,18 @@ const Curso = ({ match }) => {
         dispatch(listCursoDetails(match.params.id))
     }, [dispatch, match])
 
-    const addToCartHandler = () => {
-        history.push('/payment')
+    const errorMessage = () => {
+        setNoPremium('Debes tener una cuenta premium para acceder!')
+
     }
+
+
+
 
     return (
         <>
             {error && <Error>{error}</Error>}
+            {noPremium && <Error>{noPremium}</Error>}
             {loading ?
                 <Loader />
                 : (
@@ -61,24 +68,51 @@ const Curso = ({ match }) => {
                                                 className="w-40 h-40 object-cover -mt-20 shadow-2xl rounded-full"
                                             />
                                             <p className="font-mono text-white text-xl my-6">Episodios</p>
-                                            <div className="mb-10">
 
-                                            <ul className="object-cover -mb-[100px] md:-mb-[100px] lg:-mb-[100px] ">
-                                                {curso.episodios && curso.episodios.map((epi) => (
-                                                    <li className='mt-3 '>
-                                                        <a href={`/video/${epi.id}/${curso.id}`} >
-                                                            <div className='flex space-x-2 px-10 items-center transition-colors  text-white hover:text-grey-3 bg-grey-2 hover:bg-grey font-bold font-mono  p-2 rounded-lg'>
-                                                                <img className='w-12 h-12 rounded-full mr-5' src={`${URL}${epi.file}`} />
+                                            {userInfo && userInfo.premium == false ? (
 
-                                                                <span className=' '>
-                                                                    {epi.title}
-                                                                </span>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                            </div>
+                                                <div className="mb-10">
+
+                                                    <ul className="object-cover -mb-[100px] md:-mb-[100px] lg:-mb-[100px] ">
+                                                        {curso.episodios && curso.episodios.map((epi) => (
+                                                            <li className='mt-3 '>
+                                                                <a onClick={errorMessage}  >
+                                                                    <div className='flex space-x-2 px-10 items-center transition-colors  text-white hover:text-grey-3 bg-grey-2 hover:bg-grey font-bold font-mono  p-2 rounded-lg'>
+                                                                        <img className='w-12 h-12 rounded-full mr-5' src={`${URL}${epi.file}`} />
+
+                                                                        <span className=' '>
+                                                                            {epi.title}
+                                                                        </span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+
+                                            ) : (
+
+                                                <div className="mb-10">
+
+                                                    <ul className="object-cover -mb-[100px] md:-mb-[100px] lg:-mb-[100px] ">
+                                                        {curso.episodios && curso.episodios.map((epi) => (
+                                                            <li className='mt-3 '>
+                                                                <a href={`/video/${epi.id}/${curso.id}`} >
+                                                                    <div className='flex space-x-2 px-10 items-center transition-colors  text-white hover:text-grey-3 bg-grey-2 hover:bg-grey font-bold font-mono  p-2 rounded-lg'>
+                                                                        <img className='w-12 h-12 rounded-full mr-5' src={`${URL}${epi.file}`} />
+
+                                                                        <span className=' '>
+                                                                            {epi.title}
+                                                                        </span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+
+                                            )}
+
 
                                         </div>
                                         <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-10 text-center">
@@ -86,14 +120,15 @@ const Curso = ({ match }) => {
                                             <span className="text-grey font-mono">{curso.description}</span>
                                             <p className="mt-1  text-white font-mono"> <Rating value={curso.rating} /></p>
 
-                                            {userInfo.premium === true ? (
-                                                <a className="text-white hover:text-orange font-mono"  href={`/reviews/${curso.id}/`}>{`${curso.num_reviews} reviews`}</a>
-                                            ): (
-                                                <a className="text-white hover:text-orange font-mono"  href={`/reviews/all/${curso.id}/`}>{`${curso.num_reviews} reviews`}</a>
+                                            {userInfo && userInfo.premium === true ? (
+                                                <a className="text-white hover:text-orange font-mono" href={`/reviews/${curso.id}/`}>{`${curso.num_reviews} reviews`}</a>
+                                            ) : (
+                                                <a className="text-white hover:text-orange font-mono" href={`/reviews/all/${curso.id}/`}>{`${curso.num_reviews} reviews`}</a>
                                             )}
-                                                
-                                            {userInfo.premium === true ? (
-                                                <></>
+
+                                            {userInfo && userInfo.premium === true ? (
+                                                <>
+                                                </>
 
                                             ) : (
 

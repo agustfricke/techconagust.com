@@ -50,7 +50,7 @@ const ReviewAll = ({ match }) => {
               </div>
               
               <>
-                {curso.reviews.map((review) => (
+                {curso.reviews && curso.reviews.map((review) => (
                   <>
                     {users && users.map(user => (
                       <>

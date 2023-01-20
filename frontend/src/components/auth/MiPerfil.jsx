@@ -7,7 +7,7 @@ import Loader from '../utils/Loader';
 import Error from '../utils/Error';
 import Rating from '../utils/Rating';
 
-import { HiArrowUpOnSquareStack } from "react-icons/hi2";
+import { RiCheckboxMultipleBlankLine, RiCheckboxMultipleFill } from "react-icons/ri";
 
 
 
@@ -49,7 +49,7 @@ const MiPerfil = () => {
                     </h2>
                     <div className="flex min-h-full items-center justify-center">
                       <div>
-                        <img className="h-40 w-55 rounded-full my-4 ml-[100px]" src={`${URL}${userInfo.avatar}`} alt="" />
+                        <img className="h-40 w-55 rounded-full my-4 ml-[50px]" src={`${URL}${userInfo.avatar}`} alt="" />
                         <h3 className="text-lg font-mono leading-6 text-white">{userInfo.username}
                           <a
                             href={"/edit/profile"}
@@ -85,6 +85,19 @@ const MiPerfil = () => {
                         <dt className="text-sm font-mono text-grey-1">Biografia</dt>
                         <dd className="mt-1 text-sm text-white tracking-widest font-semibold text-space sm:col-span-2 sm:mt-0">
                           {userInfo.bio}
+                        </dd>
+                      </div>
+                      <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt className="text-sm font-mono text-grey-1">Premium</dt>
+                        <dd className="mt-1 text-sm text-white tracking-widest font-semibold text-space sm:col-span-2 sm:mt-0">
+                        {userInfo.premium === true ? (
+                                                <p className='text-grey'>
+                                                <RiCheckboxMultipleFill className='w-7 h-7' />
+
+                                                </p>
+                                            ) : (
+                                                <RiCheckboxMultipleBlankLine className='w-7 h-7'/>
+                                            )}
                         </dd>
                       </div>
                     </dl>

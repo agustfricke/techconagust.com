@@ -58,8 +58,8 @@ const Home = () => {
 
                                         {userInfo && userInfo.premium === true ? (
                                                 <a className="text-white hover:text-orange font-mono" href={`/reviews/${c.id}/`}>{`${c.num_reviews} reviews`}</a>
-                                            ): (
-                                                <a className="text-white hover:text-orange font-mono" href={`/reviews/all/${c.id}/`}>{`${c.num_reviews} reviews`}</a>
+                                            ) : (
+                                                <a className="text-white hover:text-orange font-mono" href={`/reviews/${c.id}/`}>{`${c.num_reviews} reviews`}</a>
                                             )}
                                         
                                     <a href={`/curso/${c.id}`}>

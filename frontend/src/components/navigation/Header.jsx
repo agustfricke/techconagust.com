@@ -31,7 +31,7 @@ const Header = () => {
           {userInfo ? (
             <>
               <HiBadgeCheck className='text-orange w-8 h-8 mr-4' />
-              <h1 className="text-2xl text-grey font-mono ">{userInfo.username} {userInfo.id}</h1>
+              <h1 className="text-2xl text-grey font-mono ">{userInfo.username}</h1>
             </>
           ) : (
             <>
@@ -55,7 +55,7 @@ const Header = () => {
       </div>
       {/* Tabs */}
       <div className='flex flex-row gap-4 overflow-y-auto '>
-        <a href="/fontend/" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
+        <a href="/frontend/" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors font-semibold">
           Frontend
         </a>
         <a href="/backend/" className="py-2 pr-4 font-mono text-grey-1 hover:text-orange transition-colors  font-semibold">
