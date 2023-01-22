@@ -149,7 +149,7 @@ const Reviews = ({ match }) => {
 
                 <div className="flex min-h-full items-center justify-center ">
                 <div className=' m-4 p-4 bg-grey-3 rounded-lg'>
-                  <div className="w-[400px] max-w-md space-y-8 ">
+                  <div className="w-[300px]  max-w-md space-y-8 md:w-[400px] lg:w-[400px]">
                     <div>
                       <h2 className="mt-6 text-center text-xl font-mono  text-grey">
                         Crea una Review

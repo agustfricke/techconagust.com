@@ -57,12 +57,12 @@ const Curso = ({ match }) => {
                         <>
 
                             <>
-                                <div className="bg-blue h-[2000px]">
+                                <div className="bg-blue h-[4000px] ">
                                     <div className="flex items-center justify-between ">
                                         <h2 className="text-3xl text-grey-1 font-mono mt-7">{curso.title}</h2>
                                     </div>
                                     <div className=" p-8 mt-[50px] grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-16">
-                                        <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-2 text-center text-gray-300">
+                                        <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-2 text-center ">
                                             <img
                                                 src={`${URL}${curso.image}`}
                                                 className="w-40 h-40 object-cover -mt-20 shadow-2xl rounded-full"
@@ -115,7 +115,7 @@ const Curso = ({ match }) => {
 
 
                                         </div>
-                                        <div className="bg-grey-3 p-8 rounded-xl flex flex-col items-center gap-10 text-center">
+                                        <div className="bg-grey-3 mb-[1500px] p-8 rounded-xl flex flex-col items-center gap-10 text-center ">
                                             <p className="text-xl text-white font-mono font-bold">{curso.title}</p>
                                             <span className="text-grey font-mono">{curso.description}</span>
                                             <p className="mt-1  text-white font-mono"> <Rating value={curso.rating} /></p>
@@ -153,7 +153,7 @@ const Curso = ({ match }) => {
                                                     <TbWorld />
                                                 </p>
                                                 <p className="mt-1 text-sm text-gray-300">
-                                                    Espanol
+                                                    Español
                                                 </p>
                                             </div>
                                         </div>

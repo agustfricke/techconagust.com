@@ -30,7 +30,7 @@ const AdminFormCursos = ({ match }) => {
   const [description, setDescription] = useState('')
 
   const [image, setImage] = useState('')
-  const [setUploading] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [file, setFile] = useState('')
   const [uploadingFile, setUploadingFile] = useState(false)
 
@@ -142,7 +142,7 @@ const AdminFormCursos = ({ match }) => {
               <div className="w-[400px] max-w-md space-y-8 ">
                 <div>
                   <h2 className="mt-6 text-center text-3xl font-mono  text-grey">
-                    Crear Curso
+                    Fromulario de Cursos
                   </h2>
                 </div>
                 <form onSubmit={submitHandler} className="mt-8 space-y-6" action="#" method="POST">
@@ -207,7 +207,7 @@ const AdminFormCursos = ({ match }) => {
                       type="submit"
                       className=" space-x-2 block w-full transition-colors  text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-3 px-10"
                     >
-                      Crear
+                      Aplicar
                     </button>
                   </div>
                 </form>

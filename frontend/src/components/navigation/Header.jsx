@@ -35,9 +35,9 @@ const Header = () => {
             </>
           ) : (
             <>
-              <a href='/login' className=' ml-10 items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 '>
+              <a href='/login' className=' ml-5 items-center text-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 '>
                 Iniciar Session</a>
-              <a href='/register/' className=' ml-10  items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 '>Crear cuenta</a>
+              <a href='/register/' className=' ml-5 text-center  items-center px-5 text-grey-3  bg-orange hover:bg-yellow font-bold font-mono rounded-lg p-2 '>Crear cuenta</a>
             </>
           )}
         </div>

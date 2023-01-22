@@ -49,9 +49,12 @@ const MiPerfil = () => {
                     </h2>
                     <div className="flex min-h-full items-center justify-center">
                       <div>
-                        <img className="h-40 w-55 rounded-full my-4 ml-[50px]" src={`${URL}${userInfo.avatar}`} alt="" />
+                        <img className="h-40 w-55 rounded-full my-4  w-full md:ml-[10px] lg:ml-[10px]" src={`${URL}${userInfo.avatar}`} alt="" />
+                        <div className="text-center md: lg:">
                         <h3 className="text-lg font-mono leading-6 text-white">{userInfo.username}
-                          <a
+                          
+                        </h3>
+                        <a
                             href={"/edit/profile"}
                             className=" text-sm font-mono ml-3 text-orange font-semibold hover:text-grey-1  "
                           >
@@ -63,7 +66,8 @@ const MiPerfil = () => {
                           >
                             CAMBIAR EMAIL
                           </a>
-                        </h3>
+                        </div>
+                        
                       </div>
                     </div>
                   </div>

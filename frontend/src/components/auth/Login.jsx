@@ -47,7 +47,7 @@ const Login = () => {
           : (
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
               <div className=' m-5 p-10 bg-grey-3'>
-                <div className="w-[400px] max-w-md space-y-8 ">
+                <div className="w-[300px]  max-w-md space-y-8 md:w-[400px] lg:w-[400px]">
                   <div >
                     <img
                       className="mx-auto "
