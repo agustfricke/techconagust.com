@@ -115,7 +115,7 @@ const Curso = ({ match }) => {
 
 
                                         </div>
-                                        <div className="bg-grey-3 mb-[1500px] p-8 rounded-xl flex flex-col items-center gap-10 text-center ">
+                                        <div className="bg-grey-3 mb-[2000px] p-8 rounded-xl flex flex-col items-center gap-10 text-center ">
                                             <p className="text-xl text-white font-mono font-bold">{curso.title}</p>
                                             <span className="text-grey font-mono">{curso.description}</span>
                                             <p className="mt-1  text-white font-mono"> <Rating value={curso.rating} /></p>

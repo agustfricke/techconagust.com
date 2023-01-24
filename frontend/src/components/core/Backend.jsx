@@ -53,7 +53,7 @@ const Backend = () => {
                                         src={`${URL}${c.image}`}
                                         className="w-40 h-40 object-cover -mt-20 shadow-2xl rounded-full"
                                     />
-                                    <p className="text-xl text-white font-mono font-bold">{c.title} {c.category}</p>
+                                    <p className="text-xl text-white font-mono font-bold">{c.title}</p>
                                     <span className="text-grey font-mono">{c.description}</span>
                                     <p className="mt-1 text-sm text-white"> <Rating value={c.rating} />
                                         <a href={`/revisiones/all/${c.id}/`}>{`${c.num_reviews} reviews`}</a></p>

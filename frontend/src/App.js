@@ -31,13 +31,6 @@ import EditProfile from "./components/auth/EditProfile";
 // Route Stuff
 import PrivateRoute from "./components/auth/PrivateRoute";
 
-// Admin Components
-import AdminCursos from "./components/admin/AdminCursos";
-import AdminFormCursos from "./components/admin/AdminFormCursos";
-import Episodios from "./components/admin/Episodios";
-import EditEpisodio from "./components/admin/EditEpisodio";
-import Users from "./components/admin/Users";
-
 // Shopping Stuff
 import PremiumUser from "./components/shopping/PremiumUser";
 import SuccessPremium from "./components/shopping/SuccessPremium";
@@ -78,17 +71,12 @@ function App() {
                   <Route path='/reviews/:id' component={Reviews} />
                   <Route path='/login/' component={Login} />
                   <Route path='/register/' component={Register} />
-                  <PrivateRoute path='/cursos/admin/' component={AdminCursos} />
-                  <PrivateRoute path='/cursos/:id/form' component={AdminFormCursos} />
                   <Route path='/activate/:uid/:token' component={Activation} />
                   <Route path='/reset-password' component={ResetPassword} />
                   <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
                   <PrivateRoute path='/MiPerfil/' component={MiPerfil} />
                   <Route path='/reset-password' component={ResetPassword} />
-                  <PrivateRoute path='/epi/:id' component={Episodios} />
-                  <PrivateRoute path='/episodio/:id/form' component={EditEpisodio} />
                   <PrivateRoute path='/update/email/' component={UpdateEmail} />
-                  <PrivateRoute path='/users/admin/' component={Users} />
                   <PrivateRoute path='/edit/profile' component={EditProfile} />
                   <PrivateRoute path='/premium/user/payment' component={PremiumUser} />
                   <PrivateRoute path='/success/premium/' component={SuccessPremium} />
@@ -109,17 +97,12 @@ function App() {
                   <Route path='/reviews/:id' component={ReviewAll} />
                   <Route path='/login/' component={Login} />
                   <Route path='/register/' component={Register} />
-                  <PrivateRoute path='/cursos/admin/' component={AdminCursos} />
-                  <PrivateRoute path='/cursos/:id/form' component={AdminFormCursos} />
                   <Route path='/activate/:uid/:token' component={Activation} />
                   <Route path='/reset-password' component={ResetPassword} />
                   <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
                   <PrivateRoute path='/MiPerfil/' component={MiPerfil} />
                   <Route path='/reset-password' component={ResetPassword} />
-                  <PrivateRoute path='/epi/:id' component={Episodios} />
-                  <PrivateRoute path='/episodio/:id/form' component={EditEpisodio} />
                   <PrivateRoute path='/update/email/' component={UpdateEmail} />
-                  <PrivateRoute path='/users/admin/' component={Users} />
                   <PrivateRoute path='/edit/profile' component={EditProfile} />
                   <PrivateRoute path='/premium/user/payment' component={PremiumUser} />
                   <PrivateRoute path='/success/premium/' component={SuccessPremium} />

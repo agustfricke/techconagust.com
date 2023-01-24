@@ -48,7 +48,7 @@ const Lowbar = () => {
       <div className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
         <a
           onClick={logoutHandler}
-          href="#"
+          href=""
           className="
       group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
         >

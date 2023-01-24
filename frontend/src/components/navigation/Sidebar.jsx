@@ -55,35 +55,12 @@ const Sidebar = (props) => {
                     <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
                         <a
                             onClick={logoutHandler}
-                            href="#"
+                            href=''
                             className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
                         >
                             <HiOutlineLogout className="text-2xl" />
                         </a>
                     </li>
-                    {userInfo.is_superuser ? (
-                        <>
-                            <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
-                                <a
-                                    href="/users/admin/"
-                                    className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
-                                >
-                                    <HiUsers className="text-2xl" />
-                                </a>
-                            </li>
-                            <li className="hover:bg-grey-2 p-4 rounded-tl-xl rounded-tr-xl group transition-colors">
-                                <a
-                                    href={`/cursos/admin/`}
-                                    className="group-hover:bg-orange p-4 flex justify-center rounded-xl text-orange group-hover:text-grey-2 transition-colors"
-                                >
-                                    <HiFolder className="text-2xl" />
-                                </a>
-                            </li>
-                        </>
-                    ) : (
-                        <>
-                        </>
-                    )}
                 </ul>
             </div>
         </div>
