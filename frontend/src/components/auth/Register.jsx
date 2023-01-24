@@ -9,6 +9,7 @@ import Loader from '../utils/Loader';
 import Error from '../utils/Error';
 
 import logo from '../../media/logo.png';
+import { HiEyeOff, HiEye } from "react-icons/hi";
 
 
 
@@ -20,7 +21,7 @@ const Register = () => {
     useEffect(() => {
         document.title = 'Tech con Agust | Registro'
     }, []);
-
+const [show, setShow] = useState(false)
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
@@ -42,6 +43,10 @@ const Register = () => {
             dispatch(register(email, username, name, password, re_password));
         }
     }
+
+        const handleShow = () => {
+          setShow(!show)
+      }
 
     return (
         <>
@@ -100,24 +105,32 @@ const Register = () => {
                                                 />
                                             </div>
                                             <div className='mt-7'>
-                                                <input
+                    <div class='w-full relative'>
+                    <label class='absolute text-white right-3 top-1/2 -translate-y-1/2'  onClick = {handleShow} > {show?<HiEyeOff/>:<HiEye/>}</label>                                                <input
                                                     value={password}
                                                     onChange={(e) => setPassword(e.target.value)}
-                                                    type="password"
                                                     required
+                    type={show?'text':'password'}
+
                                                     class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                                                     placeholder="Contraseña"
                                                 />
+                    </div>
                                             </div>
                                             <div className='mt-7'>
-                                                <input
+                    
+                    <div class='w-full relative'>
+                    
+                    <label class='absolute text-white right-3 top-1/2 -translate-y-1/2'  onClick = {handleShow} > {show?<HiEyeOff/>:<HiEye/>}</label>                                                                                    <input
                                                     value={re_password}
                                                     onChange={(e) => setRePassword(e.target.value)}
-                                                    type="password"
+                                                    type={show?'text':'password'} 
                                                     required
                                                     class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                                                     placeholder="Confirmar Contraseña"
                                                 />
+                                            </div>
+
                                             </div>
                                         </div>
                                         <div className='items-center'>
@@ -132,7 +145,7 @@ const Register = () => {
                                     </form>
                                     <div className="flex items-center justify-between">
                                         <div className="text-sm">
-                                            <a style={{ textDecoration: 'none' }} href="/register" className="text-mono font-mono text-grey ">
+                                            <a style={{ textDecoration: 'none' }} href="/login" className="text-mono font-mono text-grey ">
                                                 Tienes una cuenta?
                                                 <span className='hover:text-orange ml-2 transition-colors'>
                                                     Inicia Session aqui!

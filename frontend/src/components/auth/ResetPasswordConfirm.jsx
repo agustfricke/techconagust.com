@@ -8,6 +8,8 @@ import Error from '../utils/Error';
 import Success from "../utils/Success";
 import Loader from '../utils/Loader';
 
+import { HiEyeOff, HiEye } from "react-icons/hi";
+
 const ResetPasswordConfirm = ({ match }) => {
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const ResetPasswordConfirm = ({ match }) => {
 
   const [re_password, setNewPassword] = useState('');
   const [re_new_password, setre_new_password] = useState('');
-
+  const [show, setShow] = useState(false)
   const passwordConfirm = useSelector(state => state.passwordConfirm)
   const { error, loading, success } = passwordConfirm
 
@@ -29,6 +31,9 @@ const ResetPasswordConfirm = ({ match }) => {
     dispatch(Confirm(match.params.uid, match.params.token, re_password, re_new_password))
     history.push('/login/')
   }
+    const handleShow = () => {
+        setShow(!show)
+    }
 
   return (
     <>
@@ -49,24 +54,32 @@ const ResetPasswordConfirm = ({ match }) => {
                   <form onSubmit={submitHandler} className="mt-8 space-y-6" action="#" method="POST">
                     <div className="">
                       <div className='mb-2'>
+            <div className="w-full relative">
+<label class="absolute text-white right-3 top-1/2 -translate-y-1/2 " onClick = {handleShow} >{show?<HiEyeOff/>:<HiEye/>}</label>
                         <input
                           value={re_password}
                           onChange={(e) => setNewPassword(e.target.value)}
-                          type="password"
+                          type={show?'text':'password'}
+
                           required
                           class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                           placeholder="Contraseña"
                         />
                       </div>
+            </div>
                       <div className='mt-7'>
+
+            <div className="w-full relative">
+<label class="absolute text-white right-3 top-1/2 -translate-y-1/2 " onClick = {handleShow} >{show?<HiEyeOff/>:<HiEye/>}</label>
                         <input
                           value={re_new_password}
                           onChange={(e) => setre_new_password(e.target.value)}
-                          type="password"
+                          type={show?'text':'password'}
                           required
                           class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                           placeholder="Confirmar Contraseña"
                         />
+            </div>
                       </div>
                     </div>
                     <div className='items-center flex min-h-full justify-center'>

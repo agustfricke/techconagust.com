@@ -8,7 +8,7 @@ import Error from '../utils/Error';
 import Loader from '../utils/Loader';
 
 import logo from '../../media/logo.png';
-
+import { HiEyeOff, HiEye } from "react-icons/hi";
 
 
 const Login = () => {
@@ -19,6 +19,8 @@ const Login = () => {
 
   let history = useHistory();
 
+  const [show, setShow] = useState(false)
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -37,6 +39,11 @@ const Login = () => {
     history.push("/");
 
   }
+
+    const handleShow = () => {
+        setShow(!show)
+    }
+
 
   return (
     <>
@@ -73,14 +80,19 @@ const Login = () => {
                         />
                       </div>
                       <div className='mt-7'>
+              <div className="w-full relative">
+
+                        <label class="absolute text-white right-3 top-1/2 -translate-y-1/2 " onClick = {handleShow} >{show?<HiEyeOff/>:<HiEye/>}</label>
                         <input
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          type="password"
+                          type={show?'text':'password'}
                           required
                           class="bg-grey-2 w-full py-4 pl-10 pr-4 rounded-lg text-grey placeholder:font-mono outline-none "
                           placeholder="Contraseña"
                         />
+                      </div>
+              
                       </div>
                     </div>
                     <div className='items-center'>

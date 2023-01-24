@@ -18,8 +18,9 @@ const ResetPassword = () => {
   let history = useHistory();
 
   const [email, setEmail] = useState('')
-
+  const [exito,  setExito] = useState('')
   const dispatch = useDispatch()
+  
 
   const passwordRest = useSelector(state => state.passwordRest)
   const { error, loading, success } = passwordRest
@@ -27,13 +28,13 @@ const ResetPassword = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(Reset(email))
-    history.push('/login/')
+      setExito(`Verifica tu Correo de spam ${email}`)
   }
 
   return (
     <>
       {error && <Error>{error}</Error>}
-      {success && <Success>{`Verifica tu Correo de spam ${email}`}</Success>}
+      {exito && <Success>{exito}</Success>}
       {loading ?
         <Loader />
         : (

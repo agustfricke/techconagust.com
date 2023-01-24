@@ -20,7 +20,7 @@ def updateCurso(request, pk):
         curso.trailer = data['trailer']
         curso.save()
         serializer = CursoSerializer(curso, many=False)
-        return Response(serializer.data)  
+        return Response(serializer.data)
     else:
         return Response({'Error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -84,7 +84,7 @@ def uploadImageCurso(request):
     curso.save()
 
     return Response('Image was uploaded')
-    
+
 
 
 @api_view(['PUT'])
@@ -99,11 +99,11 @@ def updateCurso(request, pk):
         curso.trailer = data['trailer']
         curso.save()
         serializer = CursoSerializer(curso, many=False)
-        return Response(serializer.data)  
+        return Response(serializer.data)
     else:
         return Response({'Error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
 
-    
+
 
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
@@ -169,7 +169,7 @@ def updateEpisodio(request, pk):
         episodio.url = data['url']
         episodio.save()
         serializer = EpisodioSerializer(episodio, many=False)
-        return Response(serializer.data)  
+        return Response(serializer.data)
     else:
         return Response({'Error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
 

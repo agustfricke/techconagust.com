@@ -98,7 +98,6 @@ function App() {
                   <Route path='/login/' component={Login} />
                   <Route path='/register/' component={Register} />
                   <Route path='/activate/:uid/:token' component={Activation} />
-                  <Route path='/reset-password' component={ResetPassword} />
                   <Route path='/password/reset/confirm/:uid/:token/' component={ResetPasswordConfirm} />
                   <PrivateRoute path='/MiPerfil/' component={MiPerfil} />
                   <Route path='/reset-password' component={ResetPassword} />
