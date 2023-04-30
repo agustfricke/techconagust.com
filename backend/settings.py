@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'corsheaders',
     # My Apps
     'users',
     'cursos',
@@ -47,20 +46,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL=True
 
 CORS_ALLOWED_ORIGINS = [
     "https://techconagust.com",
     "http://127.0.0.1:3000"
 ]
-
-# CSRF_ALLOWED = [
-#     "http://127.0.0.1:3000"
-# ]
-
-# CSRF_ORIGINS = [
-#     "http://127.0.0.1:3000"
-# ]
 
 
 ROOT_URLCONF = 'backend.urls'
