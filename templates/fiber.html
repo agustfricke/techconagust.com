@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"
+/>
+
+<script>hljs.highlightAll();
+hljs.addPlugin(new CopyButtonPlugin());
+</script>
+
+<div class="container mx-auto px-[300px] mt-11">
+
+
+    <h1 class="text-3xl text-slate-200 text-center mb-11">Fiber CURD API</h1>
+
+    <p class="text-slate-200 text-xl mb-2">
+Hey hola a todos, espero que esten bien, en el video de hoy
+vamos a estar haciendo un crud api con el lenguaje Go utiizando el web
+framework Fiber con una base de datos postgres, para hacer
+este pequeno projecto es nesesario que tengan docker y go en su sistema
+    </p>
+
+    <p class="text-slate-200 text-xl mb-2">
+Lo primero seria tener una terminal, una vez que tengan la terminal vamos a crear una nueva carpeta 
+y meternos dentro de ella
+    </p>
+
+<pre class="">
+<code class="language-bash">mkdir fiber-crud-api
+cd fiber-crud-api
+</code>
+</pre>
+
+    <p class="text-slate-200 text-xl my-2">
+Ahora tendriamos que inicializar un modulo en go, poniendo el comando
+go mod init [url unica], que en mi caso va a ser la url del repositorio de 
+GitHub, asi que voy a poner mi repositorio, en tu caso deberias poner la url 
+de donde vas a poner este codigo, ten en cuenta que se pone un url unica, no 
+hace falta que sea una ruta de GitHub, en mi caso voy a poner
+github.com/agustfricke/fiber-crud-api
+    </p>
+
+<pre class="">
+<code class="language-bash">go mod init github.com/agustfricke/fiber-crud-api
+</code>
+</pre>
+
+    <p class="text-slate-200 text-xl my-2">
+Una vez que tenemos todo esto podemos empezar a instalar las dependencias,
+que en este caso vamos a instalar 4 dependencias, que son fiber, el web framework,
+gorm, un orm de go, godotenv, para manejar variables en entorno
+y por ultimo air, que es un hot reload de go, para que no tengamos que 
+compilar y correr el codigo cada vez que hagamos un cambio
+    </p>
+
+<pre class="">
+<code class="language-bash">go get go get github.com/gofiber/fiber/v2
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/postgres
+go get github.com/joho/godotenv
+curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s
+</code>
+</pre>
+
+
+    <p class="text-slate-200 text-xl my-2">
+Una vez instalado todo podemos crear un nuevo archivo que se va a llamar main.go
+    </p>
+
+<pre class="">
+<code class="language-bash">touch main.go
+</code>
+</pre>
+
+
+
+    <p class="text-slate-200 text-xl my-2">
+Aca le vamos a especificar que es el paquete main
+Y despues vamos a crear la funcion main y dentro de esta vamos a 
+poner que imprima por consola "Hello from go!"
+    </p>
+
+<pre class="">
+<code class="language-go">package main
+
+import "fmt"
+
+func main() {
+    fmt.Print("Hello from go!")
+}
+</code>
+</pre>
+
+    <p class="text-slate-200 text-xl my-2">
+Ahora podemos correr nuestro programa con air, para ver el hot reload
+
+Asi que abramos una terminal en la ruta raiz del proyecto
+    </p>
+
+
+<pre class="">
+<code class="language-bash">./bin/air main.go
+</code>
+</pre>
+
+<pre>
+<code class="language-go">package main
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/template/html/v2"
+	"techconagust.com/handlers"
+)
+
+func main() {
+
+    engine := html.New("./templates", ".html")
+
+	app := fiber.New(fiber.Config{
+		Views: engine, 
+        ViewsLayout: "layout/main", 
+	})
+
+    app.Static("/", "./public")
+
+	app.Get("/", handlers.HomePage)
+	app.Get("/fiber-crud", handlers.FiberCrud)
+
+	app.Listen(":3000")
+}
+</code>
+</pre>
+
+
+</div>
+
