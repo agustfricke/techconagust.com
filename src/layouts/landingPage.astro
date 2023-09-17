@@ -1,0 +1,31 @@
+---
+import "../styles/global.css";
+
+import "@fontsource/inter/variable.css";
+---
+
+
+<!DOCTYPE html>
+<html dir="ltr" lang="es">
+  <head>
+    <title>Tech con Agust</title>
+  </head>
+  <body
+    class="min-h-screen bg-gradient-to-b from-gray-900 via-[#1e293b] to-slate-900"
+  >
+    <div
+      class="relative before:pointer-events-none before:absolute before:inset-0 before:block before:h-full 
+      before:w-full before:bg-[url('/images/background.svg')] before:bg-cover before:bg-no-repeat before:opacity-5"
+    >
+      <aside id="grid-left" class="hidden" title="Site Navigation">
+        <div class="fixed left-0 top-0 z-30 h-screen w-screen bg-default">
+          <div class="fixed top-24 h-[calc(100%-96px)] w-full pb-16">
+          </div>
+        </div>
+      </aside>
+      <main id="content">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

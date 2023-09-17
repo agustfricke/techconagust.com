@@ -1,16 +1,8 @@
 ---
-
+import LandingPage from "../layouts/landingPage.astro";
+import Banner from "../components/landingPage/banner.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Tech con Agust</title>
-	</head>
-	<body>
-		<h1>Tech con Agust site</h1>
-	</body>
-</html>
+<LandingPage>
+  <Banner />
+</LandingPage>
