@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Navbar from "../components/navigation/navbar.astro";
 
 import "@fontsource/inter/variable.css";
 ---
@@ -17,6 +18,7 @@ import "@fontsource/inter/variable.css";
       class="relative before:pointer-events-none before:absolute before:inset-0 before:block before:h-full 
       before:w-full before:bg-[url('/images/background.svg')] before:bg-cover before:bg-no-repeat before:opacity-5"
     >
+    <Navbar/>
       <aside id="grid-left" class="hidden" title="Site Navigation">
         <div class="fixed left-0 top-0 z-30 h-screen w-screen bg-default">
           <div class="fixed top-24 h-[calc(100%-96px)] w-full pb-16">
