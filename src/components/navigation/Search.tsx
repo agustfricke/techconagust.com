@@ -53,15 +53,15 @@ export default function Search({ isLanding }: { isLanding: boolean }) {
     <>
       <button
         type="button"
-        aria-label="Search Create T3 App"
+        aria-label="Search"
         ref={searchButtonRef}
         onClick={onOpen}
         className={clsx(
           "flex w-full cursor-text items-center justify-between rounded-lg px-4 py-2 text-sm font-medium text-slate-800 !transition-colors !duration-300 dark:text-slate-100",
           {
-            "hover:bg-t3-purple/20 border border-gris-200/20 bg-gris-200/10 duration-300 hover:border-gris-200/50":
+            "border border-gris-200/20 bg-gris-200/10 duration-300 hover:border-gris-200/50":
               isLanding,
-            "dark:hover:bg-t3-purple/20 border bg-gris-200/50 duration-300 hover:bg-gris-200/75 dark:border-gris-200/20 dark:bg-gris-200/10 dark:text-slate-100 dark:hover:border-gris-200/50":
+            "border bg-gris-200/50 duration-300 hover:bg-gris-200/75 dark:border-gris-200/20 dark:bg-gris-200/10 dark:text-slate-100 dark:hover:border-gris-200/50":
               !isLanding,
           }
         )}
@@ -97,6 +97,8 @@ export default function Search({ isLanding }: { isLanding: boolean }) {
               apiKey={ALGOLIA.apiKey}
               transformItems={(items) => {
                 return items.map((item) => {
+                  // We transform the absolute URL into a relative URL to
+                  // work better on localhost, preview URLS.
                   const a = document.createElement("a");
                   a.href = item.url;
                   const hash = a.hash === "#overview" ? "" : a.hash;
