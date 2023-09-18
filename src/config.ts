@@ -32,10 +32,10 @@ export type KnownLanguageCode = keyof typeof KNOWN_LANGUAGES;
 export const ALGOLIA = {
   indexName: "techconagust.com",
   appId: "VLI6IWYN16",
-  apiKey: "aac39a63a90ca38ba2b3a935e10241ff",
+  apiKey: "3b5e1bfef294e04ae6072bc680c4a6b0",
 };
 
-export type OuterHeaders = "Go development" 
+export type OuterHeaders = "Go development";
 
 export interface SidebarItem<
   TCode extends KnownLanguageCode = KnownLanguageCode,
@@ -55,11 +55,13 @@ export const SIDEBAR: Sidebar = {
   en: {
     "Go development": [
       { text: "Go Htmx CRUD", link: "en/go-htmx-crud" },
+      { text: "Fiber REST API", link: "en/fiber-rest-api" },
     ],
   },
   es: {
     "Go development": [
       { text: "Go Htmx CRUD", link: "es/go-htmx-crud" },
+      { text: "Fiber REST API", link: "es/fiber-rest-api" },
     ],
   },
 };
