@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { Fragment } from "react";
 
 import { KNOWN_LANGUAGES, type KnownLanguageCode } from "../../config";
+import { getIsRtlFromLangCode } from "../../languages";
 
 interface LanguageSelectProps {
   language: KnownLanguageCode;
@@ -13,6 +14,8 @@ export default function LanguageSelect({ language }: LanguageSelectProps) {
     const [_1, _2, ...slug] = window.location.pathname.split("/");
     window.location.pathname = `/${code}/${slug.join("/")}`;
   };
+
+  const isRTL = getIsRtlFromLangCode(language);
 
   return (
     <div className="flex items-center gap-2">
@@ -42,7 +45,10 @@ export default function LanguageSelect({ language }: LanguageSelectProps) {
           >
             <Listbox.Options
               dir="ltr"
-              className="focus-none shadow-l t3-scrollbar absolute right-0 mt-1 max-h-60 w-fit overflow-auto rounded-lg border bg-default text-base focus:outline-none focus-visible:outline-none dark:border-gris-200/20 sm:text-sm"
+              className={clsx(
+                "focus-none shadow-l t3-scrollbar absolute right-0 mt-1 max-h-60 w-fit overflow-auto rounded-lg border bg-default text-base focus:outline-none focus-visible:outline-none dark:border-gris-200/20 sm:text-sm",
+                isRTL && "text-right",
+              )}
             >
               {Object.entries(KNOWN_LANGUAGES).map(([code, name]) => (
                 <Listbox.Option
@@ -60,7 +66,7 @@ export default function LanguageSelect({ language }: LanguageSelectProps) {
                       className={clsx(
                         "truncate",
                         selected && "font-medium",
-                        !selected && "font-normal"
+                        !selected && "font-normal",
                       )}
                     >
                       {name}

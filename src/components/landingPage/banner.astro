@@ -11,12 +11,56 @@
                 class="text-center text-4xl font-bold tracking-tight text-white sm:text-6xl 
                 sm:tracking-tight lg:text-[4rem] xl:text-[6rem] xl:tracking-tight 2xl:text-[6.5rem]"
               >
-                Read.Code.Learn
+                The best place to 
+                <span class="text-[hsl(200,100%,60%)]"> learn</span>
+                <span class="whitespace-nowrap text-[hsl(240,100%,70%)]">
+                  web dev </span
+                >in
+                <span class="text-[hsl(280,100%,60%)]">2023</span>
               </h1>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <script is:inline>
+      const command = document.querySelector("#command");
+      const commandText = document.querySelector("#command-text");
+      const copyIcon = document.querySelector("#copy-icon");
+      const checkIcon = document.querySelector("#check-icon");
+      let cooldown = false;
+
+      function toggleIcons() {
+        copyIcon.classList.toggle("hidden");
+        checkIcon.classList.toggle("hidden");
+      }
+
+      command.addEventListener("click", () => {
+        if (cooldown === false) {
+          cooldown = true;
+          navigator.clipboard.writeText(commandText.innerText);
+          toggleIcons();
+
+          setTimeout(() => {
+            toggleIcons();
+            cooldown = false;
+          }, 2000);
+        }
+      });
+    </script>
   </div>
+
+  <style>
+    #check-icon {
+      stroke-dasharray: 450;
+      stroke-dashoffset: -30;
+      animation: draw 2s linear normal;
+    }
+
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 200;
+      }
+    }
+  </style>
 </div>

@@ -38,7 +38,7 @@ export default function Search({ isLanding }: { isLanding: boolean }) {
       setIsOpen(true);
       setInitialQuery(e.key);
     },
-    [setIsOpen, setInitialQuery]
+    [setIsOpen, setInitialQuery],
   );
 
   useDocSearchKeyboardEvents({
@@ -53,28 +53,24 @@ export default function Search({ isLanding }: { isLanding: boolean }) {
     <>
       <button
         type="button"
-        aria-label="Search"
+        aria-label="Search Create T3 App"
         ref={searchButtonRef}
         onClick={onOpen}
         className={clsx(
           "flex w-full cursor-text items-center justify-between rounded-lg px-4 py-2 text-sm font-medium text-slate-800 !transition-colors !duration-300 dark:text-slate-100",
           {
-            "border border-gris-200/20 bg-gris-200/10 duration-300 hover:border-gris-200/50":
+            "hover:bg-t3-purple/20 border border-gris-200/20 bg-gris-200/10 duration-300 hover:border-gris-200/50":
               isLanding,
-            "border bg-gris-200/50 duration-300 hover:bg-gris-200/75 dark:border-gris-200/20 dark:bg-gris-200/10 dark:text-slate-100 dark:hover:border-gris-200/50":
+            "dark:hover:bg-t3-purple/20 border bg-gris-200/50 duration-300 hover:bg-gris-200/75 dark:border-gris-200/20 dark:bg-gris-200/10 dark:text-slate-100 dark:hover:border-gris-200/50":
               !isLanding,
-          }
+          },
         )}
       >
         <div className="flex items-center justify-center gap-1 lg:gap-3">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="text-white w-5 h-5"
-            height="1em"
-            viewBox="0 0 512 512"
-          >
-            <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-          </svg>
+<svg xmlns="http://www.w3.org/2000/svg" 
+className="text-white w-5 h-5"
+height="1em" viewBox="0 0 512 512">
+<path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
           <span>Search</span>
         </div>
 
@@ -110,7 +106,7 @@ export default function Search({ isLanding }: { isLanding: boolean }) {
               }}
             />
           </div>,
-          document.body
+          document.body,
         )}
     </>
   );

@@ -1,6 +1,6 @@
 export const SITE = {
   title: "Tech con Agust",
-  description: "Tech con Agust site",
+  description: "The best way to start a full-stack, typesafe Next.js app.",
   defaultLanguage: "en_US",
 };
 
@@ -35,7 +35,7 @@ export const ALGOLIA = {
   apiKey: "aac39a63a90ca38ba2b3a935e10241ff",
 };
 
-export type OuterHeaders = "Go development";
+export type OuterHeaders = "Go development" 
 
 export interface SidebarItem<
   TCode extends KnownLanguageCode = KnownLanguageCode,
@@ -53,10 +53,14 @@ export type Sidebar = {
 };
 export const SIDEBAR: Sidebar = {
   en: {
-    "Go development": [{ text: "Go Htmx CRUD", link: "en/go-htmx-crud" }],
+    "Go development": [
+      { text: "Go Htmx CRUD", link: "en/go-htmx-crud" },
+    ],
   },
   es: {
-    "Go development": [{ text: "Go Htmx CRUD", link: "es/go-htmx-crud" }],
+    "Go development": [
+      { text: "Go Htmx CRUD", link: "es/go-htmx-crud" },
+    ],
   },
 };
 
