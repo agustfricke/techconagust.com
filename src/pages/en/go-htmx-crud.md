@@ -385,3 +385,250 @@ touch ~/go-htmx-crud/templates/edit.html
     </div>
 </form>
 ```
+
+### Renderizar html
+
+Para renderizar el archivo index.html vamos a crear la carpeta handlers y dentro de ella vamos a crear un archivo task.go
+
+```bash
+mkdir ~/go-htmx-crud/handlers
+touch ~/go-htmx-crud/handlers/task.go
+```
+
+#### ~/go-htmx-crud/handlers/task.go
+
+```go
+package handlers
+
+import (
+	"html/template"
+	"net/http"
+)
+
+
+func GetTasks(w http.ResponseWriter, r *http.Request) {
+	    tmpl := template.Must(template.ParseFiles("templates/index.html"))
+	    err := tmpl.Execute(w, nil)
+	}
+
+```
+
+Importaciones: El código comienza con dos importaciones de paquetes necesarios para el programa:
+
+"html/template": Este paquete se utiliza para trabajar con plantillas HTML.
+"net/http": Este paquete proporciona funcionalidad para trabajar con el protocolo HTTP.
+Función GetTasks: Esta función es un controlador HTTP que se encarga de manejar las solicitudes HTTP entrantes. Toma dos argumentos:
+
+w http.ResponseWriter: Un objeto que se utiliza para escribir la respuesta HTTP que se enviará al cliente.
+r \*http.Request: Un objeto que representa la solicitud HTTP entrante del cliente.
+Plantilla HTML: La función crea una plantilla HTML utilizando template.Must(template.ParseFiles("templates/index.html")). Esto carga una plantilla HTML desde un archivo llamado "index.html" ubicado en el directorio "templates". La plantilla se almacena en la variable tmpl. La función template.Must se utiliza para manejar cualquier error que ocurra durante la carga de la plantilla. Si hay un error, el programa se detendrá.
+
+Ejecución de la Plantilla: Luego, intenta ejecutar la plantilla con tmpl.Execute(w, nil).
+Aquí, w es el objeto que representa la respuesta HTTP.
+
+Creemos la ruta para esta funcion en main.go
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/agustfricke/go-htmx-crud/database"
+    // Impotamos el paquete handlers
+	"github.com/agustfricke/go-htmx-crud/handlers"
+)
+
+
+func main() {
+
+    database.ConnectDB()
+
+    fs := http.FileServer(http.Dir("public"))
+    http.Handle("/public/", http.StripPrefix("/public/", fs))
+
+    // Llamamos a la funcion en la ruta raiz
+    http.HandleFunc("/", handlers.GetTasks)
+
+	  fmt.Println("Runnning in port 8000")
+	  log.Fatal(http.ListenAndServe(":8000", nil))
+}
+```
+
+Ejecutemos el codigo
+
+```bash
+go run ~/go-htmx-crud/main.go
+```
+
+Ahora si vas a http://127.0.0.1:8000 deberias ver el archivo index.html
+
+### Crear nuevas tareas
+
+#### ~/go-htmx-crud/handlers/task.go
+
+```go
+func CreateTask(w http.ResponseWriter, r *http.Request) {
+        // Extraemos el valor "name" del forumlario
+		name := r.PostFormValue("name")
+        // Delcaramos task que es de tipo models.Task
+        var task models.Task
+        // Creamos instancia de la base de datos para hacer operaciones
+        db := database.DB
+        // Se crea una nueva instancia de Task y se le asigna el valor del campo "name" que se extrajo del formulario.
+        task = models.Task{Name: name}
+        // Creamos la nueva tarea
+        db.Create(&task)
+        // Retornamos item.html con la nueva tarea
+	    tmpl := template.Must(template.ParseFiles("templates/item.html"))
+	    tmpl.Execute(w, task)
+	}
+```
+
+#### ~/go-htmx-crud/templates/item.html
+
+```html
+<div>
+    <ul id="task-list">
+        <li>{{ .Name }}</li>
+    </ul>
+    <button>Edit</button>
+    <button>
+        <span>Delete</span>
+        <span class="spinner">Loading...</span>
+    </button>
+</div>
+```
+
+Creemos la ruta para crear tareas
+
+#### ~/go-htmx-crud/main.go
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/agustfricke/go-htmx-crud/database"
+	"github.com/agustfricke/go-htmx-crud/handlers"
+)
+
+
+func main() {
+
+    database.ConnectDB()
+
+    fs := http.FileServer(http.Dir("public"))
+    http.Handle("/public/", http.StripPrefix("/public/", fs))
+
+    http.HandleFunc("/", handlers.GetTasks)
+    // Llamamos a la funcion en la ruta "/add"
+    http.HandleFunc("/add", handlers.CreateTask)
+
+	  fmt.Println("Runnning in port 8000")
+	  log.Fatal(http.ListenAndServe(":8000", nil))
+}
+```
+
+#### ~/go-htmx-crud/templates/index.html
+
+```html
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="public/htmx.min.js"></script>
+        <link rel="stylesheet" href="public/main.css" />
+        <title>HTMX & Go</title>
+    </head>
+    <body>
+        <form
+            hx-post="/add"
+            hx-target="#task-list"
+            hx-swap="beforeend"
+            hx-indicator="#spinner"
+        >
+            <div>
+                <input type="text" placeholder="Name" />
+                <button>
+                    <span>Create</span>
+                    <span id="spinner" class="spinner">Loading...</span>
+                </button>
+            </div>
+        </form>
+        <div>
+            <ul id="task-list">
+                <li>Task name</li>
+            </ul>
+            <button>Edit</button>
+            <button>
+                <span>Delete</span>
+                <span id="spinner" class="spinner">Loading...</span>
+            </button>
+        </div>
+    </body>
+</html>
+```
+
+Le ponemos hx-post con la ruta "/add" para que haga una peticion post a la ruta "/add" Ponemos un hx-target para que retorne el item.html en el elemento con el id de "task-list", se lo vamos a poner al <ul> hx-swap con beforeend para que inserte la respuesta antes del elemento objetivo hx-indicator va a indicar que el elemento con el id de "spinner" se va a mostrar mientras la peticion este cargando
+
+Ahora podemos volver a compilar el codigo
+
+```bash
+go run ~/go-htmx-crud/main.go
+```
+
+Ahora si vas a http://127.0.0.1:8000 podras crear nuevas tareas y este va a retornar el item.html como la primera tarea.
+
+### Listar las tareas
+
+#### ~/go-htmx-crud/handlers/task.go
+
+```go
+func GetTasks(w http.ResponseWriter, r *http.Request) {
+        // Instancia de la base de datos
+        db := database.DB
+        // Declaramos tasks que es de tipo slice de models.Tasks
+	    var tasks []models.Task
+        // Encontramos todas las tareas
+	    db.Find(&tasks)
+
+	    tmpl := template.Must(template.ParseFiles("templates/index.html"))
+        // Pasamos las tareas al index.html
+	    tmpl.Execute(w, tasks)
+	}
+```
+
+Ahora mostremos todas las tareas
+
+#### ~/go-htmx-crud/templates/index.html
+
+```html
+<div>
+    {{ range . }}
+    <ul id="task-list">
+        <li>{{ .Name }}</li>
+    </ul>
+    <button>Edit</button>
+    <button>
+        <span>Delete</span>
+        <span id="spinner" class="spinner">Loading...</span>
+    </button>
+    {{ .end }}
+</div>
+```
+
+Volvamos a compilar el codigo para ver los cambios
+
+```bash
+go run ~/go-htmx-crud/main.go
+```
+
+Deberias ver la lista de tareas en http://127.0.0.1:8000
