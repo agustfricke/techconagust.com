@@ -5,15 +5,11 @@ layout: ../../layouts/docs.astro
 lang: en
 ---
 
-<div class="embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/K5Zym6w91Nc" title="The best stack for your next project" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
 ## Nuestras herramientas
 
 En este tutorial vamos a estar creando una app con [**Go**](https://go.dev/), [**htmx**](https://go.dev/)
-[**Tailwind CSS**](https://tailwindcss.com/) y [**PostgreSQL**](https://www.postgresql.org/) junto con
-[**Docker**](https://www.docker.com/). Vamos a hacer un simple CRUD (crear, leer, actualizar y destruir).
+[**Tailwind CSS**](https://tailwindcss.com/) y [**Postgres**](https://www.postgresql.org/) junto con
+[**Docker**](https://www.docker.com/) para hacer un simple CRUD (crear, leer, actualizar y destruir).
 
 ## Configuracion del proyecto
 
@@ -28,8 +24,9 @@ cd ~/go-htmx-crud
 
 Una vez dentro de la carpeta vamos a crear un nuevo módulo con Go,
 los módulos se utilizan para administrar las dependencias de un proyecto y
-permiten organizar y versionar las dependencias de manera efectiva, lo que facilita la
-colaboración en proyectos y garantiza que el código sea reproducible en diferentes entornos.
+permiten organizar las dependencias de manera efectiva, lo que facilita la
+colaboración en proyectos y garantiza que el código sea reproducible en
+diferentes entornos.
 
 Para crear un nuevo modulo con Go debemos poner el comando **go mod init nombre-de-modulo**,
 donde esta **nombre-del-modulo** por lo general se le pone la url de un repositorio remoto.
@@ -52,7 +49,7 @@ go get -u gorm.io/gorm
 go get -u gorm.io/driver/postgres
 ```
 
-## Setup Postgres con Docker y Go
+## Configurar Postgres con Docker y Go
 
 Creemos una nueva base de datos Postgres con Docker con el comando
 
@@ -73,8 +70,7 @@ DB_PASSWORD=password
 DB_NAME=super_db
 ```
 
-Ahora creemos vamos a crear una funcion para leer las credenciales del archivo .env,
-vamos a crear una carpeta llamada config
+Ahora vamos a crear una funcion para leer las credenciales del archivo .env, para ello vamos a crear una carpeta llamada config
 y dentro de config vamos a crear un archivo llamado config.go
 
 ```bash
@@ -141,7 +137,7 @@ touch ~/go-htmx-crud/database/connect.go
 
 En database.go vamos a declarar una variable global llamada DB que es un puntero a un objeto gorm.DB,
 que vamos a estar utilizando para mantener una instancia de la base de datos y nos va a permitir realizar
-operaciones de base de datos en toda la aplicación
+operaciones de base de datos en toda la aplicación.
 
 #### ~/go-htmx-crud/database/database.go
 
@@ -153,7 +149,7 @@ import "gorm.io/gorm"
 var DB *gorm.DB
 ```
 
-El archivo connect.go lo vamos a utilizar para conectarnos a la base de datos
+El archivo connect.go lo vamos a utilizar para conectarnos a la base de datos.
 
 #### ~/go-htmx-crud/database/connect.go
 
@@ -191,7 +187,7 @@ func ConnectDB() {
 }
 ```
 
-En la funcion **ConnectDB** estamos conectadonos a la base de datos usando la variable **dsn**, obteniendo las credenciales
+En la funcion **ConnectDB** nos estamos conectado a la base de datos usando la variable **dsn**, obteniendo las credenciales
 gracias a la funcion **Config()** y luego la migramos con el modelo Task.
 
 Ahora vamos a crear el arhivo main.go, que es el punto de entrada donde todo nuestro codigo se va a ejecutar,
@@ -242,7 +238,7 @@ Runnning in port 8000
 
 ### Archivos estaticos
 
-Ahora vamos a crear la carpeta **public**, esta va a mantener los archivos estatic como el javascript y el css.
+Ahora vamos a crear la carpeta **public**, esta va a mantener los archivos estatics (JavaScript y CSS)
 
 ```bash
 mkdir ~/go-htmx-crud/public
@@ -296,7 +292,7 @@ npx tailwindcss -i ./public/input.css -o ./public/output.css --watch
 
 ### Home page
 
-Creemos el home page
+Creemos el home page.
 
 ```bash
 mkdir ~/go-htmx-crud/templates/index.html
@@ -408,7 +404,7 @@ mkdir ~/go-htmx-crud/templates/index.html
 
 ## Crear tareas
 
-Para crear nuevas tareas debemos crear el archivo **handlers.go**
+Para crear nuevas tareas debemos crear el archivo **handlers.go**.
 
 ```bash
 mkdir ~/go-htmx-crud/handlers
@@ -416,8 +412,8 @@ touch ~/go-htmx-crud/handlers/handlers.go
 ```
 
 Aqui vamos a definir el paquete handlers, la funcion CreateTask va a tener un **time.Sleep** que va a relentizar
-la peticion 3 segundos, despues agarramos el valor **name** desde el formulario, creamos la tarea si
-el campo name es diferente a un string vacio, si es exitosio vamos a retornar **item.html**, si el string esta vacio
+la peticion 3 segundos, para poder ver el spinner, despues agarramos el valor **name** desde el formulario, creamos la tarea si
+el campo name es diferente a un string vacio, si es exitosio vamos a retornar **item.html** con la tarea recien creada, si el string esta vacio
 vamos a retornar error.html para indicar que no se puede crear una tarea sin nombre.
 
 #### ~/go-htmx-crud/handlers/handler.go
@@ -436,7 +432,7 @@ import (
 )
 
 func CreateTask(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(1 * time.Second)
+	time.Sleep(3 * time.Second)
 	name := r.PostFormValue("name")
 
     var task models.Task
@@ -453,7 +449,8 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 	    }
     } else {
 	    tmpl := template.Must(template.ParseFiles("templates/error.html"))
-	    err :=  tmpl.Execute(w, nil)
+        error := "No se puede crear una tarea vacia"
+	    err :=  tmpl.Execute(w, error)
 	    if err != nil {
 		    http.Error(w, err.Error(), http.StatusInternalServerError)
 		    return
@@ -487,7 +484,7 @@ func GetTasks(w http.ResponseWriter, r *http.Request) {
 
 ## Routes
 
-Creemos las rutas para crear y obtener las tareas
+Creemos las rutas para crear y obtener las tareas.
 
 ```go
 package main
@@ -529,19 +526,19 @@ touch ~/go-htmx-crud/templates/error.html
 #### ~/go-htmx-crud/templates/item.html
 
 ```html
-<div class="text-slate-200" id="item-{{ .Task.ID }}">
+<div class="text-slate-200" id="item-{{ .ID }}">
     <div class="flex justify-center">
         <div
             class="w-[300px] mb-2 border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700"
         >
             <div class="flex flex-col items-center py-2">
                 <span class="font-poppis text-gray-500 dark:text-gray-400">
-                    {{ .Task.Name }} - {{ .Task.ID }}
+                    {{ .Name }} - {{ .ID }}
                 </span>
                 <div class="flex jusitfy-between mt-2">
                     <button
-                        hx-get="/edit/form?name={{ .Task.Name }}&ID={{ .Task.ID }}"
-                        hx-target="#item-{{ .Task.ID }}"
+                        hx-get="/edit/form?name={{ .Name }}&ID={{ .ID }}"
+                        hx-target="#item-{{ .ID }}"
                         class="mr-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
                     >
                         Edit
@@ -549,17 +546,17 @@ touch ~/go-htmx-crud/templates/error.html
 
                     <div class="flex justify-between">
                         <button
-                            hx-delete="/delete/{{ .Task.ID }}"
+                            hx-delete="/delete/{{ .ID }}"
                             hx-swap="delete"
-                            hx-target="#item-{{ .Task.ID }}"
-                            hx-indicator="#spinner-delete-{{ .Task.ID }}"
+                            hx-target="#item-{{ .ID }}"
+                            hx-indicator="#spinner-delete-{{ .ID }}"
                             class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
                         >
                             Delete
 
                             <div
                                 role="status"
-                                id="spinner-delete-{{ .Task.ID }}"
+                                id="spinner-delete-{{ .ID }}"
                                 class="spinner"
                             >
                                 <svg
@@ -606,9 +603,7 @@ touch ~/go-htmx-crud/templates/error.html
         />
     </svg>
     <span class="sr-only">Info</span>
-    <div class="ml-3 text-sm font-medium">
-        No se puede crear una tarea sin nombre!
-    </div>
+    <div class="ml-3 text-sm font-medium">{{ .error }}</div>
     <button
         hx-get=""
         hx-swap="delete"
@@ -790,7 +785,7 @@ go run ~/go-htmx-crud/main.go
 
 ## Editar tareas
 
-Creemos 2 nuevas funciones, la primera para obtener el formulario y la segunda para hacer el put request en si
+Creemos 2 nuevas funciones, la primera para obtener el formulario y la segunda para hacer el put request en si.
 
 ```go
 func FormEditTask(w http.ResponseWriter, r *http.Request) {
@@ -844,7 +839,7 @@ func EditTask(w http.ResponseWriter, r *http.Request) {
 	}
 ```
 
-Perfecto ahora creemos las routas
+Perfecto ahora creemos las routas.
 
 #### ~/go-htmx-crud/main.go
 
@@ -878,7 +873,7 @@ func main() {
 }
 ```
 
-Ahora creemos el archivos edit.html que es el formuilario para editar las tareas
+Ahora creemos el archivos edit.html que es el formuilario para editar las tareas.
 
 ```bash
 touch ~/go-htmx-crud/templates/edit.html
