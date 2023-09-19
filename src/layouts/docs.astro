@@ -72,12 +72,17 @@ const githubEditUrl = `${CONFIG.GITHUB_EDIT_URL}/${currentFile}`;
       <Navbar />
     </div>
     <main
-      class="grid w-full max-w-7xl flex-1 grid-cols-1 gap-4 md:grid-cols-[250px_auto] lg:grid-cols-[250px_auto_250px]"
+      class="grid w-full max-w-7xl flex-1 grid-cols-1 gap-4 
+      md:grid-cols-[250px_auto] lg:grid-cols-[250px_auto_250px]"
     >
       <nav
         id="grid-left"
         title="Site Navigation"
-        class="t3-scrollbar sticky top-20 col-span-1 hidden h-auto max-h-[calc(100vh-80px)] w-full flex-col justify-start overflow-y-auto bg-default pt-4 transition-colors duration-300 md:top-24 md:flex md:max-h-[calc(100vh-96px)] md:pt-0 md:[margin-inline-start:16px]"
+        class="t3-scrollbar sticky top-20 col-span-1 
+        hidden h-auto max-h-[calc(100vh-80px)] w-full 
+        flex-col justify-start overflow-y-auto bg-default pt-4 
+        transition-colors duration-300 md:top-24 md:flex md:max-h-[calc(100vh-96px)] 
+        md:pt-0 md:[margin-inline-start:16px]"
       >
         <LeftSidebar frontmatter={frontmatter} currentPage={currentPage} />
       </nav>
@@ -99,7 +104,9 @@ const githubEditUrl = `${CONFIG.GITHUB_EDIT_URL}/${currentFile}`;
           id="grid-right"
           title="Table of Contents"
           dir="ltr"
-          class="t3-scrollbar sticky top-[100px] col-span-1 hidden h-auto max-h-[calc(100vh-100px)] w-full [padding-inline-end:16px] lg:mb-12 lg:flex lg:flex-col lg:justify-start"
+          class="t3-scrollbar sticky top-[100px] col-span-1 
+          hidden h-auto max-h-[calc(100vh-100px)] w-full [padding-inline-end:16px] 
+          lg:mb-12 lg:flex lg:flex-col lg:justify-start"
         >
           <RightSidebar
             headings={headings}
