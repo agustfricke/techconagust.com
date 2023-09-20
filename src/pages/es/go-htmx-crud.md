@@ -2,25 +2,34 @@
 title: GO HTMX CRUD
 description: CRUD app con HTMX y Go!
 layout: ../../layouts/docs.astro
-lang: en
+lang: es
 ---
 
-## Our Tools
+## Nuestras herramientas
 
-In this tutorial, we will be creating an app using [**Go**](https://go.dev/), [**htmx**](https://go.dev/), and [**Postgres**](https://www.postgresql.org/) along with [**Docker**](https://www.docker.com/) to build a simple CRUD (Create, Read, Update, Delete) application.
+En este tutorial vamos a estar creando una app con [**Go**](https://go.dev/), [**htmx**](https://go.dev/)
+y [**Postgres**](https://www.postgresql.org/) junto con [**Docker**](https://www.docker.com/) para hacer un
+simple CRUD (crear, leer, actualizar y destruir).
 
-## Project Setup
+## Configuracion del proyecto
 
-In a new terminal, we will create a new directory called **go-htmx-crud** using the **mkdir** command and navigate into it using the **cd** command.
+En una nueva terminal vamos a crear un nuevo directorio llamado **go-htmx-crud**
+con el comando **mkdir** y nos vamos a meter dentro de el
+con el comando **cd**.
 
 ```bash
 mkdir ~/go-htmx-crud
 cd ~/go-htmx-crud
 ```
 
-Once inside the folder, we will create a new module with Go. Modules are used to manage project dependencies and allow for effective organization of dependencies, making it easier to collaborate on projects and ensuring code reproducibility in different environments.
+Una vez dentro de la carpeta vamos a crear un nuevo módulo con Go,
+los módulos se utilizan para administrar las dependencias de un proyecto y
+permiten organizar las dependencias de manera efectiva, lo que facilita la
+colaboración en proyectos y garantiza que el código sea reproducible en
+diferentes entornos.
 
-To create a new module with Go, you should use the command **go mod init module-name**, where **module-name** typically takes the URL of a remote repository.
+Para crear un nuevo modulo con Go debemos poner el comando **go mod init nombre-de-modulo**,
+donde esta **nombre-del-modulo** por lo general se le pone la url de un repositorio remoto.
 
 #### ~/go-htmx-crud
 
@@ -28,9 +37,11 @@ To create a new module with Go, you should use the command **go mod init module-
 go mod init github.com/agustfricke/go-htmx-crud
 ```
 
-## Installing Dependencies
+## Instalar las dependencias
 
-Once the module is created, we will install the dependencies, which will be [**godotenv**](https://github.com/joho/godotenv), [**GORM**](https://gorm.io/docs/), and the [**Postgres**](https://gorm.io/docs/connecting_to_the_database.html#PostgreSQL) driver. To do this, execute the following commands in your shell:
+Una vez creado el módulo, vamos a instalar las dependecias, que van a ser [**godotenv**](https://github.com/joho/godotenv),
+[**GORM**](https://gorm.io/docs/) y el driver de [**Postgres**](https://gorm.io/docs/connecting_to_the_database.html#PostgreSQL),
+asi que vamos a poner los siguientes comandos en nuestra shell:
 
 #### ~/go-htmx-crud
 
@@ -40,15 +51,16 @@ go get -u gorm.io/gorm
 go get -u gorm.io/driver/postgres
 ```
 
-## Setting Up Postgres with Docker and Go
+## Configurar Postgres con Docker y Go
 
-Let's create a new Postgres database with Docker using the following command:
+Creemos una nueva base de datos Postgres con Docker con el comando:
 
 ```bash
 sudo docker run --name postgres_db -e POSTGRES_USER=username -e POSTGRES_PASSWORD=password -e POSTGRES_DB=super_db -p 5432:5432 -d postgres
 ```
 
-Once the database is created, we can generate a new file called **.env** in the root of our project, which will contain the database credentials.
+Una vez creada la base de datos, podemos generar un nuevo archivo llamado **.env** en la raíz
+de nuestro proyecto, el cual contendrá las credenciales de la base de datos.
 
 #### ~/go-htmx-crud/.env
 
@@ -60,7 +72,8 @@ DB_PASSWORD=password
 DB_NAME=super_db
 ```
 
-Now, let's create a function to read the credentials from the **.env** file. To do this, we will create a folder called **config**, and inside the **config** folder, we'll create a file called **config.go**.
+Ahora vamos a crear una función para leer las credenciales del archivo **.env**.
+Para ello, crearemos una carpeta llamada **config** y dentro de **config** vamos a crear un archivo llamado **config.go**.
 
 ```bash
 mkdir ~/go-htmx-crud/config
@@ -88,9 +101,12 @@ func Config(key string) string {
 }
 ```
 
-This function takes a key as a parameter and returns the associated value for that key. For example, if we pass **DB_HOST** as the key, it will return **localhost**.
+Esta función recibe como parámetro una clave y retorna el valor asociado a esa clave.
+Por ejemplo, si pasamos **DB_HOST** como clave, nos devolverá **localhost**.
 
-Great, now let's create a folder called **models**, and inside the **models** folder, we'll create a file called **task.go**. We do this to define the structure of the entity called **Task**, which we will use to interact with the database.
+Perfecto, ahora vamos a crear una carpeta llamada **models** y dentro de **models** vamos a crear un archivo
+llamado **task.go**. Hacemos esto para definir la estructura de la entidad llamada **Task**, que utilizaremos
+para interactuar con la base de datos.
 
 ```bash
 mkdir ~/go-htmx-crud/models
@@ -106,13 +122,16 @@ import "gorm.io/gorm"
 
 type Task struct {
 	gorm.Model
-	Name string
+	Name    string
 }
 ```
 
-Here, we define the **Task** structure, which includes **gorm.Model**. This provides us with additional fields such as **ID, CreatedAt, UpdatedAt, and DeletedAt**. Then, we specify that each task will have a **Name** field of type string.
+Aquí definimos la estructura **Task**, que incluye gorm.Model.
+Esto nos proporcionará campos adicionales como **ID, CreatedAt, UpdatedAt y DeletedAt**.
+Luego, especificamos que cada tarea tendrá un campo **Name** de tipo string.
 
-Perfect, now let's create a folder called **database**. Inside the **database** folder, we'll create two files: **database.go** and **connect.go**.
+Perfecto, ahora vamos a crear una carpeta llamada **database**.
+Dentro de **database**, vamos a crear dos archivos: **database.go** y **connect.go**.
 
 ```bash
 mkdir ~/go-htmx-crud/database
@@ -120,7 +139,9 @@ touch ~/go-htmx-crud/database/database.go
 touch ~/go-htmx-crud/database/connect.go
 ```
 
-In **database.go**, we will declare a global variable named **DB**, which will be a pointer to a gorm.DB object. We will use this variable to maintain a database instance throughout the application, allowing us to perform database operations throughout the application.
+En **database.go**, declararemos una variable global llamada **DB**, que será un puntero a un objeto gorm.DB.
+Utilizaremos esta variable para mantener una instancia de la base de datos y nos permitirá realizar operaciones
+de base de datos en toda la aplicación.
 
 #### ~/go-htmx-crud/database/database.go
 
@@ -132,7 +153,7 @@ import "gorm.io/gorm"
 var DB *gorm.DB
 ```
 
-We will use the **connect.go** file to establish a connection to the database.
+El archivo **connect.go** lo utilizaremos para establecer la conexión con la base de datos.
 
 #### ~/go-htmx-crud/database/connect.go
 
@@ -170,9 +191,12 @@ func ConnectDB() {
 }
 ```
 
-In the **ConnectDB** function, we connect to the database using the **dsn** variable, obtaining the credentials through the **Config** function, and then perform migrations with the **Task model**.
+En la función **ConnectDB**, nos conectamos a la base de datos utilizando la variable dsn, obteniendo las
+credenciales gracias a la función **Config**, y luego realizamos las migraciones con el **modelo Task**.
 
-Now, let's create the **main.go** file, which will be the entry point where all our code will run. We will connect to the database by calling the **ConnectDB()** function, set up static files, and create a server on **port 8000** using the **net/http** package.
+Ahora, vamos a crear el archivo **main.go**, que será el punto de entrada donde se ejecutará todo nuestro código.
+Nos conectaremos a la base de datos llamando a la función **ConnectDB()**, configuraremos los archivos estáticos y crearemos
+un servidor en el **puerto 8000** utilizando el paquete **net/http**.
 
 ```bash
 touch ~/go-htmx-crud/main.go
@@ -197,45 +221,42 @@ func main() {
     fs := http.FileServer(http.Dir("public"))
     http.Handle("/public/", http.StripPrefix("/public/", fs))
 
-	fmt.Println("Running on port 8000")
+	fmt.Println("Runnning in port 8000")
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 ```
 
-Now, you can run your Go code with the following command:
+Ahora podemos ejecutar nuestro código en Go con el siguiente comando:
 
 ```bash
 go run ~/go-htmx-crud/main.go
 ```
 
-You should see the following output:
+Deberías ver el siguiente resultado
 
 ```bash
 Database Migrated
 Connection Opened to Database
-Running on port 8000
+Runnning in port 8000
 ```
 
-Your application is now running on port 8000.
+## Archivos estaticos
 
-## Static Files
-
-Now, let's create the **public** folder. This folder will contain static files (JavaScript and CSS).
+Ahora vamos a crear la carpeta **public**, esta va a contener los archivos estáticos (JavaScript y CSS).
 
 ```bash
-mkdir ~/go-htmx-crud/public
-touch ~/go-htmx-crud/public/htmx.min.js
+mkdir ~/go-htmx-crud/public/htmx.min.js
 touch ~/go-htmx-crud/public/main.js
 touch ~/go-htmx-crud/public/styles.css
 ```
 
-With this new directory, we are going to install **htmx**.
+Una vez con este nuevo directorio vamos a instalar **htmx**.
 
 ```bash
 wget https://unpkg.com/htmx.org@1.9.5/dist/htmx.min.js -P ~/go-htmx-crud/public/
 ```
 
-Now, let's set up the CSS for our app.
+Ahora pongamos el CSS de nuesta app.
 
 #### ~/go-htmx-crud/public/index.css
 
@@ -314,9 +335,9 @@ li {
 }
 ```
 
-Now, open a new shell and enter the following command:
+Ahora abre una nueva shell y pon el siguiente comando:
 
-## Home Page
+## Pagina Home
 
 ```bash
 mkdir ~/go-htmx-crud/templates/home.html
@@ -355,17 +376,17 @@ mkdir ~/go-htmx-crud/templates/home.html
 </html>
 ```
 
-This is the HTML template for the home page of your Go HTMX CRUD application.
+## Obtener todas las tareas
 
-## Get All Tasks
-
-To handle HTTP requests, we will create a new file called **task.go** located within the **handlers** directory.
+Para manejar las peticiones HTTP, vamos a crear un nuevo archivo llamado **task.go** que estará ubicado
+dentro del directorio **handlers**
 
 ```bash
 mkdir ~/go-htmx-crud/handlers/task.go
 ```
 
-We import the **html/template** and **net/http** packages to work with HTTP and HTML. Additionally, we import the previously created packages (**database** and **models**).
+Importamos los paquetes **html/template** y **net/http** para poder trabajar con HTTP y HTML.
+Además, importamos los paquetes previamente creados (**database** y **models**).
 
 #### ~/go-htmx-crud/handlers/task.go
 
@@ -385,7 +406,7 @@ func GetTasks(w http.ResponseWriter, r *http.Request) {
     var tasks []models.Task
 
     if err := db.Find(&tasks).Error; err != nil {
-        http.Error(w, "Error getting tasks from the database", http.StatusInternalServerError)
+        http.Error(w, "Error getting tasks from database", http.StatusInternalServerError)
         return
     }
 
@@ -397,9 +418,14 @@ func GetTasks(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-Basically, what we are doing here is creating the **GetTasks** function that takes **w http.ResponseWriter** and **r http.Request** as parameters to handle HTTP requests. Then, we create an instance of the database named **db** and define the **tasks** variable as type **[]models.Task**. After that, we check for any errors when querying the database, and finally, we specify that we will render the **home.html** file located in the templates directory. We pass the **tasks** variable to this file containing all the tasks. Finally, we check for any errors in rendering the template; if there is an error, we return an **Internal Server Error**.
+Básicamente, lo que estamos haciendo aquí es crear la función **GetTasks** que tiene como parámetros **w http.ResponseWriter
+y **r http.Request** para poder enviar peticiones **HTTP**. Luego creamos una instancia de la base de datos llamada **db**
+y creamos la variable **tasks**, que es de tipo **[]models.Task**. Después, verificamos que no haya ningún error al hacer
+la consulta a la base de datos y, por último, definimos que vamos a renderizar el archivo **home.html** que
+está dentro del directorio templates. A este archivo le pasamos la variable tasks con todas las tareas.
+Por último, verificamos que no tengamos un error al renderizar el template; si hay un error, mandamos un **Internal Server Error\*\*.
 
-Now, we can create the route to get the home.html file at the root path.
+Ahora podemos crear la ruta para obtener el archivo home.html en la ruta raiz
 
 #### ~/go-htmx-crud/main.go
 
@@ -412,7 +438,7 @@ import (
 	"net/http"
 
 	"github.com/agustfricke/go-htmx-crud/database"
-	"github.com/agustfricke/go-htmx-crud/handlers" // New!
+	"github.com/agustfricke/go-htmx-crud/handlers" // Nuevo !
 )
 
 
@@ -423,9 +449,9 @@ func main() {
     fs := http.FileServer(http.Dir("public"))
     http.Handle("/public/", http.StripPrefix("/public/", fs))
 
-    http.HandleFunc("/", handlers.GetTasks) // New!
+    http.HandleFunc("/", handlers.GetTasks) // Nuevo !
 
-	fmt.Println("Running on port 8000")
+	fmt.Println("Runnning in port 8000")
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 ```
@@ -444,15 +470,15 @@ func main() {
 </ul>
 ```
 
-Now, you can run the code with the following command:
+Ahora podemos correr el código con el comando:
 
 ```bash
 go run ~/go-htmx-crud/main.go
 ```
 
-If you still don't see any tasks, that's okay, we haven't created any yet.
+Si aún no ves ninguna tarea, está bien, aún no hemos creado ninguna.
 
-## Create Tasks
+## Crear tareas
 
 #### ~/go-htmx-crud/main.go
 
@@ -462,7 +488,7 @@ package handlers
 import (
 	"html/template"
 	"net/http"
-	"time" // New!
+	"time" // Nuevo !
 
 	"github.com/agustfricke/go-htmx-crud/database"
 	"github.com/agustfricke/go-htmx-crud/models"
@@ -482,7 +508,7 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
     task := models.Task{Name: name}
 
     if err := db.Create(&task).Error; err != nil {
-        http.Error(w, "Error creating task in the database", http.StatusInternalServerError)
+        http.Error(w, "Error creating task in database", http.StatusInternalServerError)
         return
     }
 
@@ -494,7 +520,7 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-Now, let's add the route in **main.go**.
+Ahora agregemos la ruta en **main.go**.
 
 #### ~/go-htmx-crud/main.go
 
@@ -502,7 +528,13 @@ Now, let's add the route in **main.go**.
 http.HandleFunc("/add/", handlers.CreateTask)
 ```
 
-In this function, we introduce a 2-second delay to observe the loading state in action using **time.Sleep()**. Next, we capture the name value from the form and check if it's empty. If it's empty, we respond with a **Bad Request**. Then, we create an instance of the database and generate a new task **(models.Task)** using the provided name. Afterward, we attempt to create the task in the database, and if any error occurs, we respond with an Internal Server Error. Finally, we execute a new template called **item.html**, passing it the newly created task. If there's any error with the template, we also respond with an Internal Server Error.
+En esta función estamos introduciendo un retraso de 2 segundos para poder observar el estado de carga en acción
+mediante el uso de **time.Sleep()**. Luego, estamos capturando el valor del nombre desde el formulario y comprobando
+si está vacío. Si es así, respondemos con un **Bad Request**. A continuación, creamos una instancia de la base de datos
+y generamos una nueva tarea **(models.Task)** utilizando el nombre proporcionado. Después, intentamos crear
+la tarea en la base de datos, y si se produce algún error, respondemos con un error de Internal Server Error.
+Finalmente, ejecutamos un nuevo template llamado **item.html**, pasándole la tarea recién creada.
+Si ocurre algún error con la plantilla, también respondemos con un error de servidor interno **Internal Server Error**.
 
 #### ~/go-htmx-crud/templates/home.html
 
@@ -520,22 +552,22 @@ In this function, we introduce a 2-second delay to observe the loading state in 
     </button>
 </form>
 <ul id="task-list">
-    <!-- Rest of the content -->
+    <!-- Resto -->
 </ul>
 ```
 
-As we can see in the above code, we are configuring various htmx attributes. Let's examine them one by one:
+Como podemos observar en el código de arriba, estamos configurando varios atributos de htmx. Vamos a examinarlos uno por uno:
 
--   **hx-post="/add/"**: We make a POST request to the "/add/" route.
--   **hx-target="#task-list"**: We replace the response from the function (item.html) with the element that has the id "task-list".
--   **hx-swap="beforeend"**: We insert the response as the last child of the target.
--   **hx-indicator="#spinner"**: When the request is in progress, we display the element with the id "spinner".
+-   **hx-post="/add/"**: Realizamos una solicitud POST a la ruta "/add/".
+-   **hx-target="#task-list"**: Reemplazaremos la respuesta de la función (item.html) con el elemento que tiene el identificador "task-list".
+-   **hx-swap="beforeend"**: Insertamos la respuesta como el último hijo del objetivo.
+-   **hx-indicator="#spinner"**: Cuando la solicitud esté en proceso, mostraremos el elemento con el identificador "spinner".
 
-## Edit Tasks
+## Editar tareas
 
-Now let's create the logic for editing tasks. First, go to **handlers.go** and declare two functions:
-
-**FormEditTask** will be the HTML template for editing the task, and then **EditTask** will be for sending the PUT request and editing the task in the database.
+Ahora creemos la lógica para editar tareas. Para ello, lo primero sería ir a **handlers.go** y declarar 2 funciones:
+**FormEditTask** va a ser el template HTML para editar la tarea, luego **EditTask** va a ser
+para enviar la petición PUT y editar la tarea en la base de datos.
 
 #### go-htmx-crud/handlers/task.go
 
@@ -579,7 +611,7 @@ func EditTask(w http.ResponseWriter, r *http.Request) {
 
     task.Name = name
     if err := db.Save(&task).Error; err != nil {
-        http.Error(w, "Error saving task in the database", http.StatusInternalServerError)
+        http.Error(w, "Error saving task in database", http.StatusInternalServerError)
         return
     }
 
@@ -591,11 +623,17 @@ func EditTask(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
--   The **FormEditTask** function processes an HTTP request to display an editing form for tasks. It extracts the **name** and **ID** values from the request's URL, verifies that both are not empty, and then loads an HTML template named **edit.html**, populates it with the data, and sends it as a response to the client. If there are errors in the process, appropriate HTTP responses with status codes and error messages are returned.
+-   Esta función **FormEditTask** procesa una solicitud **HTTP** para mostrar un formulario de edición de tareas.
+    Extrae los valores **name** e **ID** de la URL de la solicitud, verifica que ambos no estén vacíos y luego carga
+    una plantilla HTML llamada **edit.html**, la rellena con los datos y la envía como respuesta al cliente.
+    Si hay errores en el proceso, se devuelven respuestas HTTP adecuadas con códigos de estado y mensajes de error.
 
--   The **EditTask** function processes an HTTP request to edit a task. It introduces a 2-second delay, extracts the **name** and **ID** values, verifies their existence, looks up the task in the database, updates its name, and saves it. Then, it loads and displays an HTML template named **item.html** with the modified task. In case of errors, it responds with appropriate status codes and error messages.
+-   La función **EditTask** procesa una solicitud **HTTP** para editar una tarea. Introduce un retraso de 2 segundos,
+    extrae los valores **name** e **ID**, verifica su existencia, busca la tarea en la base de datos,
+    actualiza su nombre y la guarda. Luego, carga y muestra una plantilla HTML llamada **item.html** con la tarea modificada.
+    En caso de errores, responde con códigos de estado y mensajes de error apropiados.
 
-Now let's add the routes in **main.go**.
+Ahora agregemos las rutas en **main.go**.
 
 #### ~/go-htmx-crud/main.go
 
@@ -620,7 +658,9 @@ http.HandleFunc("/put", handlers.EditTask)
 </li>
 ```
 
-We make a **GET** request to the **"/edit"** route to return the **edit.html** file, specifying a target as **"item-{{ .ID }}"** to replace the **<li>** element with the form.
+Hacemos una petición **GET** a la ruta **"/edit"** para que nos devuelva el archivo
+**edit.html**, especificando un objetivo (target) como **"item-{{ .ID }}"** para reemplazar el elemento **< li >** con
+el formulario."
 
 ```bash
 touch ~/go-htmx-crud/templates/edit.html
@@ -643,11 +683,12 @@ touch ~/go-htmx-crud/templates/edit.html
 </form>
 ```
 
-We send a **PUT** request with the **ID** and **Name**, and assign the value **{{ .Name }}** to display the data that was previously loaded.
+Mandamos una petición **PUT** con el **ID** y el **Name**, además de asignarle el valor **{{ .Name }}**
+para mostrar los datos que ya estaban cargados previamente.
 
-## Delete Tasks
+## Eliminar tareas
 
-Let's go to **handlers/task.go** to define the function.
+Vallamos a **handlers/task.go** para definir la función.
 
 #### ~/go-htmx-crud/handlers/task.go
 
@@ -677,7 +718,11 @@ func DeleteTask(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-The **DeleteTask** function processes an HTTP request to delete a task. It introduces a 2-second delay, extracts the **ID** value, verifies its existence, looks up the task in the database, and deletes it. If the task is not found, it responds with a **Not Found** status code. If there are errors during the deletion process, it responds with an **Internal Server Error** status code.
+La función **DeleteTask** procesa una solicitud **HTTP** para eliminar una tarea. Introduce un retraso
+de 2 segundos, extrae el valor del **ID**, verifica su existencia, busca la tarea en la base
+de datos y la elimina. Si la tarea no se encuentra, responde con un código de estado
+**Not Found**. Si hay errores durante el proceso de eliminación, responde con un código
+de estado **Internal Server Error**.
 
 #### ~/go-htmx-crud/templates/home.html
 
@@ -694,9 +739,14 @@ The **DeleteTask** function processes an HTTP request to delete a task. It intro
 </button>
 ```
 
-As we can see in the code above, we are sending a **DELETE** request to the "delete" route along with an **ID** to know which task we are deleting. Then, we use an **hx-swap** attribute to delete the element when making the request, and **hx-target** to delete the entire **<li>** that contains the task. Afterward, we assign an **hx-indicator** of **"spinner-delete-{{ .ID }}"** and give a unique ID to the spinner, as otherwise, we would have the spinner working on each of the tasks.
+Como vemos en el código de arriba, estamos enviando una petición **DELETE** a la ruta
+"delete" junto con un **ID** para saber qué tarea estamos eliminando. Luego, usamos un atributo **hx-swap**
+para eliminar el elemento al realizar la petición, y **hx-target** para eliminar todo el **< li >**
+que contiene la tarea. Después, le asignamos un **hx-indicator** de **"spinner-delete-{{ .ID }}"** y damos
+un ID único al spinner, ya que, de lo contrario, tendríamos el spinner funcionando en cada una de las tareas.
 
-The only thing left to do is to edit the **templates/item.html** file with the new functionalities for deleting and editing tasks.
+Lo único que nos quedaría por hacer es editar el archivo **templates/item.html** con las nuevas funcionalidades para
+eliminar y editar tareas.
 
 #### ~/go-htmx-crud/templates/item.html
 
@@ -723,6 +773,6 @@ The only thing left to do is to edit the **templates/item.html** file with the n
 </li>
 ```
 
-## End
+## Fin
 
-Okay, great! Thank you for reading this far. Don't forget that you have the complete code on [**GitHub**](https://github.com/agustfricke/go-htmx-crud). Don't forget to give it a star.
+¡Ok, genial! Gracias por leer hasta aquí. No olvides que tienes el código completo en [**GitHub**](https://github.com/agustfricke/go-htmx-crud). No te olvides de darle una estrella.
