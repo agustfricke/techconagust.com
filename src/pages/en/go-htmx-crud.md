@@ -419,11 +419,11 @@ func GetTasks(w http.ResponseWriter, r *http.Request) {
 ```
 
 Básicamente, lo que estamos haciendo aquí es crear la función **GetTasks** que tiene como parámetros **w http.ResponseWriter
-y r \*http.Request** para poder enviar peticiones **HTTP**. Luego creamos una instancia de la base de datos llamada **db**
+y **r http.Request** para poder enviar peticiones **HTTP**. Luego creamos una instancia de la base de datos llamada **db**
 y creamos la variable **tasks**, que es de tipo **[]models.Task**. Después, verificamos que no haya ningún error al hacer
 la consulta a la base de datos y, por último, definimos que vamos a renderizar el archivo **home.html** que
 está dentro del directorio templates. A este archivo le pasamos la variable tasks con todas las tareas.
-Por último, verificamos que no tengamos un error al renderizar el template; si hay un error, mandamos un **Internal Server Error**.
+Por último, verificamos que no tengamos un error al renderizar el template; si hay un error, mandamos un **Internal Server Error\*\*.
 
 Ahora podemos crear la ruta para obtener el archivo home.html en la ruta raiz
 
@@ -658,8 +658,8 @@ http.HandleFunc("/put", handlers.EditTask)
 </li>
 ```
 
-Hacemos una petición **GET** a la ruta **"/edit" para que nos devuelva el archivo
-**edit.html**, especificando un objetivo (target) como **"item-{{ .ID }}"\*\* para reemplazar el elemento **< li >** con
+Hacemos una petición **GET** a la ruta **"/edit"** para que nos devuelva el archivo
+**edit.html**, especificando un objetivo (target) como **"item-{{ .ID }}"** para reemplazar el elemento **< li >** con
 el formulario."
 
 ```bash
