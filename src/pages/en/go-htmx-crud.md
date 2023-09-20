@@ -1,6 +1,6 @@
 ---
-title: Go htmx CRUD
-description: How to build a CRUD app with Go and HTMX
+title: GO HTMX CRUD
+description: Build a CRUD app with HTMX and Go!
 layout: ../../layouts/docs.astro
 lang: en
 ---
@@ -8,14 +8,14 @@ lang: en
 ## Nuestras herramientas
 
 En este tutorial vamos a estar creando una app con [**Go**](https://go.dev/), [**htmx**](https://go.dev/)
-[**Tailwind CSS**](https://tailwindcss.com/) y [**Postgres**](https://www.postgresql.org/) junto con
-[**Docker**](https://www.docker.com/) para hacer un simple CRUD (crear, leer, actualizar y destruir).
+y [**Postgres**](https://www.postgresql.org/) junto con [**Docker**](https://www.docker.com/) para hacer un
+simple CRUD (crear, leer, actualizar y destruir).
 
 ## Configuracion del proyecto
 
 En una nueva terminal vamos a crear un nuevo directorio llamado **go-htmx-crud**
 con el comando **mkdir** y nos vamos a meter dentro de el
-con el comando **cd**
+con el comando **cd**.
 
 ```bash
 mkdir ~/go-htmx-crud
@@ -37,11 +37,13 @@ donde esta **nombre-del-modulo** por lo general se le pone la url de un reposito
 go mod init github.com/agustfricke/go-htmx-crud
 ```
 
-## Instalar las dependecias
+## Instalar las dependencias
 
 Una vez creado el módulo, vamos a instalar las dependecias, que van a ser [**godotenv**](https://github.com/joho/godotenv),
 [**GORM**](https://gorm.io/docs/) y el driver de [**Postgres**](https://gorm.io/docs/connecting_to_the_database.html#PostgreSQL),
 asi que vamos a poner los siguientes comandos en nuestra shell:
+
+#### ~/go-htmx-crud
 
 ```bash
 go get github.com/joho/godotenv
@@ -51,14 +53,14 @@ go get -u gorm.io/driver/postgres
 
 ## Configurar Postgres con Docker y Go
 
-Creemos una nueva base de datos Postgres con Docker con el comando
+Creemos una nueva base de datos Postgres con Docker con el comando:
 
 ```bash
 sudo docker run --name postgres_db -e POSTGRES_USER=username -e POSTGRES_PASSWORD=password -e POSTGRES_DB=super_db -p 5432:5432 -d postgres
 ```
 
-Una vez creada la base de datos podemos crear un nuevo archivo llamado .env en la raiz de nuestro proyecto, este archivo
-va a tener las credenciales de la base de datos.
+Una vez creada la base de datos, podemos generar un nuevo archivo llamado **.env** en la raíz
+de nuestro proyecto, el cual contendrá las credenciales de la base de datos.
 
 #### ~/go-htmx-crud/.env
 
@@ -70,8 +72,8 @@ DB_PASSWORD=password
 DB_NAME=super_db
 ```
 
-Ahora vamos a crear una funcion para leer las credenciales del archivo .env, para ello vamos a crear una carpeta llamada config
-y dentro de config vamos a crear un archivo llamado config.go
+Ahora vamos a crear una función para leer las credenciales del archivo **.env**.
+Para ello, crearemos una carpeta llamada **config** y dentro de **config** vamos a crear un archivo llamado **config.go**.
 
 ```bash
 mkdir ~/go-htmx-crud/config
@@ -99,11 +101,12 @@ func Config(key string) string {
 }
 ```
 
-Esta funcion recibe como paramentro un key y retornar el valor de ese key,
-como por ejemplo si pasamos **DB_HOST** como key este nos devolvera **localhost**.
+Esta función recibe como parámetro una clave y retorna el valor asociado a esa clave.
+Por ejemplo, si pasamos **DB_HOST** como clave, nos devolverá **localhost**.
 
-Perfecto, ahora vamos a crear una carpeta llamada models y dentro de models vamos a crear un archivo llamado task.go,
-Hacemos esto para definir la estructura de llamada Task, que vamos a utilizar para interactuar con la base de datos.
+Perfecto, ahora vamos a crear una carpeta llamada **models** y dentro de **models** vamos a crear un archivo
+llamado **task.go**. Hacemos esto para definir la estructura de la entidad llamada **Task**, que utilizaremos
+para interactuar con la base de datos.
 
 ```bash
 mkdir ~/go-htmx-crud/models
@@ -123,11 +126,12 @@ type Task struct {
 }
 ```
 
-Aqui definimos el struct Task que tiene gorm.Model este nos va a dar campos extra como ID, CreatedAt, UpdatedAt, y DeletedAt,
-y luego le ponemos que cada tarea tenga un Name de type string
+Aquí definimos la estructura **Task**, que incluye gorm.Model.
+Esto nos proporcionará campos adicionales como **ID, CreatedAt, UpdatedAt y DeletedAt**.
+Luego, especificamos que cada tarea tendrá un campo **Name** de tipo string.
 
-Perfecto, ahora vamos a crear una carpeta llamada database y dentro de database vamos a crear 2 archivos, uno database.go
-y el otro connect.go
+Perfecto, ahora vamos a crear una carpeta llamada **database**.
+Dentro de **database**, vamos a crear dos archivos: **database.go** y **connect.go**.
 
 ```bash
 mkdir ~/go-htmx-crud/database
@@ -135,9 +139,9 @@ touch ~/go-htmx-crud/database/database.go
 touch ~/go-htmx-crud/database/connect.go
 ```
 
-En database.go vamos a declarar una variable global llamada DB que es un puntero a un objeto gorm.DB,
-que vamos a estar utilizando para mantener una instancia de la base de datos y nos va a permitir realizar
-operaciones de base de datos en toda la aplicación.
+En **database.go**, declararemos una variable global llamada **DB**, que será un puntero a un objeto gorm.DB.
+Utilizaremos esta variable para mantener una instancia de la base de datos y nos permitirá realizar operaciones
+de base de datos en toda la aplicación.
 
 #### ~/go-htmx-crud/database/database.go
 
@@ -149,7 +153,7 @@ import "gorm.io/gorm"
 var DB *gorm.DB
 ```
 
-El archivo connect.go lo vamos a utilizar para conectarnos a la base de datos.
+El archivo **connect.go** lo utilizaremos para establecer la conexión con la base de datos.
 
 #### ~/go-htmx-crud/database/connect.go
 
@@ -187,12 +191,12 @@ func ConnectDB() {
 }
 ```
 
-En la funcion **ConnectDB** nos estamos conectado a la base de datos usando la variable **dsn**, obteniendo las credenciales
-gracias a la funcion **Config()** y luego la migramos con el modelo Task.
+En la función **ConnectDB**, nos conectamos a la base de datos utilizando la variable dsn, obteniendo las
+credenciales gracias a la función **Config**, y luego realizamos las migraciones con el **modelo Task**.
 
-Ahora vamos a crear el arhivo main.go, que es el punto de entrada donde todo nuestro codigo se va a ejecutar,
-Vamos a conectarnos a la base de datos llamando a la funcion **ConnectDB()**, configuramos los archivos estaticos y
-creamos un servidor en el puerto 8000 con el paquete **net/http**
+Ahora, vamos a crear el archivo **main.go**, que será el punto de entrada donde se ejecutará todo nuestro código.
+Nos conectaremos a la base de datos llamando a la función **ConnectDB()**, configuraremos los archivos estáticos y crearemos
+un servidor en el **puerto 8000** utilizando el paquete **net/http**.
 
 ```bash
 touch ~/go-htmx-crud/main.go
@@ -222,13 +226,13 @@ func main() {
 }
 ```
 
-Ahora podemos ejecutar nuestro codigo con go con el comando:
+Ahora podemos ejecutar nuestro código en Go con el siguiente comando:
 
 ```bash
 go run ~/go-htmx-crud/main.go
 ```
 
-Deberias ver el siguiente output:
+Deberías ver el siguiente resultado
 
 ```bash
 Database Migrated
@@ -236,69 +240,110 @@ Connection Opened to Database
 Runnning in port 8000
 ```
 
-### Archivos estaticos
+## Archivos estaticos
 
-Ahora vamos a crear la carpeta **public**, esta va a mantener los archivos estatics (JavaScript y CSS)
+Ahora vamos a crear la carpeta **public**, esta va a contener los archivos estáticos (JavaScript y CSS).
 
 ```bash
-mkdir ~/go-htmx-crud/public
+mkdir ~/go-htmx-crud/public/htmx.min.js
+touch ~/go-htmx-crud/public/main.js
+touch ~/go-htmx-crud/public/styles.css
 ```
 
-Una vez con este nuevo directorio vamos a instalar **htmx**
+Una vez con este nuevo directorio vamos a instalar **htmx**.
 
 ```bash
 wget https://unpkg.com/htmx.org@1.9.5/dist/htmx.min.js -P ~/go-htmx-crud/public/
 ```
 
-Perfecto, ahora configuremos **Tailwind CSS**
+Ahora pongamos el CSS de nuesta app.
 
-```bash
-npm install -D tailwindcss
-npx tailwindcss init
-```
-
-#### ~/go-htmx-crud/tailwind.config.js
-
-```javascript
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-    content: ["./templates/*.html"],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
-};
-```
-
-Creemos el archivo input.css dentro de public
-
-```bash
-touch input.css
-```
-
-#### ~/go-htmx-crud/public/input.css
+#### ~/go-htmx-crud/public/index.css
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+body {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333333;
+    color: #ffffff;
+    outline: none;
+}
+
+button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    margin: 2px;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    color: #ffffff;
+    transition: border-color 0.25s;
+}
+
+button:hover {
+    border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.spinner {
+    display: none;
+}
+.htmx-request .spinner {
+    display: inline;
+}
+.htmx-request.spinner {
+    display: inline;
+}
 ```
 
 Ahora abre una nueva shell y pon el siguiente comando:
 
-```bash
-npx tailwindcss -i ./public/input.css -o ./public/output.css --watch
-```
-
-### Home page
-
-Creemos el home page.
+## Pagina Home
 
 ```bash
-mkdir ~/go-htmx-crud/templates/index.html
+mkdir ~/go-htmx-crud/templates/home.html
 ```
 
-#### ~/go-htmx-crud/templates/index.html
+#### ~/go-htmx-crud/templates/home.html
 
 ```html
 <!doctype html>
@@ -307,713 +352,427 @@ mkdir ~/go-htmx-crud/templates/index.html
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="public/htmx.min.js"></script>
-        <link rel="stylesheet" href="public/output.css" />
-
-        <title>HTMX & Go</title>
+        <link href="public/index.css" rel="stylesheet" />
+        <title>GO HTMX CRUD</title>
     </head>
 
-    <body class="container mx-auto px-[300px]">
-        <form class="mt-11">
-            <div class="flex justify-between gap-2">
-                <input
-                    type="text"
-                    class="rounded-lg focus:border-gray-700 focus:outline-none text-slate-200 w-full p-2.5 bg-gray-700"
-                    placeholder="Name"
-                />
-                <button
-                    class="rounded-lg bg-gray-700 flex justify-between hover:bg-gray-900 py-4 px-8 text-sm capitalize text-white shadow"
-                >
-                    <span> Create </span>
-                    <div role="status" class="spinner text-white">
-                        <svg
-                            aria-hidden="true"
-                            class="w-5 h-5 ml-2 text-black animate-spin fill-slate-200"
-                            viewBox="0 0 100 101"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                fill="currentColor"
-                            />
-                            <path
-                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                fill="currentFill"
-                            />
-                        </svg>
-                    </div>
-                </button>
-            </div>
+    <body>
+        <form>
+            <input type="text" placeholder="Task name" />
+            <button type="submit">Submit</button>
         </form>
 
-        <div class="mt-2">
-            <div class="text-slate-200">
-                <div class="flex justify-center">
-                    <div
-                        class="w-[300px] mb-2 border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700"
-                    >
-                        <div class="flex flex-col items-center py-2">
-                            <span
-                                class="font-poppis text-gray-500 dark:text-gray-400"
-                            >
-                                Task name
-                            </span>
-                            <div class="flex jusitfy-between mt-2">
-                                <button
-                                    class="mr-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-                                >
-                                    Edit
-                                </button>
+        <ul>
+            <li>
+                Task name
+                <button type="button">Edit</button>
+                <button type="button">Delete</button>
+            </li>
+        </ul>
 
-                                <div class="flex justify-between">
-                                    <button
-                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-                                    >
-                                        Delete
-
-                                        <div role="status" class="spinner">
-                                            <svg
-                                                aria-hidden="true"
-                                                class="w-5 h-5 ml-2 text-black animate-spin fill-slate-200"
-                                                viewBox="0 0 100 101"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                                    fill="currentColor"
-                                                />
-                                                <path
-                                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                                    fill="currentFill"
-                                                />
-                                            </svg>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <script src="public/main.js"></script>
+        <script src="public/htmx.min.js"></script>
     </body>
 </html>
 ```
 
-## Crear tareas
+## Obtener todas las tareas
 
-Para crear nuevas tareas debemos crear el archivo **handlers.go**.
+Para manejar las peticiones HTTP, vamos a crear un nuevo archivo llamado **task.go** que estará ubicado
+dentro del directorio **handlers**
 
 ```bash
-mkdir ~/go-htmx-crud/handlers
-touch ~/go-htmx-crud/handlers/handlers.go
+mkdir ~/go-htmx-crud/handlers/task.go
 ```
 
-Aqui vamos a definir el paquete handlers, la funcion CreateTask va a tener un **time.Sleep** que va a relentizar
-la peticion 3 segundos, para poder ver el spinner, despues agarramos el valor **name** desde el formulario, creamos la tarea si
-el campo name es diferente a un string vacio, si es exitosio vamos a retornar **item.html** con la tarea recien creada, si el string esta vacio
-vamos a retornar error.html para indicar que no se puede crear una tarea sin nombre.
+Importamos los paquetes **html/template** y **net/http** para poder trabajar con HTTP y HTML.
+Además, importamos los paquetes previamente creados (**database** y **models**).
 
-#### ~/go-htmx-crud/handlers/handler.go
+#### ~/go-htmx-crud/handlers/task.go
 
 ```go
 package handlers
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
-	"time"
+
+	"github.com/agustfricke/go-htmx-crud/database"
+	"github.com/agustfricke/go-htmx-crud/models"
+)
+
+func GetTasks(w http.ResponseWriter, r *http.Request) {
+    db := database.DB
+    var tasks []models.Task
+
+    if err := db.Find(&tasks).Error; err != nil {
+        http.Error(w, "Error getting tasks from database", http.StatusInternalServerError)
+        return
+    }
+
+    tmpl := template.Must(template.ParseFiles("templates/home.html"))
+    if err := tmpl.Execute(w, tasks); err != nil {
+        http.Error(w, "Render error", http.StatusInternalServerError)
+        return
+    }
+}
+```
+
+Básicamente, lo que estamos haciendo aquí es crear la función **GetTasks** que tiene como parámetros **w http.ResponseWriter
+y r \*http.Request** para poder enviar peticiones **HTTP**. Luego creamos una instancia de la base de datos llamada **db**
+y creamos la variable **tasks**, que es de tipo **[]models.Task**. Después, verificamos que no haya ningún error al hacer
+la consulta a la base de datos y, por último, definimos que vamos a renderizar el archivo **home.html** que
+está dentro del directorio templates. A este archivo le pasamos la variable tasks con todas las tareas.
+Por último, verificamos que no tengamos un error al renderizar el template; si hay un error, mandamos un **Internal Server Error**.
+
+Ahora podemos crear la ruta para obtener el archivo home.html en la ruta raiz
+
+#### ~/go-htmx-crud/main.go
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/agustfricke/go-htmx-crud/database"
+	"github.com/agustfricke/go-htmx-crud/handlers" // Nuevo !
+)
+
+
+func main() {
+
+    database.ConnectDB()
+
+    fs := http.FileServer(http.Dir("public"))
+    http.Handle("/public/", http.StripPrefix("/public/", fs))
+
+    http.HandleFunc("/", handlers.GetTasks) // Nuevo !
+
+	fmt.Println("Runnning in port 8000")
+	log.Fatal(http.ListenAndServe(":8000", nil))
+}
+```
+
+#### ~/go-htmx-crud/templates/home.html
+
+```html
+<ul>
+    {{ range . }}
+    <li>
+        {{ .ID }} - {{ .Name }}
+        <button type="button">Edit</button>
+        <button type="button">Delete</button>
+    </li>
+    {{ end }}
+</ul>
+```
+
+Ahora podemos correr el código con el comando:
+
+```bash
+go run ~/go-htmx-crud/main.go
+```
+
+Si aún no ves ninguna tarea, está bien, aún no hemos creado ninguna.
+
+## Crear tareas
+
+#### ~/go-htmx-crud/main.go
+
+```go
+package handlers
+
+import (
+	"html/template"
+	"net/http"
+	"time" // Nuevo !
 
 	"github.com/agustfricke/go-htmx-crud/database"
 	"github.com/agustfricke/go-htmx-crud/models"
 )
 
 func CreateTask(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(3 * time.Second)
-	name := r.PostFormValue("name")
+    time.Sleep(2 * time.Second)
 
-    var task models.Task
-    if name != "" {
-        db := database.DB
-        task = models.Task{Name: name}
-        db.Create(&task)
+    name := r.PostFormValue("name")
 
-	    tmpl := template.Must(template.ParseFiles("templates/item.html"))
-	    err :=  tmpl.Execute(w, task)
-	    if err != nil {
-		    http.Error(w, err.Error(), http.StatusInternalServerError)
-		    return
-	    }
-    } else {
-	    tmpl := template.Must(template.ParseFiles("templates/error.html"))
-        error := "No se puede crear una tarea vacia"
-	    err :=  tmpl.Execute(w, error)
-	    if err != nil {
-		    http.Error(w, err.Error(), http.StatusInternalServerError)
-		    return
-	    }
+    if name == "" {
+        http.Error(w, "Can't create task without a name", http.StatusBadRequest)
+        return
     }
-}
-```
 
-## Obtener tareas
-
-Ahora creemos la funcion para obtener todas las tareas, y pasando la variable tasks con todas las tareas
-a el archivo index.html
-
-#### ~/go-htmx-crud/handlers/handler.go
-
-```go
-func GetTasks(w http.ResponseWriter, r *http.Request) {
     db := database.DB
-	var tasks []models.Task
-	db.Find(&tasks)
+    task := models.Task{Name: name}
 
-	tmpl := template.Must(template.ParseFiles("templates/index.html"))
-
-	err := tmpl.Execute(w, tasks)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	    return
-	}
-}
-```
-
-## Routes
-
-Creemos las rutas para crear y obtener las tareas.
-
-```go
-package main
-
-import (
-	"fmt"
-	"log"
-	"net/http"
-
-	"github.com/agustfricke/go-htmx-crud/database"
-	"github.com/agustfricke/go-htmx-crud/handlers" // Aqui!
-)
-
-
-func main() {
-
-    database.ConnectDB()
-
-    fs := http.FileServer(http.Dir("public"))
-    http.Handle("/public/", http.StripPrefix("/public/", fs))
-
-	http.HandleFunc("/add/", handlers.CreateTask) // Aqui!
-    http.HandleFunc("/", handlers.GetTasks) // Aqui!
-
-	fmt.Println("Runnning in port 8000")
-	log.Fatal(http.ListenAndServe(":8000", nil))
-}
-```
-
-## Templates para el post request
-
-Creemos el archivo item.html y error.html para crear nuevas tareas
-
-```bash
-touch ~/go-htmx-crud/templates/item.html
-touch ~/go-htmx-crud/templates/error.html
-```
-
-#### ~/go-htmx-crud/templates/item.html
-
-```html
-<div class="text-slate-200" id="item-{{ .ID }}">
-    <div class="flex justify-center">
-        <div
-            class="w-[300px] mb-2 border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700"
-        >
-            <div class="flex flex-col items-center py-2">
-                <span class="font-poppis text-gray-500 dark:text-gray-400">
-                    {{ .Name }} - {{ .ID }}
-                </span>
-                <div class="flex jusitfy-between mt-2">
-                    <button
-                        hx-get="/edit/form?name={{ .Name }}&ID={{ .ID }}"
-                        hx-target="#item-{{ .ID }}"
-                        class="mr-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-                    >
-                        Edit
-                    </button>
-
-                    <div class="flex justify-between">
-                        <button
-                            hx-delete="/delete/{{ .ID }}"
-                            hx-swap="delete"
-                            hx-target="#item-{{ .ID }}"
-                            hx-indicator="#spinner-delete-{{ .ID }}"
-                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-                        >
-                            Delete
-
-                            <div
-                                role="status"
-                                id="spinner-delete-{{ .ID }}"
-                                class="spinner"
-                            >
-                                <svg
-                                    aria-hidden="true"
-                                    class="w-5 h-5 ml-2 text-black animate-spin fill-slate-200"
-                                    viewBox="0 0 100 101"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                        fill="currentColor"
-                                    />
-                                    <path
-                                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                        fill="currentFill"
-                                    />
-                                </svg>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-```
-
-```html
-<div
-    id="alert"
-    class="flex items-center mb-4 rounded-lg bg-gray-800 text-red-400"
-    role="alert"
->
-    <svg
-        class="flex-shrink-0 w-4 h-4"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-    >
-        <path
-            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
-        />
-    </svg>
-    <span class="sr-only">Info</span>
-    <div class="ml-3 text-sm font-medium">{{ .error }}</div>
-    <button
-        hx-get=""
-        hx-swap="delete"
-        hx-target="#alert"
-        type="button"
-        class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
-        data-dismiss-target="#alert-2"
-        aria-label="Close"
-    >
-        <span class="sr-only">Close</span>
-        <svg
-            class="w-3 h-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 14"
-        >
-            <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-            />
-        </svg>
-    </button>
-</div>
-```
-
-Ahora hagamos unos ajustes en index.html para que todo funcione correctamente, vamos a agregar atributros de **htmx**,
-al formulario y botones para poder hacer las peticiones http, vamos a poner un name al input, un id donde se
-mapean todas las tareas para poder hacer un swap al hacer la peticion post, luego donde van las tareas vamos a
-poner un **{{ .range }}** para mapear todas las tareas y por ultimo vamos a agregar unos estilos
-para ocultar los spinner si no se esta haciendo ninguna peticion.
-
-#### ~/go-htmx-crud/templates/index.html
-
-```html
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="public/htmx.js"></script>
-        <link rel="stylesheet" href="public/output.css" />
-
-        <title>HTMX & Go</title>
-    </head>
-
-    <style>
-        .spinner {
-            display: none;
-        }
-        .htmx-request .spinner {
-            display: inline;
-        }
-        .htmx-request.spinner {
-            display: inline;
-        }
-    </style>
-
-    <body class="container mx-auto px-[300px]">
-        <form
-            id="task-form"
-            hx-post="/add/"
-            hx-target="#task-list"
-            hx-swap="beforeend"
-            hx-indicator="#spinner"
-            class="mt-11"
-        >
-            <div class="flex justify-between gap-2">
-                <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    class="rounded-lg focus:border-gray-700 focus:outline-none text-slate-200 w-full p-2.5 bg-gray-700"
-                    placeholder="Name"
-                />
-                <button
-                    class="rounded-lg bg-gray-700 flex justify-between hover:bg-gray-900 py-4 px-8 text-sm capitalize text-white shadow"
-                >
-                    <span> Create </span>
-                    <div role="status" id="spinner" class="spinner text-white">
-                        <svg
-                            aria-hidden="true"
-                            class="w-5 h-5 ml-2 text-black animate-spin fill-slate-200"
-                            viewBox="0 0 100 101"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                fill="currentColor"
-                            />
-                            <path
-                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                fill="currentFill"
-                            />
-                        </svg>
-                    </div>
-                </button>
-            </div>
-        </form>
-
-        <div id="task-list" class="mt-2">
-            {{ range . }}
-            <div class="text-slate-200" id="item-{{ .ID }}">
-                <div class="flex justify-center">
-                    <div
-                        class="w-[300px] mb-2 border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700"
-                    >
-                        <div class="flex flex-col items-center py-2">
-                            <span
-                                class="font-poppis text-gray-500 dark:text-gray-400"
-                            >
-                                {{ .Name }} - {{ .ID }}
-                            </span>
-                            <div class="flex jusitfy-between mt-2">
-                                <button
-                                    hx-get="/edit/form?name={{ .Name }}&ID={{ .ID }}"
-                                    hx-target="#item-{{ .ID }}"
-                                    class="mr-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-                                >
-                                    Edit
-                                </button>
-
-                                <div class="flex justify-between">
-                                    <button
-                                        hx-delete="/delete/{{ .ID }}"
-                                        hx-swap="delete"
-                                        hx-target="#item-{{ .ID }}"
-                                        hx-indicator="#spinner-delete-{{ .ID }}"
-                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-                                    >
-                                        Delete
-
-                                        <div
-                                            role="status"
-                                            id="spinner-delete-{{ .ID }}"
-                                            class="spinner"
-                                        >
-                                            <svg
-                                                aria-hidden="true"
-                                                class="w-5 h-5 ml-2 text-black animate-spin fill-slate-200"
-                                                viewBox="0 0 100 101"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                                    fill="currentColor"
-                                                />
-                                                <path
-                                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                                    fill="currentFill"
-                                                />
-                                            </svg>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{ end }}
-        </div>
-    </body>
-</html>
-```
-
-Okey perfecto podemos volver a compilar el codigo e ir a **http://127.0.0.1:8000**
-
-```bash
-go run ~/go-htmx-crud/main.go
-```
-
-## Editar tareas
-
-Creemos 2 nuevas funciones, la primera para obtener el formulario y la segunda para hacer el put request en si.
-
-```go
-func FormEditTask(w http.ResponseWriter, r *http.Request) {
-        name := r.URL.Query().Get("name")
-        ID := r.URL.Query().Get("ID")
-	    data := struct {ID string; Name string}{ID: ID, Name: name}
-
-	    tmpl := template.Must(template.ParseFiles("templates/edit.html"))
-	    err :=  tmpl.Execute(w, data)
-	    if err != nil {
-		    http.Error(w, err.Error(), http.StatusInternalServerError)
-		    return
-	    }
+    if err := db.Create(&task).Error; err != nil {
+        http.Error(w, "Error creating task in database", http.StatusInternalServerError)
+        return
     }
 
-func EditTask(w http.ResponseWriter, r *http.Request) {
-		time.Sleep(1 * time.Second)
-
-        name := r.PostFormValue("name")
-        ID := r.PostFormValue("ID")
-        db := database.DB
-
-        var task models.Task
-
-        if err := db.First(&task, ID).Error; err != nil {
-	        tmpl := template.Must(template.ParseFiles("templates/error.html"))
-	        err :=  tmpl.Execute(w, err)
-	        if err != nil {
-		        http.Error(w, err.Error(), http.StatusInternalServerError)
-		    return
-        }
-
-        task.Name = name
-
-        if err := db.Save(&task).Error; err != nil {
-	        tmpl := template.Must(template.ParseFiles("templates/error.html"))
-	        err :=  tmpl.Execute(w, err)
-	        if err != nil {
-		        http.Error(w, err.Error(), http.StatusInternalServerError)
-		    return
-        }
-
-	    data := struct {Task models.Task}{Task: task}
-
-	    tmpl := template.Must(template.ParseFiles("templates/item.html"))
-	    err :=  tmpl.Execute(w, data)
-	    if err != nil {
-		    http.Error(w, err.Error(), http.StatusInternalServerError)
-		    return
-	    }
-	}
+    tmpl := template.Must(template.ParseFiles("templates/item.html"))
+    if err := tmpl.Execute(w, task); err != nil {
+        http.Error(w, "Render error", http.StatusInternalServerError)
+        return
+    }
+}
 ```
 
-Perfecto ahora creemos las routas.
+Ahora agregemos la ruta en **main.go**.
 
 #### ~/go-htmx-crud/main.go
 
 ```go
-package main
+http.HandleFunc("/add/", handlers.CreateTask)
+```
 
-import (
-	"fmt"
-	"log"
-	"net/http"
+En esta función estamos introduciendo un retraso de 2 segundos para poder observar el estado de carga en acción
+mediante el uso de **time.Sleep()**. Luego, estamos capturando el valor del nombre desde el formulario y comprobando
+si está vacío. Si es así, respondemos con un **Bad Request**. A continuación, creamos una instancia de la base de datos
+y generamos una nueva tarea **(models.Task)** utilizando el nombre proporcionado. Después, intentamos crear
+la tarea en la base de datos, y si se produce algún error, respondemos con un error de Internal Server Error.
+Finalmente, ejecutamos un nuevo template llamado **item.html**, pasándole la tarea recién creada.
+Si ocurre algún error con la plantilla, también respondemos con un error de servidor interno **Internal Server Error**.
 
-	"github.com/agustfricke/go-htmx-crud/database"
-	"github.com/agustfricke/go-htmx-crud/handlers"
-)
+#### ~/go-htmx-crud/templates/home.html
 
+```html
+<form
+    hx-post="/add/"
+    hx-target="#task-list"
+    hx-swap="beforeend"
+    hx-indicator="#spinner"
+>
+    <input type="text" id="name" name="name" placeholder="Task name" />
+    <button type="submit">
+        Submit
+        <span class="spinner" id="spinner">....</span>
+    </button>
+</form>
+<ul id="task-list">
+    <!-- Resto -->
+</ul>
+```
 
-func main() {
+Como podemos observar en el código de arriba, estamos configurando varios atributos de htmx. Vamos a examinarlos uno por uno:
 
-    database.ConnectDB()
+-   **hx-post="/add/"**: Realizamos una solicitud POST a la ruta "/add/".
+-   **hx-target="#task-list"**: Reemplazaremos la respuesta de la función (item.html) con el elemento que tiene el identificador "task-list".
+-   **hx-swap="beforeend"**: Insertamos la respuesta como el último hijo del objetivo.
+-   **hx-indicator="#spinner"**: Cuando la solicitud esté en proceso, mostraremos el elemento con el identificador "spinner".
 
-    fs := http.FileServer(http.Dir("public"))
-    http.Handle("/public/", http.StripPrefix("/public/", fs))
+## Editar tareas
 
-	http.HandleFunc("/add/", handlers.CreateTask)
-	http.HandleFunc("/edit/form/", handlers.FormEditTask) // Aqui!
-	http.HandleFunc("/put", handlers.EditTask) // Aqui!
-    http.HandleFunc("/", handlers.GetTasks)
+Ahora creemos la lógica para editar tareas. Para ello, lo primero sería ir a **handlers.go** y declarar 2 funciones:
+**FormEditTask** va a ser el template HTML para editar la tarea, luego **EditTask** va a ser
+para enviar la petición PUT y editar la tarea en la base de datos.
 
-	fmt.Println("Runnning in port 8000")
-	log.Fatal(http.ListenAndServe(":8000", nil))
+#### go-htmx-crud/handlers/task.go
+
+```go
+func FormEditTask(w http.ResponseWriter, r *http.Request) {
+    name := r.URL.Query().Get("name")
+    ID := r.URL.Query().Get("ID")
+
+    if ID == "" || name == "" {
+        http.Error(w, "ID or Name not found", http.StatusBadRequest)
+        return
+    }
+
+    data := struct{ ID string; Name string }{ID: ID, Name: name}
+
+    tmpl := template.Must(template.ParseFiles("templates/edit.html"))
+    if err := tmpl.Execute(w, data); err != nil {
+        http.Error(w, "Render error", http.StatusInternalServerError)
+        return
+    }
+}
+
+func EditTask(w http.ResponseWriter, r *http.Request) {
+    time.Sleep(2 * time.Second)
+
+    name := r.PostFormValue("name")
+    ID := r.URL.Query().Get("ID")
+
+    if ID == "" || name == "" {
+        http.Error(w, "ID or Name not found", http.StatusBadRequest)
+        return
+    }
+
+    db := database.DB
+
+    var task models.Task
+    if err := db.First(&task, ID).Error; err != nil {
+            http.Error(w, "Task not found", http.StatusNotFound)
+            return
+    }
+
+    task.Name = name
+    if err := db.Save(&task).Error; err != nil {
+        http.Error(w, "Error saving task in database", http.StatusInternalServerError)
+        return
+    }
+
+    tmpl := template.Must(template.ParseFiles("templates/item.html"))
+    if err := tmpl.Execute(w, task); err != nil {
+        http.Error(w, "Render error", http.StatusInternalServerError)
+        return
+    }
 }
 ```
 
-Ahora creemos el archivos edit.html que es el formuilario para editar las tareas.
+-   Esta función **FormEditTask** procesa una solicitud **HTTP** para mostrar un formulario de edición de tareas.
+    Extrae los valores **name** e **ID** de la URL de la solicitud, verifica que ambos no estén vacíos y luego carga
+    una plantilla HTML llamada **edit.html**, la rellena con los datos y la envía como respuesta al cliente.
+    Si hay errores en el proceso, se devuelven respuestas HTTP adecuadas con códigos de estado y mensajes de error.
+
+-   La función **EditTask** procesa una solicitud **HTTP** para editar una tarea. Introduce un retraso de 2 segundos,
+    extrae los valores **name** e **ID**, verifica su existencia, busca la tarea en la base de datos,
+    actualiza su nombre y la guarda. Luego, carga y muestra una plantilla HTML llamada **item.html** con la tarea modificada.
+    En caso de errores, responde con códigos de estado y mensajes de error apropiados.
+
+Ahora agregemos las rutas en **main.go**.
+
+#### ~/go-htmx-crud/main.go
+
+```go
+http.HandleFunc("/edit/form/", handlers.FormEditTask)
+http.HandleFunc("/put", handlers.EditTask)
+```
+
+#### ~/go-htmx-crud/templates/home.html
+
+```html
+<li id="item-{{ .ID }}">
+    {{ .ID }} - {{ .Name }}
+    <button
+        hx-target="#item-{{ .ID }}"
+        hx-get="/edit/form?name={{ .Name }}&ID={{ .ID }}"
+        type="button"
+    >
+        Edit
+    </button>
+    <button type="button">Delete</button>
+</li>
+```
+
+Hacemos una petición **GET** a la ruta **"/edit" para que nos devuelva el archivo
+**edit.html**, especificando un objetivo (target) como **"item-{{ .ID }}"\*\* para reemplazar el elemento **< li >** con
+el formulario."
 
 ```bash
 touch ~/go-htmx-crud/templates/edit.html
 ```
 
-#### ~/go-htmx-crud/templates/edit.htmlgo
+#### ~/go-htmx-crud/templates/edit.html
 
 ```html
-<form hx-put="/put" hx-indicator="#spinner-{{ .ID }}">
-    <ul class="" id="task-list">
-        <li class="text-slate-200">
-            <div class="flex justify-center">
-                <div
-                    class="w-[300px] mb-2 border border-gray-200 rounded-lg shadow bg-gray-800 border-gray-700"
-                >
-                    <div class="flex flex-col items-center py-2">
-                        <span
-                            class="flex m-1 justify-between font-poppis text-gray-500 dark:text-gray-400"
-                        >
-                            <input
-                                required
-                                value="{{ .Name }}"
-                                type="text"
-                                name="name"
-                                class="rounded-lg block text-slate-200 w-full p-2.5 bg-gray-700"
-                                placeholder="Name"
-                            />
-                            <input
-                                type="text"
-                                hidden
-                                name="ID"
-                                value="{{ .ID }}"
-                            />
-                            <button
-                                type="submit"
-                                class="ml-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-                            >
-                                Save
-
-                                <div
-                                    role="status"
-                                    class="spinner ml-2 text-white"
-                                    id="spinner-{{ .ID }}"
-                                >
-                                    <svg
-                                        aria-hidden="true"
-                                        class="w-5 h-5 ml-2 text-black animate-spin fill-slate-200"
-                                        viewBox="0 0 100 101"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                            fill="currentColor"
-                                        />
-                                        <path
-                                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                            fill="currentFill"
-                                        />
-                                    </svg>
-                                </div>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
+<form hx-put="/put?ID={{ .ID }}" hx-indicator="#spinner">
+    <input
+        type="text"
+        value="{{ .Name }}"
+        name="name"
+        placeholder="Task name"
+    />
+    <button type="submit">
+        Edit
+        <span class="spinner" id="spinner">....</span>
+    </button>
 </form>
 ```
 
-Okey perfecto ahora podemos volver a compilar el codigo
-
-```bash
-go run ~/go-htmx-crud/main.go
-```
+Mandamos una petición **PUT** con el **ID** y el **Name**, además de asignarle el valor **{{ .Name }}**
+para mostrar los datos que ya estaban cargados previamente.
 
 ## Eliminar tareas
 
-Ahora para eliminar tareas debemos crear una nueva funcion en handler.go, podemos hacer un check de si el id
-viene en la url, si no es asi podemos retornar un status de bad request.
+Vallamos a **handlers/task.go** para definir la función.
+
+#### ~/go-htmx-crud/handlers/task.go
 
 ```go
 func DeleteTask(w http.ResponseWriter, r *http.Request) {
-    time.Sleep(1 * time.Second)
+    time.Sleep(2 * time.Second)
 
-    parts := strings.Split(r.URL.Path, "/")
-    if len(parts) != 3 {
-        http.Error(w, "Invalid URL", http.StatusBadRequest)
+    ID := r.URL.Query().Get("ID")
+
+    if ID == "" {
+        http.Error(w, "ID not found", http.StatusBadRequest)
         return
     }
-    ID := parts[2]
 
     db := database.DB
-
     var task models.Task
-    db.First(&task, ID)
-    db.Delete(&task)
+
+    if err := db.First(&task, ID).Error; err != nil {
+            http.Error(w, "Task not found", http.StatusNotFound)
+            return
+    }
+
+    if err := db.Delete(&task).Error; err != nil {
+        http.Error(w, "Error deleting task from database", http.StatusInternalServerError)
+        return
+    }
 }
 ```
 
-Ahora como siempre, creemos la ruta para manejar al solicitud.
+La función **DeleteTask** procesa una solicitud **HTTP** para eliminar una tarea. Introduce un retraso
+de 2 segundos, extrae el valor del **ID**, verifica su existencia, busca la tarea en la base
+de datos y la elimina. Si la tarea no se encuentra, responde con un código de estado
+**Not Found**. Si hay errores durante el proceso de eliminación, responde con un código
+de estado **Internal Server Error**.
 
-#### ~/go-htmx-crud/main.go
+#### ~/go-htmx-crud/templates/home.html
 
-```go
-package main
-
-import (
-	"fmt"
-	"log"
-	"net/http"
-
-	"github.com/agustfricke/go-htmx-crud/database"
-	"github.com/agustfricke/go-htmx-crud/handlers"
-)
-
-
-func main() {
-
-    database.ConnectDB()
-
-    fs := http.FileServer(http.Dir("public"))
-    http.Handle("/public/", http.StripPrefix("/public/", fs))
-
-	http.HandleFunc("/add/", handlers.CreateTask)
-	http.HandleFunc("/delete/", handlers.DeleteTask) // Aqui!
-	http.HandleFunc("/edit/form/", handlers.FormEditTask)
-	http.HandleFunc("/put", handlers.EditTask)
-    http.HandleFunc("/", handlers.GetTasks)
-
-	fmt.Println("Runnning in port 8000")
-	log.Fatal(http.ListenAndServe(":8000", nil))
-}
+```html
+<button
+    hx-delete="/delete?ID={{ .ID }}"
+    hx-swap="delete"
+    hx-target="#item-{{ .ID }}"
+    hx-indicator="#spinner-delete-{{ .ID }}"
+    type="button"
+>
+    Delete
+    <span class="spinner" id="spinner-delete-{{ .ID }}">....</span>
+</button>
 ```
 
-Okey perfecto ahora podemos volver a compilar el codigo
+Como vemos en el código de arriba, estamos enviando una petición **DELETE** a la ruta
+"delete" junto con un **ID** para saber qué tarea estamos eliminando. Luego, usamos un atributo **hx-swap**
+para eliminar el elemento al realizar la petición, y **hx-target** para eliminar todo el **< li >**
+que contiene la tarea. Después, le asignamos un **hx-indicator** de **"spinner-delete-{{ .ID }}"** y damos
+un ID único al spinner, ya que, de lo contrario, tendríamos el spinner funcionando en cada una de las tareas.
 
-```bash
-go run ~/go-htmx-crud/main.go
+Lo único que nos quedaría por hacer es editar el archivo **templates/item.html** con las nuevas funcionalidades para
+eliminar y editar tareas.
+
+#### ~/go-htmx-crud/templates/item.html
+
+```html
+<li id="item-{{ .ID }}">
+    {{ .ID }} - {{ .Name }}
+    <button
+        hx-target="#item-{{ .ID }}"
+        hx-get="/edit/form?name={{ .Name }}&ID={{ .ID }}"
+        type="button"
+    >
+        Edit
+    </button>
+    <button
+        hx-delete="/delete/{{ .ID }}"
+        hx-swap="delete"
+        hx-target="#item-{{ .ID }}"
+        hx-indicator="#spinner-delete-{{ .ID }}"
+        type="button"
+    >
+        Delete
+        <span class="spinner" id="spinner-delete-{{ .ID }}">....</span>
+    </button>
+</li>
 ```
 
-Eso fue todo por este tutorial, recuerda que tienes el [**GitHub Repo**](https://github.com/agustfricke/go-htmx-crud/)
+## Fin
+
+¡Ok, genial! Gracias por leer hasta aquí. No olvides que tienes el código completo en [**GitHub**](https://github.com/agustfricke/go-htmx-crud). No te olvides de darle una estrella.

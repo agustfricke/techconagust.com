@@ -53,16 +53,10 @@ export type Sidebar = {
 };
 export const SIDEBAR: Sidebar = {
   en: {
-    "Go development": [
-      { text: "Go Htmx CRUD", link: "en/go-htmx-crud" },
-      { text: "Fiber REST API", link: "en/fiber-rest-api" },
-    ],
+    "Go development": [{ text: "GO HTMX CRUD", link: "en/go-htmx-crud" }],
   },
   es: {
-    "Go development": [
-      { text: "Go Htmx CRUD", link: "es/go-htmx-crud" },
-      { text: "Fiber REST API", link: "es/fiber-rest-api" },
-    ],
+    "Go development": [{ text: "GO HTMX CRUD", link: "es/go-htmx-crud" }],
   },
 };
 
