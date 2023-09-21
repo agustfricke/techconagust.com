@@ -1,1 +1,0 @@
-const e=/\/([a-z]{2,3}-?[a-zA-Z]{0,4})\//;function g(a){const n=a.match(e);return n?n[1]:"en"}const t=["ar","arc","dv","fa","ha","he","khw","ks","ku","ps","ur","yi"];function o(a){return t.indexOf(a)!==-1}export{o as a,g};
