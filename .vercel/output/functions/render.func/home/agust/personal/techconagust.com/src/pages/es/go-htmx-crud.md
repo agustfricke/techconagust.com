@@ -258,7 +258,7 @@ wget https://unpkg.com/htmx.org@1.9.5/dist/htmx.min.js -P ~/go-htmx-crud/public/
 
 Ahora pongamos el CSS de nuesta app.
 
-#### ~/go-htmx-crud/public/styles.css
+#### ~/go-htmx-crud/public/index.css
 
 ```css
 body {
@@ -352,7 +352,7 @@ mkdir ~/go-htmx-crud/templates/home.html
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="public/styles.css" rel="stylesheet" />
+        <link href="public/index.css" rel="stylesheet" />
         <title>GO HTMX CRUD</title>
     </head>
 
@@ -364,9 +364,9 @@ mkdir ~/go-htmx-crud/templates/home.html
 
         <ul>
             <li>
-                task name
-                <button type="button">edit</button>
-                <button type="button">delete</button>
+                Task name
+                <button type="button">Edit</button>
+                <button type="button">Delete</button>
             </li>
         </ul>
 
@@ -562,16 +562,6 @@ Como podemos observar en el código de arriba, estamos configurando varios atrib
 -   **hx-target="#task-list"**: Reemplazaremos la respuesta de la función (item.html) con el elemento que tiene el identificador "task-list".
 -   **hx-swap="beforeend"**: Insertamos la respuesta como el último hijo del objetivo.
 -   **hx-indicator="#spinner"**: Cuando la solicitud esté en proceso, mostraremos el elemento con el identificador "spinner".
-
-#### ~/go-htmx-crud/templates/item.html
-
-```html
-<li>
-    {{ .ID }} - {{ .Name }}
-    <button type="button">Edit</button>
-    <button type="button">Delete</button>
-</li>
-```
 
 ## Editar tareas
 

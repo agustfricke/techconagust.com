@@ -1,0 +1,1 @@
+const e={en:"English",es:"Español"},o={indexName:"techconagust.com",appId:"VLI6IWYN16",apiKey:"3b5e1bfef294e04ae6072bc680c4a6b0"},n={en:{"Go development":[{text:"GO HTMX CRUD",link:"en/go-htmx-crud"}]},es:{"Go development":[{text:"GO HTMX CRUD",link:"es/go-htmx-crud"}]}},s={es:{"Go development":"Desarrollo con Go"}};export{o as A,e as K,n as S,s as a};
