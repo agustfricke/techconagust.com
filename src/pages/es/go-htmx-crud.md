@@ -5,6 +5,16 @@ layout: ../../layouts/docs.astro
 lang: es
 ---
 
+<iframe 
+width="560" 
+height="315" 
+src="https://www.youtube.com/embed/7vY5KOAbhqo?si=bfG3yCpHRmgh7BfD" 
+title="YouTube Video CRUD HTMX y GO" 
+frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+allowfullscreen>
+</iframe>
+
 ## Nuestras herramientas
 
 En este tutorial vamos a estar creando una app con [**Go**](https://go.dev/), [**htmx**](https://go.dev/)
@@ -335,8 +345,6 @@ li {
 }
 ```
 
-Ahora abre una nueva shell y pon el siguiente comando:
-
 ## Pagina Home
 
 ```bash
@@ -365,8 +373,8 @@ mkdir ~/go-htmx-crud/templates/home.html
         <ul>
             <li>
                 task name
-                <button type="button">edit</button>
-                <button type="button">delete</button>
+                <button type="button">Edit</button>
+                <button type="button">Delete</button>
             </li>
         </ul>
 
@@ -423,7 +431,7 @@ y **r http.Request** para poder enviar peticiones **HTTP**. Luego creamos una in
 y creamos la variable **tasks**, que es de tipo **[]models.Task**. Después, verificamos que no haya ningún error al hacer
 la consulta a la base de datos y, por último, definimos que vamos a renderizar el archivo **home.html** que
 está dentro del directorio templates. A este archivo le pasamos la variable tasks con todas las tareas.
-Por último, verificamos que no tengamos un error al renderizar el template; si hay un error, mandamos un **Internal Server Error\*\*.
+Por último, verificamos que no tengamos un error al renderizar el template, si hay un error, mandamos un **Internal Server Error\*\*.
 
 Ahora podemos crear la ruta para obtener el archivo home.html en la ruta raiz
 
@@ -562,6 +570,8 @@ Como podemos observar en el código de arriba, estamos configurando varios atrib
 -   **hx-target="#task-list"**: Reemplazaremos la respuesta de la función (item.html) con el elemento que tiene el identificador "task-list".
 -   **hx-swap="beforeend"**: Insertamos la respuesta como el último hijo del objetivo.
 -   **hx-indicator="#spinner"**: Cuando la solicitud esté en proceso, mostraremos el elemento con el identificador "spinner".
+
+Ahora creemos el archivo item.html que vamos a retornar al crear una nueva tarea.
 
 #### ~/go-htmx-crud/templates/item.html
 
