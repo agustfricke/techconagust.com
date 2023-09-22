@@ -12,7 +12,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  output: "static",
   adapter: vercel(),
   markdown: {
     remarkPlugins: [remarkCodeTitles],
