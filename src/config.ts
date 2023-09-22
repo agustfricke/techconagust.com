@@ -37,26 +37,30 @@ export const ALGOLIA = {
 
 export type OuterHeaders = "Go development";
 
-export interface SidebarItem<
-  TCode extends KnownLanguageCode = KnownLanguageCode,
-> {
+export interface SidebarItem {
   text: string;
-  link: `${TCode}/${string}`;
+  link: `${string}`;
 }
 
 export type SidebarItemLink = SidebarItem["link"];
 
 export type Sidebar = {
   [TCode in KnownLanguageCode]: {
-    [THeader in OuterHeaders]?: SidebarItem<TCode>[];
+    [THeader in OuterHeaders]?: SidebarItem[];
   };
 };
 export const SIDEBAR: Sidebar = {
   en: {
-    "Go development": [{ text: "GO HTMX CRUD", link: "en/go-htmx-crud" }],
+    "Go development": [
+      { text: "GO HTMX CRUD", link: "en/go-htmx-crud" },
+      { text: "Send emails with Go", link: "en/go-send-email" },
+    ],
   },
   es: {
-    "Go development": [{ text: "GO HTMX CRUD", link: "es/go-htmx-crud" }],
+    "Go development": [
+      { text: "GO HTMX CRUD", link: "es/go-htmx-crud" },
+      { text: "Manda correos con Go", link: "es/go-send-email" },
+    ],
   },
 };
 
