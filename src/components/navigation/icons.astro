@@ -1,22 +1,5 @@
 ---
 import { getIsRtlFromUrl, getLanguageFromURL } from "../../languages";
-import { fetchGithub } from "../../utils/fetchGithub";
-
-const githubStars =
-  (await fetchGithub("https://api.github.com/repos/t3-oss/create-t3-app", {
-    throwIfNoAuth: false,
-    fetchType: "repo",
-  }).then((data) => data?.stargazers_count)) ?? 42069;
-const ONE_HOUR = 1 * 60 * 60;
-Astro.response.headers.set("Cache-Control", `public, max-age=${ONE_HOUR}`);
-
-const { pathname } = Astro.url;
-
-const formattedStars = new Intl.NumberFormat(getLanguageFromURL(pathname), {
-  notation: "compact",
-}).format(githubStars);
-
-const isRtl = getIsRtlFromUrl(pathname);
 ---
 
 <a

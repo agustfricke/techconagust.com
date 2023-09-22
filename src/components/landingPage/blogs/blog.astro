@@ -20,7 +20,7 @@ export interface Props {}
       My personal collection of projects, step by step.
     </p>
     <div
-      class="flex flex-col items-start justify-center space-y-4 sm:flex-row sm:space-x-6 sm:space-y-0"
+      class="grid grid-cols-1 mb-11 gap-4 md:grid-cols-2 gap-4 lg:grid-cols-3 gap-4 "
     >
       <BlogCard
         title="Go Hmtx CRUD"
@@ -35,6 +35,36 @@ export interface Props {}
         href="en/go-send-email"
       >
       </BlogCard>
+
+      <BlogCard
+        title="Fiber JWT authentication"
+        text="Learn how to implement JWT (JSON Web Token) authentication in a Golang application using Fiber web framework."
+        href="en/fiber-jwt-authentication"
+      >
+      </BlogCard>
+
+      <BlogCard
+        title="Fiber REST API"
+        text="Develop High-Performance REST API with Fiber"
+        href="en/fiber-rest-api"
+      >
+      </BlogCard>
+
+      <BlogCard
+        title="Fiber JWT CRUD"
+        text="Learn how to create a CRUD API with authentication"
+        href="en/fiber-crud-api-jwt"
+      >
+      </BlogCard>
+
+
+      <BlogCard
+        title="Neovim tutorial"
+        text="Learn how to setup and use Neovim"
+        href="en/neovim"
+      >
+      </BlogCard>
+
 
     </div>
   </div>

@@ -43,27 +43,27 @@ imágenes.
 
 -   Gestiona tu cuenta de Google
 
-<img src="/public/send-email/1.png"/>
+<img src="/send-email/1.png"/>
 
 -   Seguridad
 
-<img src="/public/send-email/2.png"/>
+<img src="/send-email/2.png"/>
 
 -   Verificación en 2 pasos
 
-<img src="/public/send-email/3.png"/>
+<img src="/send-email/3.png"/>
 
 -   Contraseñas de aplicaciones
 
-<img src="/public/send-email/4.png"/>
+<img src="/send-email/4.png"/>
 
 -   Dale un nombre a la app
 
-<img src="/public/send-email/5.png"/>
+<img src="/send-email/5.png"/>
 
 -   Guarda la contraseña
 
-<img src="/public/send-email/6.png"/>
+<img src="/send-email/6.png"/>
 
 ## Configurar ambientes de entorno
 

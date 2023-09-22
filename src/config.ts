@@ -54,12 +54,17 @@ export const SIDEBAR: Sidebar = {
     "Go development": [
       { text: "GO HTMX CRUD", link: "go-htmx-crud" },
       { text: "Send emails with Go", link: "go-send-email" },
+      { text: "Fiber JWT authentication", link: "fiber-jwt-authentication" },
     ],
   },
   es: {
     "Go development": [
       { text: "GO HTMX CRUD", link: "go-htmx-crud" },
       { text: "Manda correos con Go", link: "go-send-email" },
+      {
+        text: "Autenticacion con JWT y Fiber",
+        link: "autenticacion-con-jwt-y-fiber",
+      },
     ],
   },
 };
