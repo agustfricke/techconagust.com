@@ -52,14 +52,14 @@ export type Sidebar = {
 export const SIDEBAR: Sidebar = {
   en: {
     "Go development": [
-      { text: "GO HTMX CRUD", link: "en/go-htmx-crud" },
-      { text: "Send emails with Go", link: "en/go-send-email" },
+      { text: "GO HTMX CRUD", link: "go-htmx-crud" },
+      { text: "Send emails with Go", link: "go-send-email" },
     ],
   },
   es: {
     "Go development": [
-      { text: "GO HTMX CRUD", link: "es/go-htmx-crud" },
-      { text: "Manda correos con Go", link: "es/go-send-email" },
+      { text: "GO HTMX CRUD", link: "go-htmx-crud" },
+      { text: "Manda correos con Go", link: "go-send-email" },
     ],
   },
 };
