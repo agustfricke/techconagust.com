@@ -43,27 +43,27 @@ images.
 
 -   Manage your Google Account
 
-<img src="/public/send-email/1.png"/>
+<img src="/send-email/1.png"/>
 
 -   Security
 
-<img src="/public/send-email/2.png"/>
+<img src="/send-email/2.png"/>
 
 -   2-Step Verification
 
-<img src="/public/send-email/3.png"/>
+<img src="/send-email/3.png"/>
 
 -   App Passwords
 
-<img src="/public/send-email/4.png"/>
+<img src="/send-email/4.png"/>
 
 -   Give the app a name
 
-<img src="/public/send-email/5.png"/>
+<img src="/send-email/5.png"/>
 
 -   Save the password
 
-<img src="/public/send-email/6.png"/>
+<img src="/send-email/6.png"/>
 
 ## Configure Environment Variables
 
