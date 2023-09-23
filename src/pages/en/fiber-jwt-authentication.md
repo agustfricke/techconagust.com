@@ -1,13 +1,13 @@
 ---
-title: Fiber JWT authentication
-description: Fiber JWT authentication
+title: Fiber JWT Authentication
+description: Fiber JWT Authentication
 layout: ../../layouts/docs.astro
 lang: en
 ---
 
 ## Getting Started
 
-In this extensive guide, you will gain insights on the process of incorporating
+In this extensive guide, you will gain insights into the process of incorporating
 JWT (JSON Web Token) authentication into a Golang application,
 leveraging GORM alongside the Fiber web framework. Powering the REST API will be a
 robust Fiber HTTP server, delivering specialized endpoints for secure user authentication and data
@@ -15,7 +15,7 @@ persistence in a PostgreSQL database.
 
 ## Setup
 
-To begin, lets create a folder with the name fiber-jwt-auth and get inside.
+To begin, let's create a folder with the name fiber-jwt-auth and get inside.
 
 ```bash
 mkdir ~/fiber-jwt-auth
@@ -38,7 +38,7 @@ go mod init github.com/agustfricke/fiber-jwt-auth
 ```
 
 Once the module is created, we'll install the [**fiber**](https://docs.gofiber.io/)
-p[**godotenv**](https://github.com/joho/godotenv), [**gorm**](https://gorm.io/docs/) ackage.
+[**godotenv**](https://github.com/joho/godotenv), [**gorm**](https://gorm.io/docs/) package.
 
 #### ~/fiber-jwt-auth
 
@@ -99,7 +99,7 @@ func Config(key string) string {
 
 This function takes a key as a parameter and returns the associated value. For example, if we pass **DB_HOST** as the key, it will return **localhost**.
 
-Now, let's create a folder called **models**, and within the **models** folder, create a file named **task.go**. We do this to define the structure of the entity called **Task**, which we will use to interact with the database.
+Now, let's create a folder called **models**, and within the **models** folder, create a file named **user.go**. We do this to define the structure of the entity called **User**, which we will use to interact with the database.
 
 ```bash
 mkdir ~/fiber-jwt-auth/models
@@ -134,7 +134,7 @@ type SignInInput struct {
 
 Here, we define the **User** structure, which includes **gorm.Model**.
 This provides additional fields such as **ID, CreatedAt, UpdatedAt, and DeletedAt**.
-We then specify that each task will have a **Name** field of type string.
+We then specify that each user will have a **Name** field of type string.
 Then we have 2 more structs, SignInInput for the login and then SignUpInput for the register.
 
 Now, let's create a folder called **database**. Inside the **database** folder, create two files: **database.go** and **connect.go**.
@@ -243,7 +243,7 @@ go run ~/fiber-jwt-auth/main.go
 
 ## Sign up
 
-Now lets crate a new folder called handlers, and inside create a new file called auth.go
+Now let's create a new folder called handlers, and inside it, create a new file called auth.go.
 
 ```bash
 mkdir ~/fiber-jwt-auth/handlers
@@ -266,7 +266,7 @@ import (
 
 func SignUp(c *fiber.Ctx) error {
 	var payload *models.SignUpInput
-  db := database.DB
+	db := database.DB
 
 	if err := c.BodyParser(&payload); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})
@@ -296,14 +296,14 @@ func SignUp(c *fiber.Ctx) error {
 }
 ```
 
-Now lets create a new route for this function, for that lets create a new folder witha new file inside.
+Now let's create a new route for this function by creating a new folder with a new file inside.
 
 ```bash
 mkdir ~/fiber-jwt-auth/router
 touch ~/fiber-jwt-auth/router/router.go
 ```
 
-Inside this file lets put this inside.
+Inside this file, let's put the following code:
 
 #### ~/fiber-jwt-auth/router/router.go
 
@@ -316,7 +316,7 @@ import (
 )
 
 func SetupRoutes(app *fiber.App) {
-    app.Post("/signup", handlers.SignUp)
+	app.Post("/signup", handlers.SignUp)
 }
 ```
 
@@ -337,24 +337,24 @@ import (
 )
 
 func main() {
-  database.ConnectDB()
+	database.ConnectDB()
 
 	app := fiber.New()
 
-  app.Use(cors.New(cors.Config{
-      AllowOrigins: "http://localhost:5173",
-      AllowMethods: "GET, POST, PUT, DELETE",
-      AllowCredentials: true,
-      AllowHeaders: "Origin, Content-Type, Accept",
-  }))
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "http://localhost:5173",
+		AllowMethods:     "GET, POST, PUT, DELETE",
+		AllowCredentials: true,
+		AllowHeaders:     "Origin, Content-Type, Accept",
+	}))
 
-  router.SetupRoutes(app) // New!
+	router.SetupRoutes(app) // New!
 
-  log.Fatal(app.Listen(":8000"))
+	log.Fatal(app.Listen(":8000"))
 }
 ```
 
-Lets test if we can create a new user.
+Let's test if we can create a new user.
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -364,9 +364,11 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/signup/
 ```
 
-## Login
+Your code appears to be ready for testing now.
 
-Now lets create a function to login a new user.
+## Sign In
+
+Now let's create a function to log in a new user.
 
 #### ~/fiber-jwt-auth/handlers/auth.go
 
@@ -388,7 +390,7 @@ import (
 
 func SignIn(c *fiber.Ctx) error {
 	var payload *models.SignInInput
-    db := database.DB
+	db := database.DB
 
 	if err := c.BodyParser(&payload); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})
@@ -409,12 +411,12 @@ func SignIn(c *fiber.Ctx) error {
 
 	now := time.Now().UTC()
 	claims := tokenByte.Claims.(jwt.MapClaims)
-    expDuration := time.Hour * 24
+	expDuration := time.Hour * 24
 
-    claims["sub"] = user.ID
-    claims["exp"] = now.Add(expDuration).Unix()
-    claims["iat"] = now.Unix()
-    claims["nbf"] = now.Unix()
+	claims["sub"] = user.ID
+	claims["exp"] = now.Add(expDuration).Unix()
+	claims["iat"] = now.Unix()
+	claims["nbf"] = now.Unix()
 
 	tokenString, err := tokenByte.SignedString([]byte(config.Config("SECRET_KEY")))
 
@@ -439,14 +441,14 @@ func SignIn(c *fiber.Ctx) error {
 The **SignIn** function handles user authentication in a web application using the Fiber framework for Go.
 It performs the following tasks:
 
-Parses the **HTTP** request body to obtain a payload object with login information.
-Searches for a user in the database by their email address.
-Compares the password provided in the payload with the password stored in the database using bcrypt.
-If authentication is successful, it generates a **JSON Web Token (JWT)** containing user information and an expiration date.
-Stores the JWT token in an **HTTP response cookie**.
-Returns an HTTP response with the JWT token if authentication is successful or an error message if it fails.
+-   Parses the **HTTP** request body to obtain a payload object with login information.
+-   Searches for a user in the database by their email address.
+-   Compares the password provided in the payload with the password stored in the database using bcrypt.
+-   If authentication is successful, it generates a **JSON Web Token (JWT)** containing user information and an expiration date.
+-   Stores the JWT token in an **HTTP response cookie**.
+-   Returns an HTTP response with the JWT token if authentication is successful or an error message if it fails.
 
-Now we can create the route for this endpoint
+Now we can create the route for this endpoint.
 
 #### ~/fiber-jwt-auth/router/router.go
 
@@ -464,7 +466,7 @@ func SetupRoutes(app *fiber.App) {
 }
 ```
 
-Now we can test this endpoint, rebuild the code to apply the changes
+Now we can test this endpoint, rebuild the code to apply the changes.
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -473,11 +475,11 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://127.0.0.1:8000/signin/
 ```
 
-This should retorn a JWT token, save it.
+This should return a JWT token. Save it.
 
 ## Logout
 
-Now lets create a new endpoint to logout our users.
+Now let's create a new endpoint to log out our users.
 
 #### ~/fiber-jwt-auth/handlers/auth.go
 
@@ -497,7 +499,7 @@ This Go code defines a function called Logout that handles user logout in a Fibe
 It expires a user's authentication token cookie, sets it to an empty value, and sends a JSON response
 indicating a successful logout. The cookie's expiration time is set to 24 hours in the past to effectively invalidate it.
 
-Lets create the route
+Let's create the route.
 
 #### ~/fiber-jwt-auth/router/router.go
 
@@ -516,13 +518,15 @@ func SetupRoutes(app *fiber.App) {
 }
 ```
 
-Lets test this endpoint, remeber you need to rebuild the code to apply the changes.
+Let's test this endpoint; remember you need to rebuild the code to apply the changes.
 
 ```bash
 curl -X GET -H "Authorization: Bearer YOUR_JWT_TOKEN" http://127.0.0.1:8000/logout
 ```
 
-New lets create a middleware.
+## Middleware
+
+Now let's create a middleware.
 
 ```bash
 mkdir ~/fiber-jwt-auth/middleware
@@ -582,7 +586,7 @@ func DeserializeUser(c *fiber.Ctx) error {
 	db.First(&user, "id = ?", fmt.Sprint(claims["sub"]))
 
 	if float64(user.ID) != claims["sub"] {
-		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"status": "fail", "message": "the user belonging to this token no logger exists"})
+		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"status": "fail", "message": "the user belonging to this token no longer exists"})
 	}
 
 	c.Locals("user", &user)
@@ -597,7 +601,9 @@ It extracts the token from the request's Authorization header or cookies, valida
 it retrieves the corresponding user information from a database and stores it in the Fiber context's locals.
 If the token is invalid or expired, it returns an appropriate error response.
 
-Now lets create a new endpoint to show our authenticated user
+## My User
+
+Now let's create a new endpoint to show our authenticated user.
 
 ```bash
 touch ~/fiber-jwt-auth/handlers/user.go
@@ -620,10 +626,10 @@ func GetMe(c *fiber.Ctx) error {
 }
 ```
 
-This function it retrieves the user object stored in the Fiber context's locals and responds with a JSON
+This function retrieves the user object stored in the Fiber context's locals and responds with a JSON
 representation of the user along with a success status code (200 OK).
 
-Now lets create the route for this endpoint
+Now let's create the route for this endpoint.
 
 #### ~/fiber-jwt-auth/router/router.go
 
@@ -644,11 +650,11 @@ func SetupRoutes(app *fiber.App) {
 }
 ```
 
-This GET request is made to the "/me" endpoint, Fiber will first run the DeserializeUser middleware to validate
+This GET request is made to the "/me" endpoint; Fiber will first run the DeserializeUser middleware to validate
 the user's JWT token and store user information in the context. Then, it will execute the GetMe handler function
 to respond with the user's data if the token is valid.
 
-Lets tests this endpoint, make sure of have a valid token.
+Let's test this endpoint; make sure you have a valid token.
 
 ```bash
 curl -X GET -H "Authorization: Bearer YOUR_JWT_TOKEN" http://127.0.0.1:8000/me
