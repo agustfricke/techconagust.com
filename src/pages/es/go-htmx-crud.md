@@ -5,15 +5,9 @@ layout: ../../layouts/docs.astro
 lang: es
 ---
 
-<iframe 
-width="560" 
-height="315" 
+ <iframe width="700" height="415" 
 src="https://www.youtube.com/embed/7vY5KOAbhqo?si=bfG3yCpHRmgh7BfD" 
-title="YouTube Video CRUD HTMX y GO" 
-frameborder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-allowfullscreen>
-</iframe>
+ title="htmx crud go tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Nuestras herramientas
 
