@@ -55,6 +55,7 @@ export const SIDEBAR: Sidebar = {
       { text: "GO HTMX CRUD", link: "go-htmx-crud" },
       { text: "Send emails with Go", link: "go-send-email" },
       { text: "Fiber JWT authentication", link: "fiber-jwt-authentication" },
+      { text: "Neovim setup", link: "neovim-setup" },
     ],
   },
   es: {
@@ -64,6 +65,10 @@ export const SIDEBAR: Sidebar = {
       {
         text: "Autenticacion con JWT y Fiber",
         link: "autenticacion-con-jwt-y-fiber",
+      },
+      {
+        text: "Neovim setup",
+        link: "neovim-setup",
       },
     ],
   },
