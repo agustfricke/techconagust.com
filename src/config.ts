@@ -35,7 +35,7 @@ export const ALGOLIA = {
   apiKey: "3b5e1bfef294e04ae6072bc680c4a6b0",
 };
 
-export type OuterHeaders = "Go development";
+export type OuterHeaders = "Go development" | "Linux and tools";
 
 export interface SidebarItem {
   text: string;
@@ -56,7 +56,9 @@ export const SIDEBAR: Sidebar = {
       { text: "Send emails with Go", link: "go-send-email" },
       { text: "Fiber JWT authentication", link: "fiber-jwt-authentication" },
       { text: "2FA Fiber", link: "2fa-fiber" },
+      { text: "Neovim config", link: "neovim-config" },
     ],
+    "Linux and tools": [{ text: "Neovim config", link: "neovim-config" }],
   },
   es: {
     "Go development": [
@@ -70,6 +72,10 @@ export const SIDEBAR: Sidebar = {
         text: "2FA Fiber",
         link: "2f-fiber",
       },
+      {
+        text: "Neovim config",
+        link: "neovim-config",
+      },
     ],
   },
 };
@@ -80,5 +86,6 @@ export const SIDEBAR_HEADER_MAP: Record<
 > = {
   es: {
     "Go development": "Desarrollo con Go",
+    "Linux and tools": "Linux y herramientas",
   },
 };
