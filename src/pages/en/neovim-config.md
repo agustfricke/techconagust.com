@@ -228,7 +228,7 @@ return require('packer').startup(function(use)
 
   -- nuevo!
     use({ 'rose-pine/neovim', as = 'rose-pine' })
-    use 'prettier/vim-prettier'
+    
 
     vim.cmd('colorscheme rose-pine')
   -- fin nuevo!
@@ -280,7 +280,7 @@ return require('packer').startup(function(use)
     }
 
     use({ 'rose-pine/neovim', as = 'rose-pine' })
-    use 'prettier/vim-prettier'
+    
 
     vim.cmd('colorscheme rose-pine')
 
@@ -351,7 +351,7 @@ return require('packer').startup(function(use)
     }
 
     use({ 'rose-pine/neovim', as = 'rose-pine' })
-    use 'prettier/vim-prettier'
+    
 
     vim.cmd('colorscheme rose-pine')
 
@@ -605,36 +605,39 @@ touch  ~/.config/nvim/agust/set.lua
 #### ~/.config/nvim/agust/set.lua
 
 ```lua
+-- cursor gordo
 vim.opt.guicursor = ""
 
+-- numeros relativos
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+-- 2 tabs
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
-vim.opt.clipboard = "unnamedplus"
 
 vim.opt.smartindent = true
 
+-- copiar al portapapeles del os
+vim.opt.clipboard = "unnamedplus"
+
+-- Sin limite de longitud de la linea
 vim.opt.wrap = false
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-vim.opt.undofile = true
-
+-- cuando busca no se queda con color y mientra busca se pone de color
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+-- para mejorar los colores
 vim.opt.termguicolors = true
 
+-- el cursor siempre queda con 8 espacios para arriba y para abajo
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50
 ```
 
 Y podemos hacer un source de este archivo
@@ -652,4 +655,29 @@ require("agust.remap")
 require("agust.set")
 ```
 
-Perfecto ya tienes configuado neovim!
+Pongamos agunos remaps mas:
+#### ~/.config/nvim/lua/agust/remap.lua
+
+```lua
+vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+
+-- nuevo!
+-- para mover cuando esta el visual mode
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- la J se queda en su luegar 
+vim.keymap.set("n", "J", "mzJ`z")
+
+-- subir y bajar el cursor siempre al medio 
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- al buscar tambien se va a quedar al medio
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- para guardar lo que copiaste y pegaste en el buffer
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+```

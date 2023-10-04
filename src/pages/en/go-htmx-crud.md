@@ -19,7 +19,6 @@ cd ~/go-htmx-crud
 ```
 
 Once inside the folder, we will create a new module with Go. Modules are used to manage a project's dependencies and allow for effective organization of dependencies, making it easier to collaborate on projects and ensuring code reproducibility across different environments.
-
 To create a new Go module, use the following command, replacing **module-name** with your desired module name. Typically, you would use a URL to a remote repository as the module name.
 
 #### ~/go-htmx-crud
@@ -706,6 +705,7 @@ The **DeleteTask** function processes an HTTP request to delete a task. It intro
     <span class="spinner" id="spinner-delete-{{ .ID }}">....</span>
 </button>
 ```
+
 As can be seen in the above code, we are making a **DELETE** request to the "delete" route along with an **ID** to determine which task we are deleting. Then, we use the **hx-swap** attribute to remove the element when making the request, and **hx-target** to delete the entire **<li>** element that contains the task. Additionally, we assign an **hx-indicator** attribute with a unique ID of **"spinner-delete-{{ .ID }}"** to the spinner, as otherwise, the spinner would be active for every task.
 
 All that remains is to edit the **templates/item.html** file with the new functionality to delete and edit tasks.

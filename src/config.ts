@@ -56,7 +56,7 @@ export const SIDEBAR: Sidebar = {
       { text: "Send emails with Go", link: "go-send-email" },
       { text: "Fiber JWT authentication", link: "fiber-jwt-authentication" },
       { text: "2FA Fiber", link: "2fa-fiber" },
-      { text: "Neovim config", link: "neovim-config" },
+      
     ],
     "Linux and tools": [{ text: "Neovim config", link: "neovim-config" }],
   },
@@ -72,11 +72,8 @@ export const SIDEBAR: Sidebar = {
         text: "2FA Fiber",
         link: "2f-fiber",
       },
-      {
-        text: "Neovim config",
-        link: "neovim-config",
-      },
     ],
+  "Linux and tools": [{ text: "Neovim config", link: "neovim-config" }],
   },
 };
 
