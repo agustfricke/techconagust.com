@@ -1,10 +1,16 @@
 ---
-import Banner from "../components/landingPage/banner.astro";
-import Blog from "../components/landingPage/blogs/blog.astro";
-import LandingPage from "../layouts/landingPage.astro";
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
 ---
 
-<LandingPage>
-  <Banner />
-  <Blog />
-</LandingPage>
+<Layout title="ES - machinelab">
+  <h1 class="text-3xl text-indigo-400">
+    www.es.machinelab.dev -> El mejor lugar para apredner web dev
+  </h1>
+			<Card
+				href="/some-url"
+				title="Some title"
+				body="Some body for some title"
+			/>
+</Layout>
+
