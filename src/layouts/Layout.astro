@@ -1,0 +1,48 @@
+---
+
+import Navbar from "../components/navigation/navbar.astro";
+
+import "../styles/global.css";
+import "../styles/algolia/style.css";
+import "../styles/accessibility.css";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="La mejor web para apreder a programar" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen bg-gradient-to-b dark:from-gray-800 dark:via-slate-900 dark:to-slate-950 from-gray-200 via-slate-500 to-slate-600">
+    <div
+      class="relative before:pointer-events-none before:absolute before:inset-0 
+      before:block before:h-full before:w-full 
+      before:bg-[url('/images/graph-paper.svg')] before:bg-cover 
+      before:bg-no-repeat before:opacity-5"
+    >
+      <Navbar />
+      <aside id="grid-left" class="hidden" title="Site Navigation">
+        <div class="fixed left-0 top-0 z-30 h-screen w-screen bg-default">
+          <div class="fixed top-24 h-[calc(100%-96px)] w-full pb-16">
+            <p>Left sidebar</p>
+          </div>
+        </div>
+      </aside>
+      <main id="content">
+        <slot />
+      </main>
+      <p>Footer</p>
+    </div>
+	</body>
+</html>

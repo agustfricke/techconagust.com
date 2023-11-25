@@ -1,0 +1,96 @@
+---
+import Icons from "./icons.astro";
+import Search from "./Search";
+import SidebarToggle from "./sidebarToggle.astro";
+import ThemeToggleButton from "./themeToggleButton.astro";
+
+export interface Props {
+  isNotFound?: boolean;
+}
+
+const { pathname } = Astro.url;
+const isLanding = pathname === "/" || !!Astro.props.isNotFound;
+const hasTrailing = pathname.endsWith("/");
+const currentPage = pathname.slice(0, hasTrailing ? -1 : pathname.length);
+
+const navbarLinks: Array<{ href: string; label: string, icon?: boolean }> = [
+  {
+    href: "/",
+    label: "Inicio",
+  },
+  {
+    href: "/English",
+    label: "English",
+    icon: true
+  },
+];
+---
+
+<nav
+  class:list={[
+    "navbar relative flex flex-col items-center justify-between py-4 transition-colors duration-300",
+  ]}
+  aria-label="Global"
+>
+  <div class="flex w-full max-w-7xl items-center justify-between px-4">
+    <div class="flex w-full items-center justify-between md:w-auto">
+      <div
+        class:list={["hidden gap-2 -space-x-1 md:flex md:ml-10"]}>
+        {
+          navbarLinks.map((navbarLink) => (
+            <a
+              class:list={[
+                "relative inline-flex items-center border border-transparent px-3 py-2 transition-colors hover:no-underline rounded-lg text-t3-purple-800 hover:bg-t3-purple-200/50 hover:text-t3-purple-800 dark:text-t3-purple-100 dark:hover:bg-t3-purple-200/10 dark:hover:text-t3-purple-300",
+              ]}
+              aria-current={navbarLink.href === currentPage ? "page" : "false"}
+              href={navbarLink.href}
+            >
+              {navbarLink.label}
+              {navbarLink.icon && 
+    <svg
+            viewBox="0 0 88.6 77.3"
+            class="h-6 w-6 ml-2"
+            role="img"
+          >
+            <path
+              fill="currentColor"
+              d="M61 24.6h7.9l18.7 51.6h-7.7l-5.4-15.5H54.3l-5.6 15.5h-7.2L61 24.6zM72.6 55l-8-22.8L56.3 55h16.3z"
+            ></path>
+            <path
+              fill="currentColor"
+              d="M53.6 60.6c-10-4-16-9-22-14 0 0 1.3 1.3 0 0-6 5-20 13-20 13l-4-6c8-5 10-6 19-13-2.1-1.9-12-13-13-19h8c4 9 10 14 10 14 10-8 10-19 10-19h8s-1 13-12 24c5 5 10 9 19 13l-3 7zm-52-44h56v-8h-23v-7h-9v7h-24v8z"
+            ></path>
+          </svg>
+
+              }
+            </a>
+          ))
+        }
+      </div>
+    </div>
+    <div class="flex flex-grow items-center justify-end gap-4">
+      <Icons />
+      <div
+        class:list={[
+          "text-center",
+        ]}
+      >
+        <ThemeToggleButton />
+      </div>
+      <div class="block md:hidden">
+        <SidebarToggle isLanding={isLanding} />
+      </div>
+      <div class="hidden w-full max-w-xs rounded-lg md:block">
+        <Search isLanding={isLanding} client:load />
+      </div>
+    </div>
+  </div>
+</nav>
+<script>
+  const logo = document.querySelector("[data-home-link]") as HTMLAnchorElement;
+
+  logo.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    window.location.pathname = "/branding";
+  });
+</script>
