@@ -1,0 +1,28 @@
+---
+title: Barra Lateral de Navegación
+description: Aprende a configurar y personalizar los enlaces de navegación de la barra lateral de tu sitio Starlight.
+---
+
+import FileTree from '../../../../components/file-tree.astro';
+
+Una barra lateral bien organizada es clave para una buena documentación, ya que es una de las principales formas en que los usuarios navegarán por su sitio. Starlight proporciona un conjunto completo de opciones para personalizar el diseño y el contenido de tu barra lateral.
+
+## Barra lateral predeterminada
+
+Por defecto, Starlight generará automáticamente una barra lateral basada en la estructura del sistema de archivos de tu documentación, utilizando la propiedad `title` de cada archivo como entrada de la barra lateral.
+
+Por ejemplo, dada la siguiente estructura de archivos:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - components.md
+        - i18n.md
+      - reference/
+        - configuration.md
+
+</FileTree>
+
