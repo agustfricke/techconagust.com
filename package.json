@@ -1,5 +1,5 @@
 {
-  "name": "www",
+  "name": "machinelab.dev",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,17 +11,9 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
-    "@astrojs/react": "^3.0.6",
-    "@astrojs/tailwind": "^5.0.2",
-    "@docsearch/react": "^3.5.2",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "astro": "^3.6.0",
-    "clsx": "^2.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "tailwind-scrollbar": "^3.0.5",
-    "tailwindcss": "^3.0.24",
+    "@astrojs/starlight": "^0.13.0",
+    "astro": "^3.2.3",
+    "sharp": "^0.32.5",
     "typescript": "^5.3.2"
   }
 }
