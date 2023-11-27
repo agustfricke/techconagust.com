@@ -1,48 +1,29 @@
 ---
-title: Machine Lab 🌟 Learn how to code
-head:
-  - tag: title
-    content: Machine Lab 🌟 Learn how to code
-description: Machine Lab website helps you learn and build high-performance software.
+title: Aprende a programar
+description: Pagina inicio de machinelab.dev
 template: splash
-editUrl: false
-lastUpdated: false
 hero:
-  title: The best place to learn how to code.
-  tagline: Everything you need to learn and build high-performance software.
+  tagline: Aprende y mejora tu calidad de software con guias paso a paso
+  image:
+    file: ../../assets/houston.webp
   actions:
-    - text: Get started
-      icon: right-arrow
+    - text: Mira mi videos
+      link: https://youtube.com
+      icon: youtube
       variant: primary
-      link: /getting-started/
-    - text: Follow me on GitHub
-      icon: external
-      link: https://github.com/withastro/starlight
+    - text: Sigueme en 
+      link: https://starlight.astro.build
+      icon: x.com
 ---
+
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
+## Guias completas
+
 <CardGrid>
-
-<LinkCard 
-  title="Go Programming" 
-  description="Learn how to code in the Go programming language"
-  href="/go/introduction/" />
-
-<LinkCard 
-  title="Neovim from Scratch" 
-  description="Learn how to configure Neovim for improving speed in coding"
-  href="/tools/neovim/" />
-
-<LinkCard 
-  title="Go HTMX CRUD" 
-  description="Learn how to create a simple CRUD app using Go with the standard library and HTMX"
-  href="/go-projects/go-htmx-crud/" />
-
-<LinkCard 
-  title="Go REST API with Fiber" 
-  description="Learn how to create a REST API using Go with the Fiber web framework"
-  href="/go-projects/go-rest-api-fiber/" />
-
+  <LinkCard 
+    title="Programacion con Go" 
+    description="En esta guia aprenderas a programar con Go, paso a paso"
+    href="/go/00-introduccion" />
 </CardGrid>
-
