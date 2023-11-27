@@ -6,31 +6,22 @@ export const locales = {
 	es: { label: 'Español', lang: 'es' },
 };
 
-/* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
 const VERCEL_PREVIEW_SITE =
 	process.env.VERCEL_ENV !== 'production' &&
 	process.env.VERCEL_URL &&
 	`https://${process.env.VERCEL_URL}`;
 
-const site = VERCEL_PREVIEW_SITE || 'https://starlight.astro.build/';
+const site = VERCEL_PREVIEW_SITE || 'https://zustex.com';
 
+// https://astro.build/config
 export default defineConfig({
-	site,
-	trailingSlash: 'always',
 	integrations: [
 		starlight({
-			title: 'Starlight',
-			logo: {
-				light: '/src/assets/logo-light.svg',
-				dark: '/src/assets/logo-dark.svg',
-				replacesTitle: true,
-			},
-			editLink: {
-				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
-			},
+			title: 'Machine Lab',
 			social: {
-				github: 'https://github.com/withastro/starlight',
-				discord: 'https://astro.build/chat',
+				github: 'https://github.com/agustfricke',
+				youtube: 'https://youtube.com/@techconagust',
+        "x.com": 'https://x.com/agustfricke.com'
 			},
 			head: [
 				{
@@ -54,54 +45,25 @@ export default defineConfig({
 			locales,
 			sidebar: [
 				{
-					label: 'Start Here',
+					label: 'Go programing',
 					translations: {
-						es: 'Comienza aqui',
+						es: 'Programacion con Go',
 					},
-					items: [
-						{
-							label: 'Getting Started',
-							link: 'getting-started',
-							translations: {
-								es: 'Empezando',
-							},
-						},
-						{
-							label: 'Manual Setup',
-							link: 'manual-setup',
-							translations: {
-								es: 'Configuración Manual',
-							},
-						},
-						{
-							label: 'Environmental Impact',
-							link: 'environmental-impact',
-							translations: {
-								es: 'Documentación ecológica',
-							},
-						},
-						{
-							label: 'Showcase',
-							link: 'showcase',
-							translations: {
-								es: 'Caso Show',
-							},
-						},
-					],
+					autogenerate: { directory: 'go' },
+        },
+				{
+					label: 'Go Projects',
+					translations: {
+						es: 'Proyectos en Go',
+					},
+					autogenerate: { directory: 'go-projects' },
 				},
 				{
-					label: 'Guides',
+					label: 'Tools',
 					translations: {
-						es: 'Guías',
+						es: 'Herramientas',
 					},
-					autogenerate: { directory: 'guides' },
-				},
-				{
-					label: 'Reference',
-					translations: {
-						es: 'Referencias',
-					},
-					autogenerate: { directory: 'reference' },
+					autogenerate: { directory: 'tools' },
 				},
 			],
 		}),

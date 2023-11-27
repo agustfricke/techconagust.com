@@ -1,37 +1,48 @@
 ---
-title: Starlight 🌟 Build documentation sites with Astro
+title: Machine Lab 🌟 Learn how to code
 head:
   - tag: title
-    content: Starlight 🌟 Build documentation sites with Astro
-description: Starlight helps you build beautiful, high-performance documentation websites with Astro.
+    content: Machine Lab 🌟 Learn how to code
+description: Machine Lab website helps you learn and build high-performance software.
 template: splash
 editUrl: false
 lastUpdated: false
 hero:
-  title: Make your docs shine with Starlight
-  tagline: Everything you need to build a stellar documentation website. Fast, accessible, and easy-to-use.
-  image:
-    file: ../../assets/hero-star.webp
+  title: The best place to learn how to code.
+  tagline: Everything you need to learn and build high-performance software.
   actions:
     - text: Get started
       icon: right-arrow
       variant: primary
       link: /getting-started/
-    - text: View on GitHub
+    - text: Follow me on GitHub
       icon: external
       link: https://github.com/withastro/starlight
 ---
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-<LinkCard
-  title="Customizing Starlight"
-  description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
-  href="/guides/customization/"
-/>
-
 <CardGrid>
-  <LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
-  <LinkCard title="Components" href="/guides/components/" />
+
+<LinkCard 
+  title="Go Programming" 
+  description="Learn how to code in the Go programming language"
+  href="/go/introduction/" />
+
+<LinkCard 
+  title="Neovim from Scratch" 
+  description="Learn how to configure Neovim for improving speed in coding"
+  href="/tools/neovim/" />
+
+<LinkCard 
+  title="Go HTMX CRUD" 
+  description="Learn how to create a simple CRUD app using Go with the standard library and HTMX"
+  href="/go-projects/go-htmx-crud/" />
+
+<LinkCard 
+  title="Go REST API with Fiber" 
+  description="Learn how to create a REST API using Go with the Fiber web framework"
+  href="/go-projects/go-rest-api-fiber/" />
+
 </CardGrid>
 
