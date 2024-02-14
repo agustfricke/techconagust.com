@@ -1,0 +1,31 @@
+---
+title: Home
+description: Machine Labs website
+template: splash
+hero:
+  title: Imprube your software skills in Machine Labs
+  tagline: Comprehensive programming videos and guides so you can enhance your skills when creating software. 
+  image:
+    file: ../../assets/logo.webp
+  actions:
+    - text: Get started
+      link: https://youtube.com
+      icon: right-arrow
+      variant: primary
+    - text: Go premium
+      link: https://starlight.astro.build
+      icon: external
+---
+
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+
+<CardGrid>
+
+  <LinkCard 
+    title="GO HTMX CRUD" 
+    description="Create a simple CRUD (create, read, update, delete) application using the Go programming language along with HTMX and MySQL database"
+    href="/go/go-htmx-crud-sqlite" />
+
+</CardGrid>
