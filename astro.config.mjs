@@ -5,7 +5,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Machine Lab',
+			title: 'agusttech',
       logo: {
         // light: '/src/assets/logo-light.svg',
 				// dark: './src/assets/logo-dark.svg',
@@ -13,15 +13,19 @@ export default defineConfig({
         replacesTitle: true,
       },
 			social: {
-				github: 'https://github.com/withastro/starlight',
-        youtube: 'https://youtube.com',
-        "x.com": "https://x.com/TechConAgust",
-        twitch: "https://agustech.dev",
+				github: 'https://github.com/agustfricke',
+        youtube: 'https://youtube.com/@agusttech',
+        "x.com": "https://x.com/agusttech",
+        twitch: "https://twitch.tv/agusttech",
 			},
 			sidebar: [
 				{
 					label: 'Go programing',
 					autogenerate: { directory: 'go' },
+				},
+				{
+					label: 'Tools',
+					autogenerate: { directory: 'tools' },
 				},
 			],
 		}),
