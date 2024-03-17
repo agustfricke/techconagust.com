@@ -3,27 +3,17 @@ title: Neovim config
 description: Aprende a configurar neovim desde cero
 ---
 
+## Instalación de Neovim
 
-## Instalando Neovim
-
-Puden encontrar todas las versiones de Neovim en **https://github.com/neovim/neovim/releases**, en mi caso
-voy a descargar la version 0.9.5 que es la ultima en el momento que estoy escibiendo este arituclo.
-Luego podemos 
+Puden encontrar todas las versiones de Neovim en **https://github.com/neovim/neovim/releases**.
 
 ```bash
 wget https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage ~/
-```
-
-Ahora hacemos ejecutable el archivo que .appimage y lo movemos a una ubicacion para que sea accesible desde todo
-nuestro sistema y lo renombramos como vim para simplicidad, lo puedes renombrar como quieras. 
-Luego si ejecutamos el comando vim en nustra terminal deberiamos ver como se abre Neovim en la version 0.9.5.
-
-```bash
 chmod +x nvim.appimage
 sudo mv nvim.appimage /usr/local/bin/vim
 ```
 
-Ahora debemos instalar gcc en nuestro sistema para no tener errores.
+Instalando dependencias nesesarias en sistemas basados en Debian.
 
 ```bash
 sudo apt install gcc -y
