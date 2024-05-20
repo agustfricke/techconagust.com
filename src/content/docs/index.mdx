@@ -1,35 +1,28 @@
 ---
-title: Home
-description: agusttech website
+title: Welcome to Starlight
+description: Get started building your docs site with Starlight.
 template: splash
 hero:
-  title: Website agusttech.com
-  tagline: Comprehensive programming videos and guides so you can enhance your skills when creating software. 
+  tagline: Congrats on setting up a new Starlight project!
   image:
-    file: ../../assets/logo.webp
+    file: ../../assets/houston.webp
   actions:
-    - text: Get started
-      link: https://youtube.com
+    - text: Example Guide
+      link: /guides/example/
       icon: right-arrow
       variant: primary
-    - text: Go premium
+    - text: Read the Starlight docs
       link: https://starlight.astro.build
       icon: external
 ---
 
+## Get started
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
-
   <LinkCard 
-    title="Neovim config" 
-    description="Aprende a configurar Neovim desde cero"
-    href="/tools/neovim" />
-
-  <LinkCard 
-    title="GO HTMX CRUD" 
-    description="Create a simple CRUD (create, read, update, delete) application using the Go programming language along with HTMX and MySQL database"
-    href="/go/go-htmx-crud-sqlite" />
-
+    title="Go + SQL" 
+    description="This tutorial introduces the basics of accessing a relational database with Go and the database/sql package in its standard library."
+    href="/go/sql" />
 </CardGrid>
