@@ -5,7 +5,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'T3',
+			title: 'www',
       logo: {
         // light: '/src/assets/logo-light.svg',
 				// dark: './src/assets/logo-dark.svg',
@@ -20,7 +20,7 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
-					label: 'Go Programing',
+					label: 'Go Programming',
 					autogenerate: { directory: 'go' },
 				},
       ]
