@@ -5,23 +5,22 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'www',
       logo: {
-        // light: '/src/assets/logo-light.svg',
-				// dark: './src/assets/logo-dark.svg',
-				src: './src/assets/logo-dark.svg',
+        light: '/src/assets/logo.svg',
+				dark: './src/assets/logo-dark.svg',
         replacesTitle: true,
       },
+      title: "Zustack",
 			social: {
-				github: 'https://github.com/',
-        youtube: 'https://youtube.com/',
-        "x.com": "https://x.com/",
-        twitch: "https://twitch.tv/",
+				github: 'https://github.com/agustfricke',
+        youtube: 'https://www.youtube.com/@agustfricke',
+        "x.com": "https://x.com/agustfricke",
+        twitch: "https://twitch.tv/agustfricke",
 			},
 			sidebar: [
 				{
-					label: 'Go Programming',
-					autogenerate: { directory: 'go' },
+					label: 'Linux',
+					autogenerate: { directory: 'linux' },
 				},
       ]
 		}),

@@ -1,11 +1,12 @@
 ---
-title: Welcome to www
-description: Get started building your projects with help of www.
+title: Zustack blog
+description: Guides on topics that interest me in IT. 
 template: splash
 hero:
-  tagline: Get started building your projects with help of www.
+  tagline: Guides on IT topics, free forever.
   image:
-    file: ../../assets/houston.webp
+    dark: ../../assets/logo-dark.svg
+    light: ../../assets/logo.svg
   actions:
     - text: Get started
       link: /#get
@@ -19,21 +20,12 @@ hero:
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <div id="get">
-## Get started
+
+## Content
 <CardGrid>
   <LinkCard 
-    title="Install Go" 
-    description="This tutorial explains how to install Go on Linux, Mac, and Windows." 
-    href="/go/install" />
-
-  <LinkCard 
-    title="Go & SQL" 
-    description="In this tutorial, you’ll create a database, then write code to access the database. Your example project will be a repository of data about vintage jazz records."
-    href="/go/sql" />
-
-  <LinkCard 
-    title="Go and SQLite" 
-    description="This tutorial introduces the basics of accessing a SQLite relational database with Go."
-    href="/go/sqlite" />
+    title="Dotfiles" 
+    description="This guide explains how to manage my configuration files in Linux." 
+    href="/linux/dotfiles" />
 </CardGrid>
 </div>
